@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+import { styles } from '../../styles/styles';
 import { Strings } from '../../utils/Strings';
 
 const NavItems = [
@@ -21,35 +22,32 @@ const NavbarWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   background: ${(props) => props.theme.colors.primary};
-  padding: 0 ${(props) => props.theme.spacing.md2};
-  box-shadow: ${(props) => props.theme.dropShadow};
+  padding: 0 ${styles.spacing.md2};
+  box-shadow: ${styles.shadows.dropShadow};
 `;
 
 const LinkWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
-  gap: ${(props) => props.theme.spacing.md2};
+  gap: ${(props) => styles.spacing.md2};
 `;
 
-// TODO: Move text to a seperate component
 const Title = styled.p`
-  font-size: ${(props) => props.theme.fontSize.md};
+  font-size: ${styles.fontSize.md};
   text-transform: uppercase;
   color: ${(props) => props.theme.colors.primaryText};
-  font-family: ${(props) => props.theme.font.title};
+  font-family: ${styles.font.title};
 `;
 
-// TODO: Move text to a separate component
 const NavbarLink = styled.p`
-  font-size: ${(props) => props.theme.fontSize.sm};
+  font-size: ${styles.fontSize.sm};
   color: ${(props) => props.theme.colors.primaryText};
-  font-family: ${(props) => props.theme.font.body};
-  padding: ${(props) => props.theme.spacing.sm2};
+  font-family: ${styles.font.body};
+  padding: ${styles.spacing.sm2};
   &:hover {
     background: ${(props) => props.theme.colors.secondary};
   }
   transition: background 0.2s;
-
 `;
 
 const Navbar = () => {
