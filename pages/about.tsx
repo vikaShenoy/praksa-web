@@ -1,7 +1,13 @@
+import Head from 'next/head';
+
 const About = () => {
-  <div>
-    About Page Placeholder
-  </div>
-}
+  return (
+    <section>
+      <Head key={'about'}>
+        <title>Praksa - About</title>
+      </Head>
+    </section>
+  );
+};
 
 export default About;
