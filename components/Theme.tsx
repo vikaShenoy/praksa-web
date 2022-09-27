@@ -6,14 +6,6 @@ const darkTheme = {
     primary: '#1E113A',
     secondary: '#513097',
     primaryText: '#FFFFFF',
-    disabled: '#E0E0E01A',
-    icon: "#FFFFFF"
-  },
-  shadows: {
-    navbar: "0px -5px 20px 0px rgba(0, 0, 0, 0.5)",
-    card: "0px -5px 10px 0px rgba(0, 0, 0, 0.5)",
-    cardHover: "0px -5px 20px 0px rgba(0, 0, 0, 0.5)",
-    buttonHover: "0px -5px 20px 0px rgba(0, 0, 0, 0.5)"
   }
 };
 

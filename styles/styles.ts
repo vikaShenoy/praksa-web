@@ -9,8 +9,8 @@ export const styles = {
     md2: '32px',
     lg: '48px',
   },
-  borderRadius: {
-    md: '24px',
+  shadows: {
+    dropShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
   },
   fontSize: {
     sm: '1em',

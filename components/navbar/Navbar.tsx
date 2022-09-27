@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import styled from 'styled-components';
-import useMediaQuery from '../hooks/useMediaQuery';
-import HamburgerIcon from '../public/icons/HarmburgerIcon';
-import { styles } from '../styles/styles';
-import { Strings } from '../utils/Strings';
-import { BodyText, TitleText } from './utils/Text';
+import useMediaQuery from '../../hooks/useMediaQuery';
+import HamburgerIcon from '../../public/icons/HarmburgerIcon';
+import { styles } from '../../styles/styles';
+import { Strings } from '../../utils/Strings';
 
 const NavItems = [
   {
@@ -26,7 +25,7 @@ const NavbarWrapper = styled.div<{ isMobile: boolean }>`
   justify-content: space-between;
   background: ${(props) => props.theme.colors.primary};
   padding: 0 ${styles.spacing.md2};
-  box-shadow: ${(props) => props.theme.shadows.drop};
+  box-shadow: ${styles.shadows.dropShadow};
   width: 100%;
 
   position: ${(props) => (props.isMobile ? 'relative' : '')};
@@ -56,7 +55,14 @@ const MenuIconWrapper = styled.div`
   transition: background 0.3s;
 `;
 
-const NavbarLinkText = styled(BodyText)<{ isMobile: boolean }>`
+const Title = styled.p`
+  font-size: ${styles.fontSize.md};
+  text-transform: uppercase;
+  color: ${(props) => props.theme.colors.primaryText};
+  font-family: ${styles.font.title};
+`;
+
+const NavbarLink = styled.p<{ isMobile: boolean }>`
   font-size: ${styles.fontSize.sm};
   color: ${(props) => props.theme.colors.primaryText};
   font-family: ${styles.font.body};
@@ -75,7 +81,7 @@ const Navbar = () => {
 
   return (
     <NavbarWrapper isMobile={isMobile}>
-      <TitleText>{Strings.title}</TitleText>
+      <Title>{Strings.title}</Title>
       {isMobile && (
         <MenuIconWrapper
           test-id="menu-icon"
@@ -86,9 +92,9 @@ const Navbar = () => {
       )}
       <LinkWrapper isMobile={isMobile} isVisible={showDropdown}>
         {NavItems.map((navItem) => (
-          <NavbarLinkText isMobile={isMobile} key={navItem.id}>
+          <NavbarLink isMobile={isMobile} key={navItem.id}>
             <Link href={navItem.href}>{navItem.name}</Link>
-          </NavbarLinkText>
+          </NavbarLink>
         ))}
       </LinkWrapper>
     </NavbarWrapper>
