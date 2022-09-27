@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import Navbar from '../components/navbar/Navbar';
+import Navbar from '../components/Navbar';
 import Theme from '../components/Theme';
 
 Object.defineProperty(window, 'matchMedia', {
