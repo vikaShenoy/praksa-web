@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export enum ButtonSize {
-  SMALL = 24,
-  LARGE = 48,
+  SMALL = 32,
+  LARGE = 64,
 }
 
 const Button = styled.button<{ size: ButtonSize }>`
@@ -26,11 +26,12 @@ const Button = styled.button<{ size: ButtonSize }>`
 interface Props {
   size: ButtonSize;
   Icon: React.ReactNode;
+  onClick: () => void;
 }
 
-const IconButton = ({ size, Icon }: Props) => {
+const IconButton = ({ Icon, size, onClick }: Props) => {
   return (
-    <Button size={size}>
+    <Button onClick={onClick} size={size}>
       {Icon}
     </Button>
   );

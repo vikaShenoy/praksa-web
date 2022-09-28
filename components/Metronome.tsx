@@ -1,5 +1,7 @@
 import { ChangeEvent, useState } from 'react';
+import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { IoMdPlay } from 'react-icons/io';
+import { IoStopSharp } from 'react-icons/io5';
 import styled from 'styled-components';
 import { styles } from '../styles/styles';
 import { INITIAL_BPM, MAX_BPM, MIN_BPM } from '../utils/constants';
@@ -14,21 +16,54 @@ const MetronomeCard = styled(Card)`
 `;
 
 const SliderWrapper = styled.div`
-  margin: ${styles.spacing.lg} 0;
+  display: flex;
+  align-items: center;
   width: 100%;
+  margin: ${styles.spacing.lg} 0;
 `;
 
-const PlusIcon = styled(IoMdPlay)`
+const PlayIcon = styled(IoMdPlay)`
+  color: ${(props) => props.theme.colors.icon};
+  font-size: 32px;
+  margin-left: 2px;
+`;
+
+const StopIcon = styled(IoStopSharp)`
+  color: ${(props) => props.theme.colors.icon};
+  font-size: 32px;
+`;
+
+const PlusIcon = styled(AiOutlinePlus)`
   color: ${(props) => props.theme.colors.icon};
   font-size: 24px;
-  margin-left: 2px;
+`;
+
+const MinusIcon = styled(AiOutlineMinus)`
+  color: ${(props) => props.theme.colors.icon};
+  font-size: 24px;
+`;
+
+const Margin = styled.div`
+  width: 100%;
+  margin: 0 ${styles.spacing.sm};
 `;
 
 const Metronome = () => {
   const [bpm, setBpm] = useState(INITIAL_BPM);
-
+  const [isPlaying, setIsPlaying] = useState(false);
+  
   const onSliderUpdate = (e: ChangeEvent<HTMLInputElement>) => {
     setBpm(Number(e.target.value));
+  };
+
+  const startMetronome = () => {
+    // TODO
+    setIsPlaying(true);
+  };
+
+  const stopMetronome = () => {
+    // TODO
+    setIsPlaying(false);
   };
 
   return (
@@ -36,14 +71,34 @@ const Metronome = () => {
       <MetronomeCard>
         <BoldText>{bpm.toString()}</BoldText>
         <SliderWrapper>
-          <Slider
-            minVal={MIN_BPM}
-            maxVal={MAX_BPM}
-            currentVal={bpm}
-            onValueChange={onSliderUpdate}
+          <IconButton
+            onClick={() => {
+              setBpm((prev) => prev - 1);
+            }}
+            size={ButtonSize.SMALL}
+            Icon={<MinusIcon />}
+          />
+          <Margin>
+            <Slider
+              minVal={MIN_BPM}
+              maxVal={MAX_BPM}
+              currentVal={bpm}
+              onValueChange={onSliderUpdate}
+            />
+          </Margin>
+          <IconButton
+            onClick={() => {
+              setBpm((prev) => prev + 1);
+            }}
+            size={ButtonSize.SMALL}
+            Icon={<PlusIcon />}
           />
         </SliderWrapper>
-        <IconButton size={ButtonSize.LARGE} Icon={<PlusIcon />} />
+        <IconButton
+          onClick={isPlaying ? stopMetronome : startMetronome}
+          size={ButtonSize.LARGE}
+          Icon={isPlaying ? <StopIcon /> : <PlayIcon />}
+        />
       </MetronomeCard>
     </div>
   );
