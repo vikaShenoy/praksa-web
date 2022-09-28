@@ -3,8 +3,13 @@ import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { IoMdPlay } from 'react-icons/io';
 import { IoStopSharp } from 'react-icons/io5';
 import styled from 'styled-components';
+import useMetronome from '../hooks/useMetronomeRunner';
 import { styles } from '../styles/styles';
-import { INITIAL_BPM, MAX_BPM, MIN_BPM } from '../utils/constants';
+import {
+  INITIAL_BPM,
+  MAX_BPM,
+  MIN_BPM
+} from '../utils/constants';
 import { Card } from './utils/Card';
 import IconButton, { ButtonSize } from './utils/IconButton';
 import Slider from './utils/Slider';
@@ -13,6 +18,7 @@ import { BoldText } from './utils/Text';
 const MetronomeCard = styled(Card)`
   margin: ${styles.spacing.sm2};
   max-width: 500px;
+  min-width: 300px;
 `;
 
 const SliderWrapper = styled.div`
@@ -51,19 +57,10 @@ const Margin = styled.div`
 const Metronome = () => {
   const [bpm, setBpm] = useState(INITIAL_BPM);
   const [isPlaying, setIsPlaying] = useState(false);
-  
+  useMetronome({ bpm, isPlaying });
+
   const onSliderUpdate = (e: ChangeEvent<HTMLInputElement>) => {
     setBpm(Number(e.target.value));
-  };
-
-  const startMetronome = () => {
-    // TODO
-    setIsPlaying(true);
-  };
-
-  const stopMetronome = () => {
-    // TODO
-    setIsPlaying(false);
   };
 
   return (
@@ -95,7 +92,7 @@ const Metronome = () => {
           />
         </SliderWrapper>
         <IconButton
-          onClick={isPlaying ? stopMetronome : startMetronome}
+          onClick={() => setIsPlaying((prev) => !prev)}
           size={ButtonSize.LARGE}
           Icon={isPlaying ? <StopIcon /> : <PlayIcon />}
         />
