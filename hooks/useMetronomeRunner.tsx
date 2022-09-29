@@ -1,18 +1,30 @@
-import { useEffect, useRef, useState } from "react";
-import { WOODBLOCK_SOUND } from "../utils/constants";
+import { useEffect, useRef } from 'react';
+import { WOODBLOCK_SOUND } from '../utils/constants';
 
 interface Props {
   bpm: number;
   isPlaying: boolean;
 }
 
-// TODO: Implement
 const useMetronomeRunner = ({ bpm, isPlaying }: Props) => {
   const audioContext = useRef<AudioContext | null>(null);
-  const audioPlayer = useRef<HTMLAudioElement | undefined>(
-    typeof Audio !== 'undefined' ? new Audio(WOODBLOCK_SOUND) : undefined
-  );
-  const [buffer, setBuffer] = useState<AudioBuffer | null>(null);
+  const bufferedSound = useRef<AudioBuffer | null>(null);
+  const bufferSource = useRef<AudioBufferSourceNode | null>(null);
+
+  useEffect(() => {
+    const request = new XMLHttpRequest();
+    request.responseType = 'arraybuffer';
+    request.onload = () => {
+      audioContext.current?.decodeAudioData(
+        request.response,
+        (loadedBuffer: AudioBuffer) => {
+          bufferedSound.current = loadedBuffer;
+        }
+      );
+    };
+    request.open('GET', WOODBLOCK_SOUND, true);
+    request.send();
+  }, []);
 
   useEffect(() => {
     isPlaying ? play() : stop();
@@ -24,32 +36,30 @@ const useMetronomeRunner = ({ bpm, isPlaying }: Props) => {
     }
   }, []);
 
-  useEffect(() => {
-    const request = new XMLHttpRequest();
-    request.open('GET', WOODBLOCK_SOUND, true)
-    request.responseType = 'arraybuffer';
-
-    request.onload = () => {
-      audioContext.current?.decodeAudioData(request.response, (loadedBuffer) => {
-        setBuffer(loadedBuffer);
-      })
-    }
-  }, []);
-
   const play = () => {
-    if (audioContext.current && audioPlayer.current) {
-      let source = audioContext.current.createBufferSource();
-      source.connect(audioContext.current.destination);
-      source.buffer = buffer;
-      audioPlayer.current.play();
+    const context = audioContext.current;
+    if (!context) {
+      return;
     }
+
+    let nextStart = context.currentTime;
+
+    const schedule = () => {
+      nextStart += 60 / bpm;
+      console.log(bpm);
+      bufferSource.current = context.createBufferSource();
+      bufferSource.current.buffer = bufferedSound.current;
+      bufferSource.current.connect(context.destination);
+      bufferSource.current.onended = schedule;
+      bufferSource.current.start(nextStart);
+    };
+
+    schedule();
   };
 
   const stop = () => {
-    if (audioPlayer.current) {
-      audioPlayer.current.pause();
-    }
+    // TODO
   };
-}
+};
 
 export default useMetronomeRunner;
