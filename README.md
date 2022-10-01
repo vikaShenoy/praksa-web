@@ -8,25 +8,17 @@ Praksa is a web application for music practice.
 - [Styled-components](https://styled-components.com/)
 - [jest](https://jestjs.io/), [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 
-<br>
-
 ### Getting Started
 
 1. Install the correct nodejs version (16.17.0). We reccommend using [ASDF](https://asdf-vm.com/) to manage tool versions.
 2. `yarn install` to install dependencies.
 
-<br>
-
 ### Development
 
-To run the development server:
+Run the development server with the following command. The app will be served at `localhost:3000`, and will hot reload as you make changes.
   ```bash
  yarn dev
  ```
-
-and open `localhost:3000` in the browser. The app will hot reload as you make changes.
-
-<br>
 
 ### Testing
 
