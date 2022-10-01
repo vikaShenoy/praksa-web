@@ -27,11 +27,12 @@ interface Props {
   size: ButtonSize;
   Icon: React.ReactNode;
   onClick: () => void;
+  ariaLabel: string;
 }
 
-const IconButton = ({ Icon, size, onClick }: Props) => {
+const IconButton = ({ Icon, size, onClick, ariaLabel }: Props) => {
   return (
-    <Button onClick={onClick} size={size}>
+    <Button onClick={onClick} size={size} aria-label={ariaLabel}>
       {Icon}
     </Button>
   );

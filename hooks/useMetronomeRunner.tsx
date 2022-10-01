@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import { WOODBLOCK_SOUND } from '../utils/constants';
 
 interface Props {
   bpm: number;
@@ -8,57 +7,69 @@ interface Props {
 
 const useMetronomeRunner = ({ bpm, isPlaying }: Props) => {
   const audioContext = useRef<AudioContext | null>(null);
-  const bufferedSound = useRef<AudioBuffer | null>(null);
-  const bufferSource = useRef<AudioBufferSourceNode | null>(null);
+  const audioSource = useRef<AudioBufferSourceNode | null>(null);
+  const audioBuffer = useRef<AudioBuffer | null>(null);
 
   useEffect(() => {
-    const request = new XMLHttpRequest();
-    request.responseType = 'arraybuffer';
-    request.onload = () => {
-      audioContext.current?.decodeAudioData(
-        request.response,
-        (loadedBuffer: AudioBuffer) => {
-          bufferedSound.current = loadedBuffer;
-        }
-      );
-    };
-    request.open('GET', WOODBLOCK_SOUND, true);
-    request.send();
+    setup();
   }, []);
 
   useEffect(() => {
-    isPlaying ? play() : stop();
+    isPlaying ? audioContext.current?.resume() : audioContext.current?.suspend();
   }, [isPlaying]);
 
   useEffect(() => {
-    if (!audioContext.current) {
-      audioContext.current = new window.AudioContext();
+    const source = audioSource.current;
+    if (source) {
+      source.loopEnd = 1 / (bpm / 60);
     }
-  }, []);
+  }, [bpm]);
 
-  const play = () => {
+  const setup = () => {
+    audioContext.current = new window.AudioContext();
     const context = audioContext.current;
-    if (!context) {
+
+    audioBuffer.current = context.createBuffer(
+      1,
+      context.sampleRate * 2,
+      context.sampleRate
+    );
+    const buffer = audioBuffer.current;
+
+    audioSource.current = context.createBufferSource();
+    const source = audioSource.current;
+
+    createTone();
+
+    source.buffer = buffer;
+    source.loop = true;
+    source.loopEnd = 1 / (bpm / 60);
+    source.connect(context.destination);
+    source.start(0);
+  };
+
+  const createTone = () => {
+    const context = audioContext.current;
+    const buffer = audioBuffer.current;
+    if (!context || !buffer) {
       return;
     }
 
-    let nextStart = context.currentTime;
+    const channel = buffer.getChannelData(0);
+    const durationFrames = context.sampleRate / 50;
 
-    const schedule = () => {
-      nextStart += 60 / bpm;
-      console.log(bpm);
-      bufferSource.current = context.createBufferSource();
-      bufferSource.current.buffer = bufferedSound.current;
-      bufferSource.current.connect(context.destination);
-      bufferSource.current.onended = schedule;
-      bufferSource.current.start(nextStart);
-    };
+    let phase = 0;
+    let amp = 1;
+    let frequency = 320;
 
-    schedule();
-  };
-
-  const stop = () => {
-    // TODO
+    for (let i = 0; i < durationFrames; i++) {
+      channel[i] = Math.sin(phase) * amp;
+      phase += (2 * Math.PI * frequency) / context.sampleRate;
+      if (phase > 2 * Math.PI) {
+        phase -= 2 * Math.PI;
+      }
+      amp -= 1 / durationFrames;
+    }
   };
 };
 

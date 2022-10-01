@@ -3,13 +3,9 @@ import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { IoMdPlay } from 'react-icons/io';
 import { IoStopSharp } from 'react-icons/io5';
 import styled from 'styled-components';
-import useMetronome from '../hooks/useMetronomeRunner';
+import useMetronomeRunner from '../hooks/useMetronomeRunner';
 import { styles } from '../styles/styles';
-import {
-  INITIAL_BPM,
-  MAX_BPM,
-  MIN_BPM
-} from '../utils/constants';
+import { INITIAL_BPM, MAX_BPM, MIN_BPM } from '../utils/constants';
 import { Card } from './utils/Card';
 import IconButton, { ButtonSize } from './utils/IconButton';
 import Slider from './utils/Slider';
@@ -57,7 +53,7 @@ const Margin = styled.div`
 const Metronome = () => {
   const [bpm, setBpm] = useState(INITIAL_BPM);
   const [isPlaying, setIsPlaying] = useState(false);
-  useMetronome({ bpm, isPlaying });
+  useMetronomeRunner({ bpm, isPlaying });
 
   const onSliderUpdate = (e: ChangeEvent<HTMLInputElement>) => {
     setBpm(Number(e.target.value));
@@ -66,7 +62,7 @@ const Metronome = () => {
   return (
     <div>
       <MetronomeCard>
-        <BoldText>{bpm.toString()}</BoldText>
+        <BoldText aria-label="tempo-label">{bpm.toString()}</BoldText>
         <SliderWrapper>
           <IconButton
             onClick={() => {
@@ -74,6 +70,7 @@ const Metronome = () => {
             }}
             size={ButtonSize.SMALL}
             Icon={<MinusIcon />}
+            ariaLabel="minus"
           />
           <Margin>
             <Slider
@@ -89,12 +86,14 @@ const Metronome = () => {
             }}
             size={ButtonSize.SMALL}
             Icon={<PlusIcon />}
+            ariaLabel="plus"
           />
         </SliderWrapper>
         <IconButton
           onClick={() => setIsPlaying((prev) => !prev)}
           size={ButtonSize.LARGE}
-          Icon={isPlaying ? <StopIcon /> : <PlayIcon />}
+          Icon={isPlaying ? <StopIcon aria-label="stop" /> : <PlayIcon aria-label="play" />}
+          ariaLabel="play-stop"
         />
       </MetronomeCard>
     </div>

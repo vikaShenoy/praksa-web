@@ -8,7 +8,6 @@ const Home: NextPage = () => {
       <Head>
         <title>Praksa - Home</title>
       </Head>
-
       <Metronome />
     </section>
   );
