@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { MdOutlineRestartAlt } from 'react-icons/md';
 import styled from 'styled-components';
-import { styles } from '../styles/styles';
 import { DEFAULT_COUNTDOWN_TIME } from '../utils/constants';
 import IconButton, { ButtonSize } from './buttons/IconButton';
 import PlayStopButton from './buttons/PlayStopButton';
@@ -11,14 +10,8 @@ import Progress from './utils/Progress';
 import { BoldText } from './utils/Text';
 
 const TimerCard = styled(Card)`
-  margin: ${styles.spacing.sm2};
   min-width: 400px;
-  min-height: 350px;
-`;
-
-const ResetIcon = styled(MdOutlineRestartAlt)`
-  color: ${(props) => props.theme.colors.icon};
-  font-size: 32px;
+  height: 350px;
 `;
 
 // TODO: Test
@@ -39,7 +32,7 @@ const Timer = () => {
 
   const tickTimerDown = useCallback(() => {
     setSecondsRemaining((prev: number) => {
-      if (prev === 0) {
+      if (prev === 1) {
         stopTimer();
         return 0;
       } else {
@@ -79,14 +72,14 @@ const Timer = () => {
     <TimerCard>
       <BoldText aria-label="tempo-label">{timeLabel}</BoldText>
       <Progress currentValue={secondsRemaining} maxValue={totalSeconds} />
-      <CenteredFlexRow>
+      <CenteredFlexRow gap={24}>
         <PlayStopButton
           isPlaying={isPlaying}
           onClick={() => (isPlaying ? stopTimer() : startTimer())}
         />
         <IconButton
+          iconName={MdOutlineRestartAlt}
           size={ButtonSize.LARGE}
-          Icon={<ResetIcon />}
           onClick={resetTimer}
           ariaLabel="reset-timer"
         />

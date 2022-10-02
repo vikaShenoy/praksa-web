@@ -11,9 +11,8 @@ import Slider from './utils/Slider';
 import { BoldText } from './utils/Text';
 
 const MetronomeCard = styled(Card)`
-  margin: ${styles.spacing.sm2};
   min-width: 400px;
-  min-height: 350px;
+  height: 350px;
 `;
 
 const SliderWrapper = styled.div`
@@ -21,16 +20,6 @@ const SliderWrapper = styled.div`
   align-items: center;
   width: 100%;
   margin: ${styles.spacing.lg} 0;
-`;
-
-const PlusIcon = styled(AiOutlinePlus)`
-  color: ${(props) => props.theme.colors.icon};
-  font-size: 24px;
-`;
-
-const MinusIcon = styled(AiOutlineMinus)`
-  color: ${(props) => props.theme.colors.icon};
-  font-size: 24px;
 `;
 
 const Margin = styled.div`
@@ -53,12 +42,12 @@ const Metronome = () => {
         <BoldText aria-label="tempo-label">{bpm.toString()}</BoldText>
         <SliderWrapper>
           <IconButton
+            iconName={AiOutlineMinus}
             onClick={() => {
               setBpm((prev) => prev - 1);
             }}
             size={ButtonSize.SMALL}
-            Icon={<MinusIcon />}
-            ariaLabel="minus"
+            ariaLabel="minus"            
           />
           <Margin>
             <Slider
@@ -69,11 +58,11 @@ const Metronome = () => {
             />
           </Margin>
           <IconButton
+            iconName={AiOutlinePlus}
             onClick={() => {
               setBpm((prev) => prev + 1);
             }}
             size={ButtonSize.SMALL}
-            Icon={<PlusIcon />}
             ariaLabel="plus"
           />
         </SliderWrapper>

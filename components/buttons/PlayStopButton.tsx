@@ -23,15 +23,9 @@ interface Props {
 const PlayStopButton = ({ isPlaying, onClick }: Props) => {
   return (
     <IconButton
+      iconName={isPlaying ? IoStopSharp : IoMdPlay}
       onClick={onClick}
       size={ButtonSize.LARGE}
-      Icon={
-        isPlaying ? (
-          <StopIcon aria-label="stop" />
-        ) : (
-          <PlayIcon aria-label="play" />
-        )
-      }
       ariaLabel="play-stop"
     />
   );
