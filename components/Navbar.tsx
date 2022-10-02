@@ -5,7 +5,7 @@ import useMediaQuery from '../hooks/useMediaQuery';
 import HamburgerIcon from '../public/icons/HarmburgerIcon';
 import { styles } from '../styles/styles';
 import { Strings } from '../utils/Strings';
-import { BodyText, TitleText } from './utils/Text';
+import { BodyText, TitleText } from './wrappers/Text';
 
 const NavItems = [
   {

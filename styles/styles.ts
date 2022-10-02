@@ -24,6 +24,7 @@ export const styles = {
   components: {
     progressBarHeight: '1.5rem',
     sliderTrackHeight: '0.75rem',
-    sliderThumbSize: '2rem'
+    sliderThumbSize: '2rem',
+    cardWidth: '25rem'
   },
 };

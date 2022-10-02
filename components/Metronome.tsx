@@ -6,13 +6,13 @@ import { styles } from '../styles/styles';
 import { DEFAULT_BPM, MAX_BPM, MIN_BPM } from '../utils/constants';
 import IconButton, { ButtonSize } from './buttons/IconButton';
 import PlayStopButton from './buttons/PlayStopButton';
-import { Card } from './utils/Card';
-import { CenteredFlexRow } from './utils/Containers';
 import Slider from './utils/Slider';
-import { BoldText } from './utils/Text';
+import { Card } from './wrappers/Card';
+import { CenteredFlexRow } from './wrappers/Containers';
+import { BoldText } from './wrappers/Text';
 
 const MetronomeCard = styled(Card)`
-  min-width: 400px;
+  min-width: ${styles.components.cardWidth};
 `;
 
 const SliderWrapper = styled.div`

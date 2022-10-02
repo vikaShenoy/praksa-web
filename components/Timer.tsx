@@ -1,17 +1,18 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { MdOutlineRestartAlt } from 'react-icons/md';
 import styled from 'styled-components';
+import { styles } from '../styles/styles';
 import { DEFAULT_COUNTDOWN_TIME } from '../utils/constants';
 import IconButton, { ButtonSize } from './buttons/IconButton';
 import PlayStopButton from './buttons/PlayStopButton';
-import { Card } from './utils/Card';
-import { CenteredFlexRow } from './utils/Containers';
 import ProgressBar from './utils/ProgressBar';
-import { BoldText } from './utils/Text';
 import TimeInput from './utils/TimeInput';
+import { Card } from './wrappers/Card';
+import { CenteredFlexRow } from './wrappers/Containers';
+import { BoldText } from './wrappers/Text';
 
 const TimerCard = styled(Card)`
-  min-width: 400px;
+  min-width: ${styles.components.cardWidth};
 `;
 
 // TODO: Test

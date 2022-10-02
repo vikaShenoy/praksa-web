@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Metronome from '../components/Metronome';
 import Timer from '../components/Timer';
-import { Flex } from '../components/utils/Containers';
+import { Flex } from '../components/wrappers/Containers';
 
 const Home: NextPage = () => {
   return (
