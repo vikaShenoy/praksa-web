@@ -1,6 +1,8 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Metronome from '../components/Metronome';
+import Timer from '../components/Timer';
+import { Flex } from '../components/utils/Containers';
 
 const Home: NextPage = () => {
   return (
@@ -8,7 +10,10 @@ const Home: NextPage = () => {
       <Head>
         <title>Praksa - Home</title>
       </Head>
-      <Metronome />
+      <Flex>
+        <Metronome />
+        <Timer />
+      </Flex>
     </section>
   );
 };

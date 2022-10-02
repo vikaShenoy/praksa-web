@@ -15,6 +15,8 @@ const Button = styled.button<{ size: ButtonSize }>`
   border: none;
   padding: ${(props) => `${props.size / 4}px`};
 
+  margin: 0 8px;
+
   background-color: ${(props) => props.theme.colors.secondary};
   cursor: pointer;
 
