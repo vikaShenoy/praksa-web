@@ -1,7 +1,6 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { MdOutlineRestartAlt } from 'react-icons/md';
 import styled from 'styled-components';
-import { DEFAULT_COUNTDOWN_TIME } from '../utils/constants';
 import IconButton, { ButtonSize } from './buttons/IconButton';
 import PlayStopButton from './buttons/PlayStopButton';
 import { Card } from './utils/Card';
@@ -16,21 +15,22 @@ const TimerCard = styled(Card)`
 
 // TODO: Test
 const Timer = () => {
-  const [totalSeconds] = useState(DEFAULT_COUNTDOWN_TIME);
+  const [totalSeconds] = useState(3);
   const [secondsRemaining, setSecondsRemaining] = useState(totalSeconds);
 
   const [isPlaying, setIsPlaying] = useState(false);
-  const [timerFunc, setTimerFunc] = useState<NodeJS.Timer | null>(null);
+  // const [timerFunc, setTimerFunc] = useState<NodeJS.Timer | null>(null);
+  const timerFunc = useRef<NodeJS.Timer | null>(null);
 
   useEffect(() => {
     return () => {
-      if (timerFunc) {
-        clearInterval(timerFunc);
+      if (timerFunc.current) {
+        clearInterval(timerFunc.current);
       }
     };
   }, []);
 
-  const tickTimerDown = useCallback(() => {
+  const tickTimerDown = () => {
     setSecondsRemaining((prev: number) => {
       if (prev === 1) {
         stopTimer();
@@ -39,18 +39,21 @@ const Timer = () => {
         return (prev -= 1);
       }
     });
-  }, []);
+  };
 
   const startTimer = () => {
+    if (secondsRemaining === 0) {
+      resetTimer();
+    }
+    
     setIsPlaying(true);
-    const timerFunction = setInterval(tickTimerDown, 1000);
-    setTimerFunc(timerFunction);
+    timerFunc.current = setInterval(tickTimerDown, 1000);
   };
 
   const stopTimer = () => {
     setIsPlaying(false);
-    if (timerFunc) {
-      clearInterval(timerFunc);
+    if (timerFunc.current) {
+      clearInterval(timerFunc.current);
     }
   };
 
@@ -61,17 +64,23 @@ const Timer = () => {
 
   const timeLabel: string = useMemo(() => {
     const minutes = Math.floor(secondsRemaining / 60);
-    let seconds = (secondsRemaining % 60).toString();
-    if (seconds === '0') {
-      seconds = '00';
+    const seconds = (secondsRemaining % 60);
+
+    if (minutes === 0) {
+      return `${seconds}s`;
+    } 
+
+    if (minutes > 0 && seconds < 10) {
+      return `${minutes}:0${seconds}`;
     }
+    
     return `${minutes}:${seconds}`;
   }, [secondsRemaining]);
 
   return (
     <TimerCard>
       <BoldText aria-label="tempo-label">{timeLabel}</BoldText>
-      <Progress currentValue={secondsRemaining} maxValue={totalSeconds} />
+      <Progress currentVal={secondsRemaining} maxVal={totalSeconds} />
       <CenteredFlexRow gap={24}>
         <PlayStopButton
           isPlaying={isPlaying}
