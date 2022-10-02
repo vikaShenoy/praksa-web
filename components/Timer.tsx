@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { MdOutlineRestartAlt } from 'react-icons/md';
 import styled from 'styled-components';
+import { DEFAULT_COUNTDOWN_TIME } from '../utils/constants';
 import IconButton, { ButtonSize } from './buttons/IconButton';
 import PlayStopButton from './buttons/PlayStopButton';
 import { Card } from './utils/Card';
 import { CenteredFlexRow } from './utils/Containers';
 import ProgressBar from './utils/ProgressBar';
 import { BoldText } from './utils/Text';
+import TimeInput from './utils/TimeInput';
 
 const TimerCard = styled(Card)`
   min-width: 400px;
@@ -14,11 +16,10 @@ const TimerCard = styled(Card)`
 
 // TODO: Test
 const Timer = () => {
-  const [totalSeconds] = useState(3);
+  const [totalSeconds, setTotalSeconds] = useState(DEFAULT_COUNTDOWN_TIME);
   const [secondsRemaining, setSecondsRemaining] = useState(totalSeconds);
-
+  const [isEditingTime, setIsEditingTime] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  // const [timerFunc, setTimerFunc] = useState<NodeJS.Timer | null>(null);
   const timerFunc = useRef<NodeJS.Timer | null>(null);
 
   useEffect(() => {
@@ -44,7 +45,7 @@ const Timer = () => {
     if (secondsRemaining === 0) {
       resetTimer();
     }
-    
+
     setIsPlaying(true);
     timerFunc.current = setInterval(tickTimerDown, 1000);
   };
@@ -61,24 +62,43 @@ const Timer = () => {
     setSecondsRemaining(totalSeconds);
   };
 
+  const onEditTime = () => {
+    stopTimer();
+    setIsEditingTime(true);
+    setSecondsRemaining(0);
+  };
+
+  const onTimeEntered = (seconds: number) => {
+    setIsEditingTime(false);
+    setTotalSeconds(seconds);
+    setSecondsRemaining(seconds);
+    stopTimer();
+  };
+
   const timeLabel: string = useMemo(() => {
     const minutes = Math.floor(secondsRemaining / 60);
-    const seconds = (secondsRemaining % 60);
+    const seconds = secondsRemaining % 60;
 
     if (minutes === 0) {
       return `${seconds}s`;
-    } 
+    }
 
     if (minutes > 0 && seconds < 10) {
       return `${minutes}:0${seconds}`;
     }
-    
+
     return `${minutes}:${seconds}`;
   }, [secondsRemaining]);
 
   return (
     <TimerCard>
-      <BoldText aria-label="tempo-label">{timeLabel}</BoldText>
+      {isEditingTime ? (
+        <TimeInput onEnter={onTimeEntered} />
+      ) : (
+        <BoldText onClick={onEditTime} aria-label="tempo-label">
+          {timeLabel}
+        </BoldText>
+      )}
       <ProgressBar currentVal={secondsRemaining} maxVal={totalSeconds} />
       <CenteredFlexRow gap={24}>
         <PlayStopButton

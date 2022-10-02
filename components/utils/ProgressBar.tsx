@@ -37,16 +37,16 @@ const ProgressBar = ({ currentVal, maxVal }: Props) => {
 
   const innerBarWidth: number = useMemo(() => {
     const outer = outerBar.current;
-    if (!outer) {
+    if (!outer || !currentVal || !maxVal) {
       return 0;
     }
     return (currentVal / maxVal) * outer.offsetWidth;
-  }, [currentVal, maxVal, outerBar.current]);
+  }, [currentVal, maxVal, outerBar]);
 
   return (
     <Wrapper>
       <OuterBar ref={outerBar}>
-        <InnerBar width={innerBarWidth} fullBar={currentVal === maxVal} />
+        <InnerBar width={innerBarWidth} fullBar={currentVal === maxVal && currentVal !== 0} />
       </OuterBar>
     </Wrapper>
   );
