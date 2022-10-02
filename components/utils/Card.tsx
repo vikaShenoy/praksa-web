@@ -8,7 +8,7 @@ export const Card = styled.div`
   background: ${(props) => props.theme.colors.primary};
   border-radius: ${styles.borderRadius.md};
   box-shadow: ${(props) => props.theme.shadows.card};
-  padding: ${styles.spacing.lg} ${styles.spacing.sm2};
+  padding: ${styles.spacing.lg} ${styles.spacing.md};
 
   &:hover {
     box-shadow: ${(props) => props.theme.shadows.cardHover};

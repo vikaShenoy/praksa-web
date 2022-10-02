@@ -5,12 +5,11 @@ import IconButton, { ButtonSize } from './buttons/IconButton';
 import PlayStopButton from './buttons/PlayStopButton';
 import { Card } from './utils/Card';
 import { CenteredFlexRow } from './utils/Containers';
-import Progress from './utils/Progress';
+import ProgressBar from './utils/ProgressBar';
 import { BoldText } from './utils/Text';
 
 const TimerCard = styled(Card)`
   min-width: 400px;
-  height: 350px;
 `;
 
 // TODO: Test
@@ -80,7 +79,7 @@ const Timer = () => {
   return (
     <TimerCard>
       <BoldText aria-label="tempo-label">{timeLabel}</BoldText>
-      <Progress currentVal={secondsRemaining} maxVal={totalSeconds} />
+      <ProgressBar currentVal={secondsRemaining} maxVal={totalSeconds} />
       <CenteredFlexRow gap={24}>
         <PlayStopButton
           isPlaying={isPlaying}

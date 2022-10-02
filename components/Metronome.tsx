@@ -7,15 +7,16 @@ import { DEFAULT_BPM, MAX_BPM, MIN_BPM } from '../utils/constants';
 import IconButton, { ButtonSize } from './buttons/IconButton';
 import PlayStopButton from './buttons/PlayStopButton';
 import { Card } from './utils/Card';
+import { CenteredFlexRow } from './utils/Containers';
 import Slider from './utils/Slider';
 import { BoldText } from './utils/Text';
 
 const MetronomeCard = styled(Card)`
   min-width: 400px;
-  height: 350px;
 `;
 
 const SliderWrapper = styled.div`
+  height: ${styles.components.progressBarHeight};
   display: flex;
   align-items: center;
   width: 100%;
@@ -47,7 +48,7 @@ const Metronome = () => {
               setBpm((prev) => prev - 1);
             }}
             size={ButtonSize.SMALL}
-            ariaLabel="minus"            
+            ariaLabel="minus"
           />
           <Margin>
             <Slider
@@ -66,10 +67,12 @@ const Metronome = () => {
             ariaLabel="plus"
           />
         </SliderWrapper>
-        <PlayStopButton
-          onClick={() => setIsPlaying((prev) => !prev)}
-          isPlaying={isPlaying}
-        />
+        <CenteredFlexRow gap={24}>
+          <PlayStopButton
+            onClick={() => setIsPlaying((prev) => !prev)}
+            isPlaying={isPlaying}
+          />
+        </CenteredFlexRow>
       </MetronomeCard>
     </div>
   );
