@@ -26,8 +26,8 @@ const Button = styled.button<{ size: ButtonSize }>`
 
 const Icon = styled.div<{ size: ButtonSize }>`
   color: ${(props) => props.theme.colors.icon};
-  font-size: ${(props) => `${props.size * (2/3)}px`};
-`
+  font-size: ${(props) => `${props.size * (2 / 3)}px`};
+`;
 interface Props {
   iconName: IconType;
   size: ButtonSize;
@@ -35,10 +35,16 @@ interface Props {
   ariaLabel: string;
 }
 
-const IconButton = ({ iconName, onClick, size, ariaLabel  }: Props) => {
+const IconButton = ({ iconName, onClick, size, ariaLabel }: Props) => {
   return (
-    <Button onClick={onClick} size={size} aria-label={ariaLabel}>
-      <Icon as={iconName} size={size}/>
+    <Button
+      onClick={onClick}
+      size={size}
+      name={ariaLabel}
+      aria-label={ariaLabel}
+      role="button"
+    >
+      <Icon as={iconName} size={size} />
     </Button>
   );
 };
