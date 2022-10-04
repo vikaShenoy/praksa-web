@@ -1,16 +1,14 @@
 import { render } from '@testing-library/react';
-import { ThemeProvider } from 'styled-components';
 import Theme from '../components/Theme';
+import Timer from '../components/Timer';
 
 // TODO
-describe('Theme component', () => {
+describe('Timer component', () => {
   beforeEach(() => {
     render(
-      <ThemeProvider>
-        <Theme>
-          <div>Child</div>
-        </Theme>
-      </ThemeProvider>
+      <Theme>
+        <Timer />
+      </Theme>
     );
   });
 
