@@ -84,7 +84,7 @@ const Navbar = () => {
           <HamburgerIcon />
         </MenuIconWrapper>
       )}
-      <LinkWrapper isMobile={isMobile} isVisible={showDropdown}>
+      <LinkWrapper isMobile={isMobile} isVisible={showDropdown} role="navigation">
         {NavItems.map((navItem) => (
           <NavbarLinkText isMobile={isMobile} key={navItem.id}>
             <Link href={navItem.href}>{navItem.name}</Link>

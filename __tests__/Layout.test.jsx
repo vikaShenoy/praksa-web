@@ -1,22 +1,24 @@
-import { render } from '@testing-library/react';
-import { ThemeProvider } from 'styled-components';
+import { render, screen } from '@testing-library/react';
 import Layout from '../components/Layout';
+import Theme from '../components/Theme';
 
 // TODO
 describe('Layout component', () => {
   beforeEach(() => {
     render(
-      <ThemeProvider>
+      <Theme>
         <Layout>
-          <div>Child</div>
+          <button>Test button</button>
         </Layout>
-      </ThemeProvider>
+      </Theme>
     );
   });
 
-  it('', () => {});
+  it('renders the navbar', () => {
+    expect(screen.queryByRole('navigation')).toBeTruthy()
+  });
 
-  it('', () => {});
-
-  it('', () => {});
+  it('renders children', () => {
+    expect(screen.queryByRole("button", { name: "Test button"})).toBeTruthy()
+  });
 });
