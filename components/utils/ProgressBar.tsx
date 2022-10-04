@@ -44,7 +44,7 @@ const ProgressBar = ({ currentVal, maxVal }: Props) => {
   }, [currentVal, maxVal, outerBar]);
 
   return (
-    <Wrapper>
+    <Wrapper role="progressbar">
       <OuterBar ref={outerBar}>
         <InnerBar width={innerBarWidth} fullBar={currentVal === maxVal && currentVal !== 0} />
       </OuterBar>

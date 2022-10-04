@@ -15,7 +15,6 @@ const TimerCard = styled(Card)`
   min-width: ${styles.components.cardWidth};
 `;
 
-// TODO: Test
 const Timer = () => {
   const [totalSeconds, setTotalSeconds] = useState(DEFAULT_COUNTDOWN_TIME);
   const [secondsRemaining, setSecondsRemaining] = useState(totalSeconds);
@@ -96,7 +95,7 @@ const Timer = () => {
       {isEditingTime ? (
         <TimeInput onEnter={onTimeEntered} />
       ) : (
-        <BoldText onClick={onEditTime} aria-label="tempo-label">
+        <BoldText onClick={onEditTime} aria-label="time-label">
           {timeLabel}
         </BoldText>
       )}
@@ -110,7 +109,7 @@ const Timer = () => {
           iconName={MdOutlineRestartAlt}
           size={ButtonSize.LARGE}
           onClick={resetTimer}
-          ariaLabel="reset-timer"
+          ariaLabel="reset-timer-button"
         />
       </CenteredFlexRow>
     </TimerCard>
