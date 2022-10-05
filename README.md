@@ -31,7 +31,7 @@ To run tests:
 ### CI / CD
 
 #### CI
-CI is managed using GitHub actions. Linting and tests are run on every push.
+CI is managed using GitHub actions. Linting and tests are run on every push. The pipeline can be seen in .github/test.yml.
 
 #### CD
 The app is deployed on Vercel. To deploy, simply merge a pull request into the main branch. Make sure CI checks are passing before merging a pull request.
