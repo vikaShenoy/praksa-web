@@ -62,28 +62,14 @@ describe('Metronome', () => {
     });
 
     it('clicking the play button changes the icon to a stop icon', () => {
-      expect(screen.queryByLabelText('play-button')).toBeInTheDocument();
-      expect(screen.queryByLabelText('stop-button')).not.toBeInTheDocument();
-
       fireEvent.click(screen.getByRole('button', { name: 'play-button' }));
-
-      expect(screen.queryByLabelText('play-button')).not.toBeInTheDocument();
       expect(screen.queryByLabelText('stop-button')).toBeInTheDocument();
     });
 
     it('clicking the play button twice changes the icon to a stop icon back to a play icon', () => {
-      expect(screen.queryByLabelText('play-button')).toBeInTheDocument();
-      expect(screen.queryByLabelText('stop-button')).not.toBeInTheDocument();
-
       fireEvent.click(screen.getByRole('button', { name: 'play-button' }));
-
-      expect(screen.queryByLabelText('play-button')).not.toBeInTheDocument();
-      expect(screen.queryByLabelText('stop-button')).toBeInTheDocument();
-
       fireEvent.click(screen.getByRole('button', { name: 'stop-button' }));
-
       expect(screen.queryByLabelText('play-button')).toBeInTheDocument();
-      expect(screen.queryByLabelText('stop-button')).not.toBeInTheDocument();
     });
   });
 

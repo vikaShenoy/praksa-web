@@ -19,7 +19,7 @@ const OuterBar = styled.div`
 
 const InnerBar = styled.div<{ width: number; fullBar: boolean }>`
   height: ${styles.components.progressBarHeight};
-  width: ${(props) => (props.fullBar ? '100%' : `${props.width}px`)};
+  width: ${(props) => (props.fullBar ? '100%' : `${props.width}%`)};
   background-color: ${(props) => props.theme.colors.secondary};
   border-radius: ${styles.borderRadius.md};
 
@@ -35,18 +35,22 @@ interface Props {
 const ProgressBar = ({ currentVal, maxVal }: Props) => {
   const outerBar = useRef<HTMLDivElement>(null);
 
-  const innerBarWidth: number = useMemo(() => {
+  const innerBarWidthPercentage: number = useMemo(() => {
     const outer = outerBar.current;
     if (!outer || !currentVal || !maxVal) {
       return 0;
     }
-    return (currentVal / maxVal) * outer.offsetWidth;
+    return (currentVal / maxVal) * 100;
   }, [currentVal, maxVal, outerBar]);
 
   return (
-    <Wrapper role="progressbar">
+    <Wrapper>
       <OuterBar ref={outerBar}>
-        <InnerBar width={innerBarWidth} fullBar={currentVal === maxVal && currentVal !== 0} />
+        <InnerBar
+          width={innerBarWidthPercentage}
+          fullBar={currentVal === maxVal && currentVal !== 0}
+          role="progressbar"
+        />
       </OuterBar>
     </Wrapper>
   );
