@@ -15,8 +15,8 @@ const TimerCard = styled(Card)`
   min-width: ${styles.components.cardWidth};
 `;
 
-const Timer = () => {
-  const [totalSeconds, setTotalSeconds] = useState(DEFAULT_COUNTDOWN_TIME);
+const Timer = ({ initialTime = DEFAULT_COUNTDOWN_TIME }: { initialTime?: number }) => {
+  const [totalSeconds, setTotalSeconds] = useState(initialTime);
   const [secondsRemaining, setSecondsRemaining] = useState(totalSeconds);
   const [isEditingTime, setIsEditingTime] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
