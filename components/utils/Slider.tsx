@@ -6,14 +6,14 @@ const SliderInput = styled.input`
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 0.5rem;
+  height: ${styles.components.sliderTrackHeight};
   background: ${(props) => props.theme.colors.disabled};
   border-radius: ${styles.borderRadius.md};
 
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
-    height: 1.5rem;
-    width: 1.5rem;
+    height: ${styles.components.sliderThumbSize};
+    width: ${styles.components.sliderThumbSize};
     border-radius: 50%;
     background: ${(props) => props.theme.colors.secondary};
     cursor: pointer;

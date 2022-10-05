@@ -1,25 +1,14 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
+import React from 'react';
 import Navbar from '../components/Navbar';
 import Theme from '../components/Theme';
-
-Object.defineProperty(window, 'matchMedia', {
-  writable: true,
-  value: jest.fn().mockImplementation((query) => ({
-    matches: true,
-    media: query,
-    onchange: null,
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-  })),
-});
 
 describe('Navbar', () => {
   jest.mock(
     'next/link',
     () =>
-      ({ children }) =>
+      ({ children }: { children: React.ReactNode }) =>
         children
   );
 

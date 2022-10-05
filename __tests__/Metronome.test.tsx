@@ -3,18 +3,6 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import Metronome from '../components/Metronome';
 import Theme from '../components/Theme';
 
-Object.defineProperty(window, 'audioContext', {
-  writable: true,
-  value: jest.fn().mockImplementation((query) => ({
-    matches: true,
-    media: query,
-    onchange: null,
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-  })),
-});
-
 const mockBufferSource = { buffer: null, connect: jest.fn(), start: jest.fn() };
 const mockAudioContext = {
   createBuffer: jest.fn(),
@@ -37,7 +25,7 @@ describe('Metronome', () => {
     it('defaults to 120 bpm', () => {
       const tempoLabel = screen.queryByLabelText('tempo-label');
       expect(tempoLabel).toBeInTheDocument();
-      expect(tempoLabel.textContent).toBe('120');
+      expect(tempoLabel?.textContent).toBe('120');
     });
   });
 
@@ -53,7 +41,7 @@ describe('Metronome', () => {
     });
 
     it('include a play-stop button', () => {
-      const playStopBtn = screen.getByRole('button', { name: /play-stop/i });
+      const playStopBtn = screen.getByRole('button', { name: 'play-button' });
       expect(playStopBtn).toBeDefined();
     });
 
@@ -62,40 +50,26 @@ describe('Metronome', () => {
       fireEvent.click(plusBtn);
 
       const tempoLabel = screen.queryByLabelText('tempo-label');
-      expect(tempoLabel.textContent).toBe('121');
+      expect(tempoLabel?.textContent).toBe('121');
     });
 
     it('clicking the minus button decrements the bpm text', () => {
-      const minusBtn = screen.getByRole('button', { name: /minus/i });
+      const minusBtn = screen.getByRole('button', { name: 'minus' });
       fireEvent.click(minusBtn);
 
       const tempoLabel = screen.queryByLabelText('tempo-label');
-      expect(tempoLabel.textContent).toBe('119');
+      expect(tempoLabel?.textContent).toBe('119');
     });
 
     it('clicking the play button changes the icon to a stop icon', () => {
-      expect(screen.queryByLabelText('play')).toBeInTheDocument();
-      expect(screen.queryByLabelText('stop')).not.toBeInTheDocument();
-
-      fireEvent.click(screen.getByRole('button', { name: /play-stop/i }));
-
-      expect(screen.queryByLabelText('play')).not.toBeInTheDocument();
-      expect(screen.queryByLabelText('stop')).toBeInTheDocument();
+      fireEvent.click(screen.getByRole('button', { name: 'play-button' }));
+      expect(screen.queryByLabelText('stop-button')).toBeInTheDocument();
     });
 
     it('clicking the play button twice changes the icon to a stop icon back to a play icon', () => {
-      expect(screen.queryByLabelText('play')).toBeInTheDocument();
-      expect(screen.queryByLabelText('stop')).not.toBeInTheDocument();
-
-      fireEvent.click(screen.getByRole('button', { name: /play-stop/i }));
-
-      expect(screen.queryByLabelText('play')).not.toBeInTheDocument();
-      expect(screen.queryByLabelText('stop')).toBeInTheDocument();
-
-      fireEvent.click(screen.getByRole('button', { name: /play-stop/i }));
-
-      expect(screen.queryByLabelText('play')).toBeInTheDocument();
-      expect(screen.queryByLabelText('stop')).not.toBeInTheDocument();
+      fireEvent.click(screen.getByRole('button', { name: 'play-button' }));
+      fireEvent.click(screen.getByRole('button', { name: 'stop-button' }));
+      expect(screen.queryByLabelText('play-button')).toBeInTheDocument();
     });
   });
 
@@ -106,10 +80,10 @@ describe('Metronome', () => {
 
     it('can be adjusted to adjust the bpm text', () => {
       const slider = screen.getByRole('slider');
-      fireEvent.change(slider, { target: { value: 180}});
-      
+      fireEvent.change(slider, { target: { value: 180 } });
+
       const tempoLabel = screen.queryByLabelText('tempo-label');
-      expect(tempoLabel.textContent).toBe('180');
+      expect(tempoLabel?.textContent).toBe('180');
     });
   });
 });

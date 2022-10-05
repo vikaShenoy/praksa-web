@@ -3,11 +3,11 @@ export const styles = {
     small: 500,
   },
   spacing: {
-    sm: '8px',
-    sm2: '16px',
-    md: '24px',
-    md2: '32px',
-    lg: '48px',
+    sm: '0.5rem',
+    sm2: '1rem',
+    md: '1.5rem',
+    md2: '2rem',
+    lg: '3rem',
   },
   borderRadius: {
     md: '24px',
@@ -20,5 +20,11 @@ export const styles = {
   font: {
     title: "'Proza Libre', sans-serif",
     body: "'Lato', sans-serif",
+  },
+  components: {
+    progressBarHeight: '1.5rem',
+    sliderTrackHeight: '0.75rem',
+    sliderThumbSize: '2rem',
+    cardWidth: '25rem'
   },
 };

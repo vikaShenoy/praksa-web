@@ -1,3 +1,4 @@
+import { IconType } from 'react-icons';
 import styled from 'styled-components';
 
 export enum ButtonSize {
@@ -23,17 +24,27 @@ const Button = styled.button<{ size: ButtonSize }>`
   }
 `;
 
+const Icon = styled.div<{ size: ButtonSize }>`
+  color: ${(props) => props.theme.colors.icon};
+  font-size: ${(props) => `${props.size * (2 / 3)}px`};
+`;
 interface Props {
+  iconName: IconType;
   size: ButtonSize;
-  Icon: React.ReactNode;
   onClick: () => void;
   ariaLabel: string;
 }
 
-const IconButton = ({ Icon, size, onClick, ariaLabel }: Props) => {
+const IconButton = ({ iconName, onClick, size, ariaLabel }: Props) => {
   return (
-    <Button onClick={onClick} size={size} aria-label={ariaLabel}>
-      {Icon}
+    <Button
+      onClick={onClick}
+      size={size}
+      name={ariaLabel}
+      aria-label={ariaLabel}
+      role="button"
+    >
+      <Icon as={iconName} size={size} />
     </Button>
   );
 };

@@ -5,7 +5,7 @@ import useMediaQuery from '../hooks/useMediaQuery';
 import HamburgerIcon from '../public/icons/HarmburgerIcon';
 import { styles } from '../styles/styles';
 import { Strings } from '../utils/Strings';
-import { BodyText, TitleText } from './utils/Text';
+import { BodyText, TitleText } from './wrappers/Text';
 
 const NavItems = [
   {
@@ -84,7 +84,7 @@ const Navbar = () => {
           <HamburgerIcon />
         </MenuIconWrapper>
       )}
-      <LinkWrapper isMobile={isMobile} isVisible={showDropdown}>
+      <LinkWrapper isMobile={isMobile} isVisible={showDropdown} role="navigation">
         {NavItems.map((navItem) => (
           <NavbarLinkText isMobile={isMobile} key={navItem.id}>
             <Link href={navItem.href}>{navItem.name}</Link>
