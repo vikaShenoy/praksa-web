@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import PlayStopButton from "../components/buttons/PlayStopButton";
-import Theme from "../components/Theme";
+import Theme from "../../Theme";
+import PlayStopButton from "./PlayStopButton";
 
 describe("PlayStopButton component", () => {
   let mockOnClick = jest.fn();

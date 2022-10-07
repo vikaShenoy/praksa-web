@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
-import Theme from '../components/Theme';
-import Timer from '../components/Timer';
+import Theme from '../Theme';
+import Timer from './Timer';
 
 describe('Timer component', () => {
   const clickPlay = () => {

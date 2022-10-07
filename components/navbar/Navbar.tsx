@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import styled from 'styled-components';
-import useMediaQuery from '../hooks/useMediaQuery';
-import HamburgerIcon from '../public/icons/HarmburgerIcon';
-import { styles } from '../styles/styles';
-import { Strings } from '../utils/Strings';
-import { BodyText, TitleText } from './wrappers/Text';
+import useMediaQuery from '../../hooks/useMediaQuery';
+import HamburgerIcon from '../../public/icons/HarmburgerIcon';
+import { styles } from '../../styles/styles';
+import { BodyText, TitleText } from '../../styles/wrappers/Text';
+import { Strings } from '../../utils/Strings';
 
 const NavItems = [
   {

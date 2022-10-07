@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import Navbar from '../components/Navbar';
-import Theme from '../components/Theme';
+import Theme from '../Theme';
+import Navbar from './Navbar';
 
 describe('Navbar', () => {
   jest.mock(

@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
-import Metronome from '../components/Metronome';
-import Theme from '../components/Theme';
+import Theme from '../Theme';
+import Metronome from './Metronome';
 
 const mockBufferSource = { buffer: null, connect: jest.fn(), start: jest.fn() };
 const mockAudioContext = {

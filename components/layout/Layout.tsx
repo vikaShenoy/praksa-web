@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Navbar from './Navbar';
-import Theme from './Theme';
+import Navbar from '../navbar/Navbar';
+import Theme from '../Theme';
 
 const Background = styled.div`
   position: fixed;

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import Layout from '../components/Layout';
-import Theme from '../components/Theme';
+import Theme from '../Theme';
+import Layout from './Layout';
 
 // TODO
 describe('Layout component', () => {

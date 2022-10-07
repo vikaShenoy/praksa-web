@@ -1,15 +1,15 @@
 import { ChangeEvent, useState } from 'react';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import styled from 'styled-components';
-import useMetronomeRunner from '../hooks/useMetronomeRunner';
-import { styles } from '../styles/styles';
-import { DEFAULT_BPM, MAX_BPM, MIN_BPM } from '../utils/constants';
-import IconButton, { ButtonSize } from './buttons/IconButton';
-import PlayStopButton from './buttons/PlayStopButton';
-import Slider from './utils/Slider';
-import { Card } from './wrappers/Card';
-import { CenteredFlexRow } from './wrappers/Containers';
-import { BoldText } from './wrappers/Text';
+import useMetronomeRunner from '../../hooks/useMetronomeRunner';
+import { styles } from '../../styles/styles';
+import { Card } from '../../styles/wrappers/Card';
+import { CenteredFlexRow } from '../../styles/wrappers/Containers';
+import { BoldText } from '../../styles/wrappers/Text';
+import { DEFAULT_BPM, MAX_BPM, MIN_BPM } from '../../utils/constants';
+import IconButton, { ButtonSize } from '../buttons/IconButton';
+import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton';
+import Slider from '../utils/Slider';
 
 const MetronomeCard = styled(Card)`
   min-width: ${styles.components.cardWidth};

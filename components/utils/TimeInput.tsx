@@ -1,8 +1,8 @@
 import { ChangeEvent, useRef, useState } from 'react';
 import styled from 'styled-components';
 import useClickOutside from '../../hooks/useClickOutside';
-import { CenteredFlexRow } from '../wrappers/Containers';
-import { BoldText } from '../wrappers/Text';
+import { CenteredFlexRow } from '../../styles/wrappers/Containers';
+import { BoldText } from '../../styles/wrappers/Text';
 
 const Container = styled(CenteredFlexRow)`
   background-color: ${(props) => props.theme.colors.secondary};
