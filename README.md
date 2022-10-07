@@ -16,22 +16,25 @@ Praksa is a web application for music practice.
 ### Development
 
 Run the development server with the following command. The app will be served at `localhost:3000`, and will hot reload as you make changes.
-  ```bash
- yarn dev
- ```
+
+```bash
+yarn dev
+```
 
 ### Testing
 
 To run tests:
 
- ```bash
- yarn test
- ```
+```bash
+yarn test
+```
 
 ### CI / CD
 
 #### CI
+
 CI is managed using GitHub actions. Linting and tests are run on every push. The pipeline can be seen in .github/test.yml.
 
 #### CD
+
 The app is deployed on Vercel. To deploy, simply merge a pull request into the main branch. Make sure CI checks are passing before merging a pull request.

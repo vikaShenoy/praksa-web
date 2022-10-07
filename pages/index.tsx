@@ -1,8 +1,8 @@
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import Metronome from '../components/metronome/Metronome';
-import Timer from '../components/timer/Timer';
-import { Flex } from '../styles/wrappers/Containers';
+import type { NextPage } from 'next'
+import Head from 'next/head'
+import Metronome from '../components/metronome/Metronome'
+import Timer from '../components/timer/Timer'
+import { Flex } from '../styles/wrappers/Containers'
 
 const Home: NextPage = () => {
   return (
@@ -15,7 +15,7 @@ const Home: NextPage = () => {
         <Timer />
       </Flex>
     </section>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

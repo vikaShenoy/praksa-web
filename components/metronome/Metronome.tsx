@@ -1,19 +1,19 @@
-import { ChangeEvent, useState } from 'react';
-import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
-import styled from 'styled-components';
-import useMetronomeRunner from '../../hooks/useMetronomeRunner';
-import { styles } from '../../styles/styles';
-import { Card } from '../../styles/wrappers/Card';
-import { CenteredFlexRow } from '../../styles/wrappers/Containers';
-import { BoldText } from '../../styles/wrappers/Text';
-import { DEFAULT_BPM, MAX_BPM, MIN_BPM } from '../../utils/constants';
-import IconButton, { ButtonSize } from '../buttons/IconButton';
-import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton';
-import Slider from '../utils/Slider';
+import { ChangeEvent, useState } from 'react'
+import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
+import styled from 'styled-components'
+import useMetronomeRunner from '../../hooks/useMetronomeRunner'
+import { styles } from '../../styles/styles'
+import { Card } from '../../styles/wrappers/Card'
+import { CenteredFlexRow } from '../../styles/wrappers/Containers'
+import { BoldText } from '../../styles/wrappers/Text'
+import { DEFAULT_BPM, MAX_BPM, MIN_BPM } from '../../utils/constants'
+import IconButton, { ButtonSize } from '../buttons/IconButton'
+import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton'
+import Slider from '../utils/Slider'
 
 const MetronomeCard = styled(Card)`
   min-width: ${styles.components.cardWidth};
-`;
+`
 
 const SliderWrapper = styled.div`
   height: ${styles.components.progressBarHeight};
@@ -21,21 +21,21 @@ const SliderWrapper = styled.div`
   align-items: center;
   width: 100%;
   margin: ${styles.spacing.lg} 0;
-`;
+`
 
 const Margin = styled.div`
   width: 100%;
   margin: 0 ${styles.spacing.sm};
-`;
+`
 
 const Metronome = () => {
-  const [bpm, setBpm] = useState(DEFAULT_BPM);
-  const [isPlaying, setIsPlaying] = useState(false);
-  useMetronomeRunner({ bpm, isPlaying });
+  const [bpm, setBpm] = useState(DEFAULT_BPM)
+  const [isPlaying, setIsPlaying] = useState(false)
+  useMetronomeRunner({ bpm, isPlaying })
 
   const onSliderUpdate = (e: ChangeEvent<HTMLInputElement>) => {
-    setBpm(Number(e.target.value));
-  };
+    setBpm(Number(e.target.value))
+  }
 
   return (
     <div>
@@ -45,7 +45,7 @@ const Metronome = () => {
           <IconButton
             iconName={AiOutlineMinus}
             onClick={() => {
-              setBpm((prev) => prev - 1);
+              setBpm((prev) => prev - 1)
             }}
             size={ButtonSize.SMALL}
             ariaLabel="minus"
@@ -61,7 +61,7 @@ const Metronome = () => {
           <IconButton
             iconName={AiOutlinePlus}
             onClick={() => {
-              setBpm((prev) => prev + 1);
+              setBpm((prev) => prev + 1)
             }}
             size={ButtonSize.SMALL}
             ariaLabel="plus"
@@ -75,7 +75,7 @@ const Metronome = () => {
         </CenteredFlexRow>
       </MetronomeCard>
     </div>
-  );
-};
+  )
+}
 
-export default Metronome;
+export default Metronome

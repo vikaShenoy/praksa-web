@@ -1,6 +1,6 @@
-import { ChangeEvent } from 'react';
-import styled from 'styled-components';
-import { styles } from '../../styles/styles';
+import { ChangeEvent } from 'react'
+import styled from 'styled-components'
+import { styles } from '../../styles/styles'
 
 const SliderInput = styled.input`
   -webkit-appearance: none;
@@ -18,13 +18,13 @@ const SliderInput = styled.input`
     background: ${(props) => props.theme.colors.secondary};
     cursor: pointer;
   }
-`;
+`
 
 interface Props {
-  minVal: number;
-  maxVal: number;
-  currentVal: number;
-  onValueChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  minVal: number
+  maxVal: number
+  currentVal: number
+  onValueChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 const Slider = ({ minVal, maxVal, currentVal, onValueChange }: Props) => {
@@ -38,7 +38,7 @@ const Slider = ({ minVal, maxVal, currentVal, onValueChange }: Props) => {
         onChange={onValueChange}
       />
     </>
-  );
-};
+  )
+}
 
-export default Slider;
+export default Slider

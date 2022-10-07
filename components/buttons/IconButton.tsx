@@ -1,5 +1,5 @@
-import { IconType } from 'react-icons';
-import styled from 'styled-components';
+import { IconType } from 'react-icons'
+import styled from 'styled-components'
 
 export enum ButtonSize {
   SMALL = 32,
@@ -22,17 +22,17 @@ const Button = styled.button<{ size: ButtonSize }>`
   &:hover {
     box-shadow: ${(props) => props.theme.shadows.buttonHover};
   }
-`;
+`
 
 const Icon = styled.div<{ size: ButtonSize }>`
   color: ${(props) => props.theme.colors.icon};
   font-size: ${(props) => `${props.size * (2 / 3)}px`};
-`;
+`
 interface Props {
-  iconName: IconType;
-  size: ButtonSize;
-  onClick: () => void;
-  ariaLabel: string;
+  iconName: IconType
+  size: ButtonSize
+  onClick: () => void
+  ariaLabel: string
 }
 
 const IconButton = ({ iconName, onClick, size, ariaLabel }: Props) => {
@@ -46,7 +46,7 @@ const IconButton = ({ iconName, onClick, size, ariaLabel }: Props) => {
     >
       <Icon as={iconName} size={size} />
     </Button>
-  );
-};
+  )
+}
 
-export default IconButton;
+export default IconButton

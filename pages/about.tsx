@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Head from 'next/head'
 
 const About = () => {
   return (
@@ -7,7 +7,7 @@ const About = () => {
         <title>Praksa - About</title>
       </Head>
     </section>
-  );
-};
+  )
+}
 
-export default About;
+export default About

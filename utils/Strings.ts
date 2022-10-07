@@ -1,7 +1,7 @@
 export const Strings = {
-  title: "Praksa",
+  title: 'Praksa',
   pages: {
-    home: "Home",
-    about: "About"
-  }
-};
+    home: 'Home',
+    about: 'About',
+  },
+}

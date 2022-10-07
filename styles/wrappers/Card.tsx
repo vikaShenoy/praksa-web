@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { styles } from '../styles';
+import styled from 'styled-components'
+import { styles } from '../styles'
 
 export const Card = styled.div`
   display: flex;
@@ -13,4 +13,4 @@ export const Card = styled.div`
   &:hover {
     box-shadow: ${(props) => props.theme.shadows.cardHover};
   }
-`;
+`

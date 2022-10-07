@@ -1,11 +1,11 @@
-import Link from 'next/link';
-import { useState } from 'react';
-import styled from 'styled-components';
-import useMediaQuery from '../../hooks/useMediaQuery';
-import HamburgerIcon from '../../public/icons/HarmburgerIcon';
-import { styles } from '../../styles/styles';
-import { BodyText, TitleText } from '../../styles/wrappers/Text';
-import { Strings } from '../../utils/Strings';
+import Link from 'next/link'
+import { useState } from 'react'
+import styled from 'styled-components'
+import useMediaQuery from '../../hooks/useMediaQuery'
+import HamburgerIcon from '../../public/icons/HarmburgerIcon'
+import { styles } from '../../styles/styles'
+import { BodyText, TitleText } from '../../styles/wrappers/Text'
+import { Strings } from '../../utils/Strings'
 
 const NavItems = [
   {
@@ -18,7 +18,7 @@ const NavItems = [
     name: Strings.pages.about,
     href: '/about',
   },
-];
+]
 
 const NavbarWrapper = styled.div<{ isMobile: boolean }>`
   display: flex;
@@ -30,7 +30,7 @@ const NavbarWrapper = styled.div<{ isMobile: boolean }>`
   width: 100%;
 
   position: ${(props) => (props.isMobile ? 'relative' : '')};
-`;
+`
 
 const LinkWrapper = styled.div<{ isMobile: boolean; isVisible: boolean }>`
   display: flex;
@@ -46,7 +46,7 @@ const LinkWrapper = styled.div<{ isMobile: boolean; isVisible: boolean }>`
 
   opacity: ${(props) => (props.isMobile && !props.isVisible ? '0' : '1')};
   transition: opacity 0.3s;
-`;
+`
 
 const MenuIconWrapper = styled.div`
   padding: ${styles.spacing.sm2};
@@ -54,7 +54,7 @@ const MenuIconWrapper = styled.div`
     background: ${(props) => props.theme.colors.secondary};
   }
   transition: background 0.3s;
-`;
+`
 
 const NavbarLinkText = styled(BodyText)<{ isMobile: boolean }>`
   font-size: ${styles.fontSize.sm};
@@ -67,11 +67,11 @@ const NavbarLinkText = styled(BodyText)<{ isMobile: boolean }>`
     background: ${(props) => props.theme.colors.secondary};
   }
   transition: background 0.3s;
-`;
+`
 
 const Navbar = () => {
-  let isMobile = useMediaQuery(styles.breakpoints.small);
-  const [showDropdown, setShowDropdown] = useState(false);
+  let isMobile = useMediaQuery(styles.breakpoints.small)
+  const [showDropdown, setShowDropdown] = useState(false)
 
   return (
     <NavbarWrapper isMobile={isMobile}>
@@ -84,7 +84,11 @@ const Navbar = () => {
           <HamburgerIcon />
         </MenuIconWrapper>
       )}
-      <LinkWrapper isMobile={isMobile} isVisible={showDropdown} role="navigation">
+      <LinkWrapper
+        isMobile={isMobile}
+        isVisible={showDropdown}
+        role="navigation"
+      >
         {NavItems.map((navItem) => (
           <NavbarLinkText isMobile={isMobile} key={navItem.id}>
             <Link href={navItem.href}>{navItem.name}</Link>
@@ -92,7 +96,7 @@ const Navbar = () => {
         ))}
       </LinkWrapper>
     </NavbarWrapper>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

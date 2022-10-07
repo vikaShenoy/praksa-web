@@ -1,6 +1,6 @@
-import { useMemo, useRef } from 'react';
-import styled from 'styled-components';
-import { styles } from '../../styles/styles';
+import { useMemo, useRef } from 'react'
+import styled from 'styled-components'
+import { styles } from '../../styles/styles'
 
 const Wrapper = styled.div`
   display: flex;
@@ -8,14 +8,14 @@ const Wrapper = styled.div`
   width: 100%;
   height: ${styles.components.progressBarHeight};
   margin: ${styles.spacing.lg} 0;
-`;
+`
 
 const OuterBar = styled.div`
   height: ${styles.components.progressBarHeight};
   width: 100%;
   background-color: ${(props) => props.theme.colors.disabled};
   border-radius: ${styles.borderRadius.md};
-`;
+`
 
 const InnerBar = styled.div<{ width: number; fullBar: boolean }>`
   height: ${styles.components.progressBarHeight};
@@ -24,24 +24,24 @@ const InnerBar = styled.div<{ width: number; fullBar: boolean }>`
   border-radius: ${styles.borderRadius.md};
 
   transition: width 0.2s;
-`;
+`
 
 interface Props {
-  currentVal: number;
-  maxVal: number;
+  currentVal: number
+  maxVal: number
 }
 
 // TODO: test
 const ProgressBar = ({ currentVal, maxVal }: Props) => {
-  const outerBar = useRef<HTMLDivElement>(null);
+  const outerBar = useRef<HTMLDivElement>(null)
 
   const innerBarWidthPercentage: number = useMemo(() => {
-    const outer = outerBar.current;
+    const outer = outerBar.current
     if (!outer || !currentVal || !maxVal) {
-      return 0;
+      return 0
     }
-    return (currentVal / maxVal) * 100;
-  }, [currentVal, maxVal, outerBar]);
+    return (currentVal / maxVal) * 100
+  }, [currentVal, maxVal, outerBar])
 
   return (
     <Wrapper>
@@ -53,7 +53,7 @@ const ProgressBar = ({ currentVal, maxVal }: Props) => {
         />
       </OuterBar>
     </Wrapper>
-  );
-};
+  )
+}
 
-export default ProgressBar;
+export default ProgressBar
