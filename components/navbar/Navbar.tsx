@@ -75,7 +75,7 @@ const Navbar = () => {
         href: '/about',
       },
     ]
-  }, [])
+  }, [t])
 
   return (
     <NavbarWrapper isMobile={isMobile}>
@@ -94,7 +94,7 @@ const Navbar = () => {
         role="navigation"
       >
         {NavItems.map((navItem) => (
-          <Link href={navItem.href}>
+          <Link key={navItem.id} href={navItem.href}>
             <NavbarLink isMobile={isMobile} key={navItem.id}>
               {navItem.name}
             </NavbarLink>
