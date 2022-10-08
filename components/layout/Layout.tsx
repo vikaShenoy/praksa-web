@@ -10,6 +10,7 @@ const Background = styled.div`
   width: 100%;
   height: 100%;
   background: ${(props) => props.theme.colors.background};
+  overflow-y: scroll;
 `
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
