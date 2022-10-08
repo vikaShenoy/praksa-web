@@ -3,7 +3,7 @@ import { useState } from 'react'
 import styled, { useTheme } from 'styled-components'
 import useMediaQuery from '../../hooks/useMediaQuery'
 import HamburgerIcon from '../../public/icons/HarmburgerIcon'
-import { BodyText, TitleText } from '../../styles/wrappers'
+import { TitleText } from '../../styles/wrappers'
 import { Strings } from '../../utils/Strings'
 
 const NavItems = [
@@ -47,25 +47,26 @@ const LinkWrapper = styled.div<{ isMobile: boolean; isVisible: boolean }>`
   transition: opacity 0.3s;
 `
 
-const MenuIconWrapper = styled.div`
-  padding: ${(props) => props.theme.spacing.sm};
-  &:hover {
-    background: ${(props) => props.theme.colors.secondary};
-  }
-  transition: background 0.3s;
-`
-
-const NavbarLinkText = styled(BodyText)<{ isMobile: boolean }>`
+const NavbarLink = styled.a<{ isMobile: boolean }>`
   font-size: ${(props) => props.theme.typography.size.sm};
   color: ${(props) => props.theme.colors.text.primary};
   font-family: ${(props) => props.theme.typography.font.body};
   padding: ${(props) =>
     props.isMobile ? props.theme.spacing.sm : props.theme.spacing.md};
   margin: 0;
+  cursor: pointer;
 
   &:hover {
     background: ${(props) => props.theme.colors.secondary};
   }
+`
+
+const MenuIconWrapper = styled.div`
+  padding: ${(props) => props.theme.spacing.sm};
+  &:hover {
+    background: ${(props) => props.theme.colors.secondary};
+  }
+  transition: background 0.3s;
 `
 
 const Navbar = () => {
@@ -90,9 +91,11 @@ const Navbar = () => {
         role="navigation"
       >
         {NavItems.map((navItem) => (
-          <NavbarLinkText isMobile={isMobile} key={navItem.id}>
-            <Link href={navItem.href}>{navItem.name}</Link>
-          </NavbarLinkText>
+          <Link href={navItem.href}>
+            <NavbarLink isMobile={isMobile} key={navItem.id}>
+              {navItem.name}
+            </NavbarLink>
+          </Link>
         ))}
       </LinkWrapper>
     </NavbarWrapper>
