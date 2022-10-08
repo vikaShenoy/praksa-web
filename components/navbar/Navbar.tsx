@@ -1,23 +1,10 @@
 import Link from 'next/link'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import styled, { useTheme } from 'styled-components'
 import useMediaQuery from '../../hooks/useMediaQuery'
 import HamburgerIcon from '../../public/icons/HarmburgerIcon'
 import { TitleText } from '../../styles/wrappers'
-import { Strings } from '../../utils/Strings'
-
-const NavItems = [
-  {
-    id: 1,
-    name: Strings.pages.home,
-    href: '/',
-  },
-  {
-    id: 2,
-    name: Strings.pages.about,
-    href: '/about',
-  },
-]
 
 const NavbarWrapper = styled.div<{ isMobile: boolean }>`
   display: flex;
@@ -73,10 +60,26 @@ const Navbar = () => {
   const theme = useTheme()
   let isMobile = useMediaQuery(theme.sizes.breakpoints.sm)
   const [showDropdown, setShowDropdown] = useState(false)
+  const { t } = useTranslation()
+
+  const NavItems = useMemo(() => {
+    return [
+      {
+        id: 1,
+        name: t('nav.home'),
+        href: '/',
+      },
+      {
+        id: 2,
+        name: t('nav.about'),
+        href: '/about',
+      },
+    ]
+  }, [])
 
   return (
     <NavbarWrapper isMobile={isMobile}>
-      <TitleText>{Strings.title}</TitleText>
+      <TitleText>{t('app_name')}</TitleText>
       {isMobile && (
         <MenuIconWrapper
           test-id="menu-icon"
