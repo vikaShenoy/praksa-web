@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from 'react'
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
+import useMediaQuery from '../../hooks/useMediaQuery'
 import useMetronomeRunner from '../../hooks/useMetronomeRunner'
 import { BoldText, Card, CenteredFlexRow } from '../../styles/wrappers'
 import { DEFAULT_BPM, MAX_BPM, MIN_BPM } from '../../utils/constants'
@@ -8,9 +9,9 @@ import IconButton, { ButtonSize } from '../buttons/IconButton'
 import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton'
 import Slider from '../utils/Slider'
 
-const MetronomeCard = styled(Card)`
+const MetronomeCard = styled(Card)<{ isMobile: boolean }>`
   min-width: ${(props) => props.theme.sizes.components.minCardWidth};
-  width: ${(props) => props.theme.sizes.components.cardWidth};
+  width: ${(props) => (props.isMobile ? '100%' : '25%')};
 `
 
 const SliderWrapper = styled.div`
@@ -27,6 +28,8 @@ const Margin = styled.div`
 `
 
 const Metronome = () => {
+  const theme = useTheme()
+  let isMobile = useMediaQuery(theme.sizes.breakpoints.sm)
   const [bpm, setBpm] = useState(DEFAULT_BPM)
   const [isPlaying, setIsPlaying] = useState(false)
   useMetronomeRunner({ bpm, isPlaying })
@@ -36,7 +39,7 @@ const Metronome = () => {
   }
 
   return (
-    <MetronomeCard>
+    <MetronomeCard isMobile={isMobile}>
       <BoldText aria-label="tempo-label">{bpm.toString()}</BoldText>
       <SliderWrapper>
         <IconButton
