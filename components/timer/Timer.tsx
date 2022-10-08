@@ -1,9 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { MdOutlineRestartAlt } from 'react-icons/md'
 import styled from 'styled-components'
-import { Card } from '../../styles/wrappers/cards'
-import { CenteredFlexRow } from '../../styles/wrappers/containers'
-import { BoldText } from '../../styles/wrappers/text'
+import { BoldText, Card, CenteredFlexRow } from '../../styles/wrappers'
 import { DEFAULT_COUNTDOWN_TIME } from '../../utils/constants'
 import IconButton, { ButtonSize } from '../buttons/IconButton'
 import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton'
@@ -11,7 +9,8 @@ import ProgressBar from '../utils/ProgressBar'
 import TimeInput from '../utils/TimeInput'
 
 const TimerCard = styled(Card)`
-  min-width: ${(props) => props.theme.sizes.components.cardWidth};
+  min-width: ${(props) => props.theme.sizes.components.minCardWidth};
+  width: ${(props) => props.theme.sizes.components.cardWidth};
 `
 
 const Timer = ({

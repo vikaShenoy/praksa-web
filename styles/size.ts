@@ -1,5 +1,6 @@
 export interface SizeStyles {
   components: {
+    minCardWidth: string
     cardWidth: string
     sliderHeight: string
     sliderThumbSize: string
@@ -16,7 +17,8 @@ export const sizes: SizeStyles = {
     sliderHeight: '0.75rem',
     sliderThumbSize: '2rem',
     progressBarHeight: '1.5rem',
-    cardWidth: '25rem'
+    minCardWidth: '20rem',
+    cardWidth: '25%'
   },
   breakpoints: {
     sm: 500

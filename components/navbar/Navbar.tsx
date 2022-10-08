@@ -3,7 +3,7 @@ import { useState } from 'react'
 import styled, { useTheme } from 'styled-components'
 import useMediaQuery from '../../hooks/useMediaQuery'
 import HamburgerIcon from '../../public/icons/HarmburgerIcon'
-import { BodyText, TitleText } from '../../styles/wrappers/text'
+import { BodyText, TitleText } from '../../styles/wrappers'
 import { Strings } from '../../utils/Strings'
 
 const NavItems = [
