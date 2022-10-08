@@ -3,7 +3,7 @@ import { useState } from 'react'
 import styled, { useTheme } from 'styled-components'
 import useMediaQuery from '../../hooks/useMediaQuery'
 import HamburgerIcon from '../../public/icons/HarmburgerIcon'
-import { BodyText, TitleText } from '../../styles/wrappers/Text'
+import { BodyText, TitleText } from '../../styles/wrappers/text'
 import { Strings } from '../../utils/Strings'
 
 const NavItems = [
@@ -24,7 +24,7 @@ const NavbarWrapper = styled.div<{ isMobile: boolean }>`
   align-items: center;
   justify-content: space-between;
   background: ${(props) => props.theme.colors.primary};
-  padding: 0 ${(props) => props.theme.spacing.md};
+  padding: 0 ${(props) => props.theme.spacing.lg};
   box-shadow: ${(props) => props.theme.shadows.md};
   width: 100%;
 
@@ -62,10 +62,10 @@ const NavbarLinkText = styled(BodyText)<{ isMobile: boolean }>`
   padding: ${(props) =>
     props.isMobile ? props.theme.spacing.sm : props.theme.spacing.md};
   margin: 0;
+
   &:hover {
     background: ${(props) => props.theme.colors.secondary};
   }
-  transition: background 0.3s;
 `
 
 const Navbar = () => {
