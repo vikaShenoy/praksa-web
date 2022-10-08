@@ -3,15 +3,11 @@ export interface ShadowStyles {
   smDark: string
   md: string
   mdDark: string
-  lg: string
-  lgDark: string
 }
 
 export const shadows: ShadowStyles = {
-  sm: '',
-  smDark: '',
-  md: '',
-  mdDark: '',
-  lg: '',
-  lgDark: '',
+  sm: '0 0 4px rgba(0,0,0, 0.25)',
+  smDark: '0 0 8px rgba(0,0,0, 0.25)',
+  md: '0 0 8px rgba(0,0,0, 0.25)',
+  mdDark: '0 0 12px rgba(0,0,0, 0.5)',
 }

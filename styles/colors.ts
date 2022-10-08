@@ -18,6 +18,6 @@ export const colors: ColorStyles = {
   disabled: '#E0E0E01A',
   icon: '#FFFFFF',
   text: {
-    primary: '#FFFFFF'
+    primary: '#E0E0E0'
   }
 }
