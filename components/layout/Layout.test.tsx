@@ -1,6 +1,6 @@
-import { render, screen } from '@testing-library/react';
-import Layout from '../components/Layout';
-import Theme from '../components/Theme';
+import { render, screen } from '@testing-library/react'
+import Theme from '../Theme'
+import Layout from './Layout'
 
 // TODO
 describe('Layout component', () => {
@@ -11,14 +11,14 @@ describe('Layout component', () => {
           <button>Test button</button>
         </Layout>
       </Theme>
-    );
-  });
+    )
+  })
 
   it('renders the navbar', () => {
     expect(screen.queryByRole('navigation')).toBeTruthy()
-  });
+  })
 
   it('renders children', () => {
-    expect(screen.queryByRole("button", { name: "Test button"})).toBeTruthy()
-  });
-});
+    expect(screen.queryByRole('button', { name: 'Test button' })).toBeTruthy()
+  })
+})

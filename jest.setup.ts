@@ -8,7 +8,7 @@ Object.defineProperty(window, 'matchMedia', {
     removeEventListener: jest.fn(),
     dispatchEvent: jest.fn(),
   })),
-});
+})
 
 Object.defineProperty(window, 'audioContext', {
   writable: true,
@@ -20,6 +20,6 @@ Object.defineProperty(window, 'audioContext', {
     removeEventListener: jest.fn(),
     dispatchEvent: jest.fn(),
   })),
-});
+})
 
-export { };
+export {}

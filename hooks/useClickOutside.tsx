@@ -1,24 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from 'react'
 
 interface Props {
-  ref: React.MutableRefObject<HTMLElement | null>;
-  onClick: () => void;
+  ref: React.MutableRefObject<HTMLElement | null>
+  onClick: () => void
 }
 
 const useClickOutside = ({ ref, onClick }: Props) => {
   const onOutsideClick = (e: MouseEvent) => {
-    const el = e.target as HTMLInputElement;
+    const el = e.target as HTMLInputElement
     if (ref.current && !ref.current.contains(el)) {
-      onClick();
+      onClick()
     }
-  };
+  }
 
   useEffect(() => {
-    document.addEventListener('mousedown', onOutsideClick);
+    document.addEventListener('mousedown', onOutsideClick)
     return () => {
-      document.removeEventListener('mousedown', onOutsideClick);
-    };
-  }, [ref, onClick]);
-};
+      document.removeEventListener('mousedown', onOutsideClick)
+    }
+  }, [ref, onClick])
+}
 
-export default useClickOutside;
+export default useClickOutside

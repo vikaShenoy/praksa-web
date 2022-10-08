@@ -1,10 +1,10 @@
-import { IoMdPlay } from 'react-icons/io';
-import { IoStopSharp } from 'react-icons/io5';
-import IconButton, { ButtonSize } from './IconButton';
+import { IoMdPlay } from 'react-icons/io'
+import { IoStopSharp } from 'react-icons/io5'
+import IconButton, { ButtonSize } from '../IconButton'
 
 interface Props {
-  isPlaying: boolean;
-  onClick: () => void;
+  isPlaying: boolean
+  onClick: () => void
 }
 
 const PlayStopButton = ({ isPlaying, onClick }: Props) => {
@@ -15,7 +15,7 @@ const PlayStopButton = ({ isPlaying, onClick }: Props) => {
       size={ButtonSize.LARGE}
       ariaLabel={isPlaying ? 'stop-button' : 'play-button'}
     />
-  );
-};
+  )
+}
 
-export default PlayStopButton;
+export default PlayStopButton
