@@ -361,6 +361,16 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
+"@fontsource/lato@^4.5.10":
+  version "4.5.10"
+  resolved "https://registry.yarnpkg.com/@fontsource/lato/-/lato-4.5.10.tgz#1ab3d33282e605886e4a8b4c32b1f230a4cb5ea6"
+  integrity sha512-2hYR6r661Cq9B8zugtu6yxuOKqrVhAgfOSaPSq8XoxbC4ebsl0KOTy/vPoP+9U7JuQVLfrmikirW4a9Z0nDUug==
+
+"@fontsource/proza-libre@^4.5.8":
+  version "4.5.8"
+  resolved "https://registry.yarnpkg.com/@fontsource/proza-libre/-/proza-libre-4.5.8.tgz#7e5333195785471630f12f97c571abf269cc0cae"
+  integrity sha512-N4E4/N95Cdr0w5lM8Ao86IOx+yJQMBjSVBA4Mv2ZfM04kDT6lR1xAijSfAIvQZA/sjoOR39Ki8eSFErop3/rmA==
+
 "@humanwhocodes/config-array@^0.10.5":
   version "0.10.5"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.10.5.tgz#bb679745224745fff1e9a41961c1d45a49f81c04"
