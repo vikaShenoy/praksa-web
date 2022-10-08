@@ -20,7 +20,7 @@ const Button = styled.button<{ size: ButtonSize }>`
   cursor: pointer;
 
   &:hover {
-    box-shadow: ${(props) => props.theme.shadows.buttonHover};
+    box-shadow: ${(props) => props.theme.shadows.md};
   }
 `
 

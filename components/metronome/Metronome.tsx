@@ -2,7 +2,6 @@ import { ChangeEvent, useState } from 'react'
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 import styled from 'styled-components'
 import useMetronomeRunner from '../../hooks/useMetronomeRunner'
-import { styles } from '../../styles/styles'
 import { Card } from '../../styles/wrappers/Card'
 import { CenteredFlexRow } from '../../styles/wrappers/Containers'
 import { BoldText } from '../../styles/wrappers/Text'
@@ -12,20 +11,20 @@ import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton'
 import Slider from '../utils/Slider'
 
 const MetronomeCard = styled(Card)`
-  min-width: ${styles.components.cardWidth};
+  min-width: ${(props) => props.theme.sizes.components.cardWidth};
 `
 
 const SliderWrapper = styled.div`
-  height: ${styles.components.progressBarHeight};
+  height: ${(props) => props.theme.sizes.components.sliderHeight};
   display: flex;
   align-items: center;
   width: 100%;
-  margin: ${styles.spacing.lg} 0;
+  margin: ${(props) => props.theme.spacing.xl} 0;
 `
 
 const Margin = styled.div`
   width: 100%;
-  margin: 0 ${styles.spacing.sm};
+  margin: 0 ${(props) => props.theme.spacing.sm};
 `
 
 const Metronome = () => {

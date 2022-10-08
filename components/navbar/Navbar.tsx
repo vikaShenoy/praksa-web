@@ -1,9 +1,8 @@
 import Link from 'next/link'
 import { useState } from 'react'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import useMediaQuery from '../../hooks/useMediaQuery'
 import HamburgerIcon from '../../public/icons/HarmburgerIcon'
-import { styles } from '../../styles/styles'
 import { BodyText, TitleText } from '../../styles/wrappers/Text'
 import { Strings } from '../../utils/Strings'
 
@@ -25,8 +24,8 @@ const NavbarWrapper = styled.div<{ isMobile: boolean }>`
   align-items: center;
   justify-content: space-between;
   background: ${(props) => props.theme.colors.primary};
-  padding: 0 ${styles.spacing.md2};
-  box-shadow: ${(props) => props.theme.shadows.drop};
+  padding: 0 ${(props) => props.theme.spacing.md};
+  box-shadow: ${(props) => props.theme.shadows.md};
   width: 100%;
 
   position: ${(props) => (props.isMobile ? 'relative' : '')};
@@ -37,7 +36,7 @@ const LinkWrapper = styled.div<{ isMobile: boolean; isVisible: boolean }>`
   flex-direction: ${(props) => (props.isMobile ? 'column' : 'row')};
   justify-content: space-evenly;
   background: ${(props) => props.theme.colors.primary};
-  gap: ${(props) => (props.isMobile ? 0 : styles.spacing.md2)};
+  gap: ${(props) => (props.isMobile ? 0 : props.theme.spacing.md)};
 
   width: ${(props) => (props.isMobile ? '100%' : 'auto')};
   position: ${(props) => (props.isMobile ? 'absolute' : '')};
@@ -49,7 +48,7 @@ const LinkWrapper = styled.div<{ isMobile: boolean; isVisible: boolean }>`
 `
 
 const MenuIconWrapper = styled.div`
-  padding: ${styles.spacing.sm2};
+  padding: ${(props) => props.theme.spacing.sm};
   &:hover {
     background: ${(props) => props.theme.colors.secondary};
   }
@@ -57,11 +56,11 @@ const MenuIconWrapper = styled.div`
 `
 
 const NavbarLinkText = styled(BodyText)<{ isMobile: boolean }>`
-  font-size: ${styles.fontSize.sm};
-  color: ${(props) => props.theme.colors.primaryText};
-  font-family: ${styles.font.body};
+  font-size: ${(props) => props.theme.typography.size.sm};
+  color: ${(props) => props.theme.colors.text.primary};
+  font-family: ${(props) => props.theme.typography.font.body};
   padding: ${(props) =>
-    props.isMobile ? styles.spacing.md : styles.spacing.sm2};
+    props.isMobile ? props.theme.spacing.sm : props.theme.spacing.md};
   margin: 0;
   &:hover {
     background: ${(props) => props.theme.colors.secondary};
@@ -70,7 +69,8 @@ const NavbarLinkText = styled(BodyText)<{ isMobile: boolean }>`
 `
 
 const Navbar = () => {
-  let isMobile = useMediaQuery(styles.breakpoints.small)
+  const theme = useTheme()
+  let isMobile = useMediaQuery(theme.sizes.breakpoints.sm)
   const [showDropdown, setShowDropdown] = useState(false)
 
   return (

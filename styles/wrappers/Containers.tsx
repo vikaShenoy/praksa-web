@@ -1,12 +1,11 @@
 import styled from 'styled-components'
-import { styles } from '../styles'
 
 export const Flex = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  padding: ${styles.spacing.sm2};
-  gap: ${styles.spacing.sm2};
+  padding: ${(props) => props.theme.spacing.sm};
+  gap: ${(props) => props.theme.spacing.sm};
 `
 
 export const CenteredFlexRow = styled(Flex)<{ gap: number }>`
