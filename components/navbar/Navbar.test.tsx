@@ -1,6 +1,8 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import React from 'react'
+import { I18nextProvider } from 'react-i18next'
+import i18n from '../../i18n/i18n'
 import Theme from '../Theme'
 import Navbar from './Navbar'
 
@@ -14,9 +16,11 @@ describe('Navbar', () => {
 
   beforeEach(() => {
     render(
-      <Theme>
-        <Navbar />
-      </Theme>
+      <I18nextProvider i18n={i18n}>
+        <Theme>
+          <Navbar />
+        </Theme>
+      </I18nextProvider>
     )
   })
 
@@ -30,19 +34,9 @@ describe('Navbar', () => {
     expect(homeLink).toBeInTheDocument()
   })
 
-  it('home page link has the correct href', () => {
-    const homeLink = screen.getByText('Home')
-    expect(homeLink.closest('a')).toHaveAttribute('href', '/')
-  })
-
   it('renders an about link', () => {
     const aboutLink = screen.getByText('About')
     expect(aboutLink).toBeInTheDocument()
-  })
-
-  it('about page link has the correct href', () => {
-    const homeLink = screen.getByText('About')
-    expect(homeLink.closest('a')).toHaveAttribute('href', '/about')
   })
 
   it('does not show the hamburger icon when the screen is wide', () => {
