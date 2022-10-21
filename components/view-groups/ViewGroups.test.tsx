@@ -23,7 +23,7 @@ describe('View groups', () => {
     beforeEach(reset)
 
     it('renders', () => {
-      expect(screen.queryByText('View Groups6!')).toBeTruthy()
+      expect(screen.queryByText('View Groups7!')).toBeTruthy()
     })
   })
 })
