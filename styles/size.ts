@@ -18,10 +18,10 @@ export const sizes: SizeStyles = {
     sliderThumbSize: '2rem',
     progressBarHeight: '1.5rem',
     minCardWidth: '20rem',
-    cardWidth: '25%'
+    cardWidth: '25%',
   },
   breakpoints: {
-    sm: 500
+    sm: 500,
   },
-  borderRadius: '1.5rem'
+  borderRadius: '1.5rem',
 }

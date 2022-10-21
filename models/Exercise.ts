@@ -1,4 +1,4 @@
-import { ExerciseLog } from "./ExerciseLog"
+import { ExerciseLog } from './ExerciseLog'
 
 export interface Exercise {
   uuid: string
