@@ -11,12 +11,21 @@ export const BodyText = styled.p`
   font-family: ${(props) => props.theme.typography.font.body};
   font-size: ${(props) => props.theme.typography.size.sm};
   color: ${(props) => props.theme.colors.text.primary};
+  margin: 0;
 `
 
 export const BoldText = styled.p`
   font-family: ${(props) => props.theme.typography.font.body};
   font-weight: ${(props) => props.theme.typography.weight.bold};
   font-size: ${(props) => props.theme.typography.size.lg};
+  color: ${(props) => props.theme.colors.text.primary};
+  margin: 0;
+`
+
+export const H2 = styled.h2`
+  font-family: ${(props) => props.theme.typography.font.body};
+  font-weight: ${(props) => props.theme.typography.weight.bold};
+  font-size: ${(props) => props.theme.typography.size.smmd};
   color: ${(props) => props.theme.colors.text.primary};
   margin: 0;
 `
@@ -42,17 +51,17 @@ export const SpaceBetweenFlexRow = styled(Flex)`
 
 export const Card = styled.div`
   display: flex;
+  min-height: 360px;
   flex-direction: column;
   align-items: center;
   background: ${(props) => props.theme.colors.primary};
   border-radius: ${(props) => props.theme.sizes.borderRadius};
   box-shadow: ${(props) => props.theme.shadows.md};
-  padding: ${(props) => props.theme.spacing.xxl}
-    ${(props) => props.theme.spacing.md};
+  padding: ${(props) => props.theme.spacing.xxl} ${(props) => props.theme.spacing.md};
 
   &:hover {
     box-shadow: ${(props) => props.theme.shadows.mdDark};
-  }
+  };
 
   transition: box-shadow 0.2s;
 `

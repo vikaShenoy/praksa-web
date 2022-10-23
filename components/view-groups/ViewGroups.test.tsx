@@ -22,8 +22,8 @@ describe('View groups', () => {
   describe('on mount', () => {
     beforeEach(reset)
 
-    it('renders', () => {
-      expect(screen.queryByText('View Groups7!')).toBeTruthy()
+    it('renders a title', () => {
+      expect(screen.queryByText('Groups')).toBeTruthy()
     })
   })
 })

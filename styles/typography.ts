@@ -5,7 +5,9 @@ export interface TypographyStyles {
     bold: number
   }
   size: {
+    xs: string
     sm: string
+    smmd: string
     md: string
     lg: string
   }
@@ -22,7 +24,9 @@ export const typography: TypographyStyles = {
     bold: 700,
   },
   size: {
+    xs: '0.75rem',
     sm: '1rem',
+    smmd: '1.5rem',
     md: '2rem',
     lg: '3rem',
   },
