@@ -9,7 +9,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "format": "prettier --check --ignore-path .gitignore",
-    "format:fix": "prettier --write . --ignore-path .gitignore"
+    "format:fix": "prettier --write . --ignore-path .prettierignore",
+    "precommit": "yarn format:fix ; yarn lint ; yarn test"
   },
   "dependencies": {
     "@fontsource/lato": "^4.5.10",

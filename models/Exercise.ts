@@ -2,7 +2,7 @@ import { ExerciseLog } from './ExerciseLog'
 
 export interface Exercise {
   uuid: string
-  exerciseGroupUuid: string
+  exerciseGroup: string
   name: string
   description?: string
   initialBpm?: number
