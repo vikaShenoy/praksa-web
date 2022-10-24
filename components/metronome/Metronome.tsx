@@ -5,7 +5,7 @@ import useMediaQuery from '../../hooks/useMediaQuery'
 import useMetronomeRunner from '../../hooks/useMetronomeRunner'
 import { BoldText, Card, CenteredFlexRow } from '../../styles/wrappers'
 import { DEFAULT_BPM, MAX_BPM, MIN_BPM } from '../../utils/constants'
-import IconButton, { ButtonSize } from '../buttons/IconButton'
+import IconButton, { ButtonSize } from '../buttons/icon-btn/IconButton'
 import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton'
 import Slider from '../utils/Slider'
 

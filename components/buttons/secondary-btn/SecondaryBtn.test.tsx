@@ -6,7 +6,7 @@ import SecondaryBtn from './SecondaryBtn'
 
 describe('Secondary button', () => {
   const onClick = jest.fn()
-  const text = 'Add'
+  const text = 'Create'
 
   function reset() {
     const props = { text, onClick }

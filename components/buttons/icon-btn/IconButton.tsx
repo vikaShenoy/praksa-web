@@ -43,6 +43,7 @@ const IconButton = ({ iconName, onClick, size, ariaLabel }: Props) => {
       name={ariaLabel}
       aria-label={ariaLabel}
       role="button"
+      type="button"
     >
       <Icon as={iconName} size={size} />
     </Button>

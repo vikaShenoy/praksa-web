@@ -1,11 +1,12 @@
 import styled, { useTheme } from 'styled-components'
+import { BodyText } from '../../../styles/wrappers'
 
 interface Props {
   onClick: () => void
   text: string
 }
 
-const Container = styled.button`
+const Button = styled.button`
   display: flex;
   align-items: center;
   background: none;
@@ -22,20 +23,18 @@ const Container = styled.button`
   }
 `
 
-const Text = styled.p`
-  margin: 0;
+const Text = styled(BodyText)`
   text-transform: uppercase;
-  font-family: ${(props) => props.theme.typography.font.body};
-  font-size: ${(props) => props.theme.typography.size.xs};
+  font-size: ${(props) => props.theme.typography.size.smmd};
 `
 
 const SecondaryBtn = ({ onClick, text }: Props) => {
   const theme = useTheme()
 
   return (
-    <Container onClick={onClick}>
+    <Button onClick={onClick} role="button" type="button">
       <Text>{text}</Text>
-    </Container>
+    </Button>
   )
 }
 

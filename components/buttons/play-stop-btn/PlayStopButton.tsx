@@ -1,6 +1,6 @@
 import { IoMdPlay } from 'react-icons/io'
 import { IoStopSharp } from 'react-icons/io5'
-import IconButton, { ButtonSize } from '../IconButton'
+import IconButton, { ButtonSize } from '../icon-btn/IconButton'
 
 interface Props {
   isPlaying: boolean
