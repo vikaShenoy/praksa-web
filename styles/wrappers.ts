@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+// FONTS
+
 export const TitleText = styled.p`
   font-family: ${(props) => props.theme.typography.font.title};
   font-size: ${(props) => props.theme.typography.size.md};
@@ -11,6 +13,7 @@ export const BodyText = styled.p`
   font-family: ${(props) => props.theme.typography.font.body};
   font-size: ${(props) => props.theme.typography.size.sm};
   color: ${(props) => props.theme.colors.text.primary};
+  margin: 0;
 `
 
 export const BoldText = styled.p`
@@ -20,6 +23,16 @@ export const BoldText = styled.p`
   color: ${(props) => props.theme.colors.text.primary};
   margin: 0;
 `
+
+export const H2 = styled.h2`
+  font-family: ${(props) => props.theme.typography.font.body};
+  font-weight: ${(props) => props.theme.typography.weight.bold};
+  font-size: ${(props) => props.theme.typography.size.smmd};
+  color: ${(props) => props.theme.colors.text.primary};
+  margin: 0;
+`
+
+// CONTAINERS
 
 export const Flex = styled.div`
   display: flex;
@@ -40,14 +53,18 @@ export const SpaceBetweenFlexRow = styled(Flex)`
   justify-content: space-between;
 `
 
+// COMPONENTS
+
 export const Card = styled.div`
   display: flex;
+  min-height: 340px;
   flex-direction: column;
   align-items: center;
   background: ${(props) => props.theme.colors.primary};
   border-radius: ${(props) => props.theme.sizes.borderRadius};
   box-shadow: ${(props) => props.theme.shadows.md};
-  padding: ${(props) => props.theme.spacing.xxl} ${(props) => props.theme.spacing.md};
+  padding: ${(props) => props.theme.spacing.xxl}
+    ${(props) => props.theme.spacing.md};
 
   &:hover {
     box-shadow: ${(props) => props.theme.shadows.mdDark};

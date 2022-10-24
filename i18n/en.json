@@ -1,7 +1,19 @@
 {
   "app_name": "Praksa",
+  "common": {
+    "add": "Add",
+    "create": "Create",
+    "save": "Save",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
+  },
   "nav": {
     "home": "Home",
     "about": "About"
+  },
+  "groups": {
+    "groups": "Groups",
+    "create_prompt": "Create a group to get started!",
+    "num_exercises": "{{ count }} exercises"
   }
 }
