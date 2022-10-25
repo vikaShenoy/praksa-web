@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { BodyText } from '../../../styles/wrappers'
+import { PrimaryBtnText } from '../../../styles/fonts'
 
 const Button = styled.button<{ disabled: boolean }>`
   background-color: ${(props) =>
@@ -16,10 +16,6 @@ const Button = styled.button<{ disabled: boolean }>`
       }
       cursor: pointer;
     `}
-`
-
-const Text = styled(BodyText)`
-  text-transform: uppercase;
 `
 
 interface Props {
@@ -40,7 +36,7 @@ const PrimaryBtn = ({ onClick, text, disabled }: Props) => {
         }
       }}
     >
-      <Text>{text}</Text>
+      <PrimaryBtnText>{text}</PrimaryBtnText>
     </Button>
   )
 }

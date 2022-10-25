@@ -1,5 +1,5 @@
-import styled, { useTheme } from 'styled-components'
-import { BodyText } from '../../../styles/wrappers'
+import styled from 'styled-components'
+import { SecondaryBtnText } from '../../../styles/fonts'
 
 interface Props {
   onClick: () => void
@@ -23,17 +23,10 @@ const Button = styled.button`
   }
 `
 
-const Text = styled(BodyText)`
-  text-transform: uppercase;
-  font-size: ${(props) => props.theme.typography.size.smmd};
-`
-
 const SecondaryBtn = ({ onClick, text }: Props) => {
-  const theme = useTheme()
-
   return (
     <Button onClick={onClick} role="button" type="button">
-      <Text>{text}</Text>
+      <SecondaryBtnText>{text}</SecondaryBtnText>
     </Button>
   )
 }

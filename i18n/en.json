@@ -15,5 +15,11 @@
     "groups": "Groups",
     "create_prompt": "Create a group to get started!",
     "num_exercises": "{{ count }} exercises"
+  },
+  "exercise": {
+    "exercise_name": "Exercise name",
+    "starting_bpm": "Starting BPM",
+    "target_bpm": "Target BPM",
+    "duration": "Duration (seconds)"
   }
 }

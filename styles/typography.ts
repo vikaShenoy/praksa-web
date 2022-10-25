@@ -6,6 +6,7 @@ export interface TypographyStyles {
   }
   size: {
     xs: string
+    xssm: string
     sm: string
     smmd: string
     md: string
@@ -25,6 +26,7 @@ export const typography: TypographyStyles = {
   },
   size: {
     xs: '0.75rem',
+    xssm: '0.875rem',
     sm: '1rem',
     smmd: '1.5rem',
     md: '2rem',

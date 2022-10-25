@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import styled, { useTheme } from 'styled-components'
 import useMediaQuery from '../../hooks/useMediaQuery'
 import HamburgerIcon from '../../public/icons/HarmburgerIcon'
-import { TitleText } from '../../styles/wrappers'
+import { TitleText } from '../../styles/fonts'
 
 const NavbarWrapper = styled.div<{ isMobile: boolean }>`
   display: flex;

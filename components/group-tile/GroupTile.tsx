@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import GroupContext from '../../contexts/GroupContext'
 import { ExerciseGroup } from '../../models/ExerciseGroup'
-import { BodyText } from '../../styles/wrappers'
+import { BodyText } from '../../styles/fonts'
 
 interface Props {
   group: ExerciseGroup

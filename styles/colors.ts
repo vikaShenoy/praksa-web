@@ -3,6 +3,7 @@ export interface ColorStyles {
   primary: string
   secondary: string
   secondaryHover: string
+  tertiary: string
   accent: string
   accentHover: string
   disabled: string
@@ -20,6 +21,7 @@ export const colors: ColorStyles = {
   primary: '#1E113A',
   secondary,
   secondaryHover: `${secondary}BF`,
+  tertiary: '#321A66',
   accent,
   accentHover: `${accent}BF`,
   disabled: '#E0E0E01A',
