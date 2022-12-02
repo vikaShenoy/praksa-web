@@ -7,17 +7,18 @@ import { CenteredFlexRow } from '../../styles/wrappers/containers'
 import { BodyText, BoldText } from '../../styles/wrappers/fonts'
 import SecondaryBtn from '../buttons/secondary-btn/SecondaryBtn'
 
-const NotesCard = styled(Card)<{ isMobile: boolean }>`
+const NotesCard = styled(Card)<{ isMobile: boolean; spaceBetween: boolean }>`
   min-width: ${(props) => props.theme.sizes.components.minCardWidth};
   width: ${(props) => (props.isMobile ? '100%' : '25%')};
-  justify-content: start;
   gap: ${(props) => props.theme.spacing.lg};
+  justify-content: flex-start;
 `
 
 const TextInput = styled.textarea`
   width: 90%;
   padding: ${(props) => props.theme.spacing.sm};
   background-color: ${(props) => props.theme.colors.disabled};
+  resize: none;
 
   border: none;
 
@@ -37,6 +38,10 @@ const NotesContainer = styled(BodyText)`
   padding: ${(props) => props.theme.spacing.sm};
 `
 
+const BtnWrapper = styled.div`
+  margin-top: auto;
+`
+
 const Notes = () => {
   const theme = useTheme()
   const { t } = useTranslation()
@@ -46,7 +51,6 @@ const Notes = () => {
   let isMobile = useMediaQuery(theme.sizes.breakpoints.sm)
 
   const onSave = () => {
-    // TODO
     if (
       notesInput &&
       notesInput.current &&
@@ -58,7 +62,10 @@ const Notes = () => {
   }
 
   return (
-    <NotesCard isMobile={isMobile}>
+    <NotesCard
+      isMobile={isMobile}
+      spaceBetween={!isEditing && notes.length > 0}
+    >
       <BoldText>{t('notes.title')}</BoldText>
       {isEditing && (
         <>
@@ -78,20 +85,24 @@ const Notes = () => {
       {!isEditing && notes.length === 0 && (
         <>
           <BodyText>{t('notes.prompt')}</BodyText>
-          <SecondaryBtn
-            text={t('common.add')}
-            onClick={() => setIsEditing(true)}
-          />
+          <BtnWrapper>
+            <SecondaryBtn
+              text={t('common.add')}
+              onClick={() => setIsEditing(true)}
+            />
+          </BtnWrapper>
         </>
       )}
 
       {!isEditing && notes.length > 0 && (
         <>
           <NotesContainer>{notes}</NotesContainer>
-          <SecondaryBtn
-            text={t('common.edit')}
-            onClick={() => setIsEditing(true)}
-          />
+          <BtnWrapper>
+            <SecondaryBtn
+              text={t('common.edit')}
+              onClick={() => setIsEditing(true)}
+            />
+          </BtnWrapper>
         </>
       )}
     </NotesCard>

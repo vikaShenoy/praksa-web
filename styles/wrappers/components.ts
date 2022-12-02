@@ -10,7 +10,7 @@ export const Card = styled.div`
   box-shadow: ${(props) => props.theme.shadows.md};
   padding: ${(props) => props.theme.spacing.xxl} ${(props) => props.theme.spacing.md};
 
-  justify-content: space-evenly;
+  justify-content: space-between;
 
   &:hover {
     box-shadow: ${(props) => props.theme.shadows.mdDark};
