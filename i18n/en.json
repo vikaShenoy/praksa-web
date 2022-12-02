@@ -3,6 +3,7 @@
   "common": {
     "add": "Add",
     "create": "Create",
+    "edit": "Edit",
     "save": "Save",
     "confirm": "Confirm",
     "cancel": "Cancel"
@@ -11,9 +12,8 @@
     "home": "Home",
     "about": "About"
   },
-  "groups": {
-    "groups": "Groups",
-    "create_prompt": "Create a group to get started!",
-    "num_exercises": "{{ count }} exercises"
+  "notes": {
+    "title": "Notes",
+    "prompt": "Add practice notes here!"
   }
 }

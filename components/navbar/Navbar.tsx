@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import styled, { useTheme } from 'styled-components'
 import useMediaQuery from '../../hooks/useMediaQuery'
 import HamburgerIcon from '../../public/icons/HarmburgerIcon'
-import { TitleText } from '../../styles/wrappers'
+import { TitleText } from '../../styles/wrappers/fonts'
 
 const NavbarWrapper = styled.div<{ isMobile: boolean }>`
   display: flex;
@@ -13,7 +13,6 @@ const NavbarWrapper = styled.div<{ isMobile: boolean }>`
   background: ${(props) => props.theme.colors.primary};
   padding: 0 ${(props) => props.theme.spacing.lg};
   box-shadow: ${(props) => props.theme.shadows.md};
-  width: 100%;
 
   position: ${(props) => (props.isMobile ? 'relative' : '')};
 `
