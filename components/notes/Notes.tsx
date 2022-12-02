@@ -69,9 +69,7 @@ const Notes = () => {
       <BoldText>{t('notes.title')}</BoldText>
       {isEditing && (
         <>
-          <TextInput rows={8} ref={notesInput}>
-            {notes}
-          </TextInput>
+          <TextInput rows={8} ref={notesInput} defaultValue={notes} />
           <CenteredFlexRow gap={16}>
             <SecondaryBtn
               text={t('common.cancel')}
