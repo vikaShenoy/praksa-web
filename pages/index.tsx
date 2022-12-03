@@ -1,9 +1,10 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import Exercises from '../components/exercises/Exercises'
 import Metronome from '../components/metronome/Metronome'
 import Notes from '../components/notes/Notes'
 import Timer from '../components/timer/Timer'
-import { Flex } from '../styles/wrappers/containers'
+import { CenteredFlexRow } from '../styles/wrappers/containers'
 
 const Home: NextPage = () => {
   return (
@@ -11,11 +12,12 @@ const Home: NextPage = () => {
       <Head>
         <title>Praksa - Home</title>
       </Head>
-      <Flex>
+      <CenteredFlexRow gap={16}>
         <Metronome />
         <Timer />
+        <Exercises />
         <Notes />
-      </Flex>
+      </CenteredFlexRow>
     </section>
   )
 }

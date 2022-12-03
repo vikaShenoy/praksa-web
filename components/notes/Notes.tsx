@@ -7,8 +7,6 @@ import { BodyText, BoldText } from '../../styles/wrappers/fonts'
 import SecondaryBtn from '../buttons/secondary-btn/SecondaryBtn'
 
 const NotesCard = styled(Card)<{ isMobile: boolean; spaceBetween: boolean }>`
-  min-width: ${(props) => props.theme.sizes.components.minCardWidth};
-  width: ${(props) => (props.isMobile ? '100%' : '25%')};
   gap: ${(props) => props.theme.spacing.lg};
   justify-content: flex-start;
 `

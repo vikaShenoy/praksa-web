@@ -15,5 +15,15 @@
   "notes": {
     "title": "Notes",
     "prompt": "Add practice notes here!"
+  },
+  "exercises": {
+    "title": "Exercises",
+    "prompt": "Add exercises to track your progress!",
+    "form": {
+      "name": "Exercise name",
+      "currentBpm": "Current BPM",
+      "targetBpm": "Target BPM",
+      "duration": "Duration (seconds)"
+    }
   }
 }

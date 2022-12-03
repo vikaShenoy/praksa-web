@@ -11,11 +11,6 @@ import IconButton, { ButtonSize } from '../buttons/IconButton'
 import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton'
 import Slider from '../utils/Slider'
 
-const MetronomeCard = styled(Card)<{ isMobile: boolean }>`
-  min-width: ${(props) => props.theme.sizes.components.minCardWidth};
-  width: ${(props) => (props.isMobile ? '100%' : '25%')};
-`
-
 const SliderWrapper = styled.div`
   height: ${(props) => props.theme.sizes.components.sliderHeight};
   display: flex;
@@ -41,7 +36,7 @@ const Metronome = () => {
   }
 
   return (
-    <MetronomeCard isMobile={isMobile}>
+    <Card isMobile={isMobile}>
       <BoldText aria-label="tempo-label">{bpm.toString()}</BoldText>
       <SliderWrapper>
         <IconButton
@@ -75,7 +70,7 @@ const Metronome = () => {
           isPlaying={isPlaying}
         />
       </CenteredFlexRow>
-    </MetronomeCard>
+    </Card>
   )
 }
 
