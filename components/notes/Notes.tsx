@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import styled, { useTheme } from 'styled-components'
 import useMediaQuery from '../../hooks/useMediaQuery'
 import { Card } from '../../styles/wrappers/components'
-import { CenteredFlexRow } from '../../styles/wrappers/containers'
 import { BodyText, BoldText } from '../../styles/wrappers/fonts'
 import SecondaryBtn from '../buttons/secondary-btn/SecondaryBtn'
 
@@ -42,6 +41,12 @@ const BtnWrapper = styled.div`
   margin-top: auto;
 `
 
+const EditBtnContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;
+`
+
 const Notes = () => {
   const theme = useTheme()
   const { t } = useTranslation()
@@ -69,14 +74,14 @@ const Notes = () => {
       <BoldText>{t('notes.title')}</BoldText>
       {isEditing && (
         <>
-          <TextInput rows={8} ref={notesInput} defaultValue={notes} />
-          <CenteredFlexRow gap={16}>
+          <TextInput rows={10} ref={notesInput} defaultValue={notes} />
+          <EditBtnContainer>
             <SecondaryBtn
               text={t('common.cancel')}
               onClick={() => setIsEditing(false)}
             />
             <SecondaryBtn text={t('common.save')} onClick={onSave} />
-          </CenteredFlexRow>
+          </EditBtnContainer>
         </>
       )}
 
