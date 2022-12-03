@@ -1,4 +1,4 @@
-import styled, { useTheme } from 'styled-components'
+import styled from 'styled-components'
 
 interface Props {
   onClick: () => void
@@ -16,6 +16,8 @@ const Container = styled.button`
   color: ${(props) => props.theme.colors.accent};
   cursor: pointer;
 
+  min-width: 5rem;
+
   &:hover {
     border: ${(props) => `1px solid ${props.theme.colors.accentHover}`};
     color: ${(props) => props.theme.colors.accentHover};
@@ -30,8 +32,6 @@ const Text = styled.p`
 `
 
 const SecondaryBtn = ({ onClick, text }: Props) => {
-  const theme = useTheme()
-
   return (
     <Container onClick={onClick}>
       <Text>{text}</Text>

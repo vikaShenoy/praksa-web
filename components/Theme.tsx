@@ -1,5 +1,5 @@
 import { ThemeProvider } from 'styled-components'
-import { defaultTheme } from '../styles/defaultTheme'
+import { defaultTheme } from '../styles/theme/defaultTheme'
 
 interface Props {
   children: React.ReactNode
