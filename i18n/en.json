@@ -25,5 +25,11 @@
       "targetBpm": "Target BPM",
       "duration": "Duration (seconds)"
     }
+  },
+  "errors": {
+    "field_required": "This field is required"
+  },
+  "placeholders": {
+    "exercise_name": "Downpicking"
   }
 }

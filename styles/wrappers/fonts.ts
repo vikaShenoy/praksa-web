@@ -11,7 +11,7 @@ export const Label = styled.label`
   font-family: ${(props) => props.theme.typography.font.body};
   font-size: ${(props) => props.theme.typography.size.xs};
   color: ${(props) => props.theme.colors.text.primary};
-  margin-bottom: 0
+  margin-bottom: 0;
 `
 
 export const BodyText = styled.p<{ uppercase?: boolean }>`
@@ -20,6 +20,11 @@ export const BodyText = styled.p<{ uppercase?: boolean }>`
   color: ${(props) => props.theme.colors.text.primary};
   margin: 0;
   ${(props) => props.uppercase && css`text-transform: uppercase;`}
+`
+
+export const ErrorText = styled(Label)`
+  color: ${(props) => props.theme.colors.text.error};
+
 `
 
 export const BoldText = styled.p`

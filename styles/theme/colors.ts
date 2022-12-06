@@ -8,7 +8,8 @@ export interface ColorStyles {
   disabled: string
   icon: string
   text: {
-    primary: string
+    primary: string,
+    error: string
   }
 }
 
@@ -23,5 +24,6 @@ export const colors: ColorStyles = {
   icon: '#FFFFFF',
   text: {
     primary: '#E0E0E0',
+    error: '#D13838'
   },
 }
