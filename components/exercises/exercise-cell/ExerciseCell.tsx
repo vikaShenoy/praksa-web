@@ -1,9 +1,10 @@
-import { IoPencilSharp } from "react-icons/io5"
-import { MdDelete } from "react-icons/md"
+import { IoPencilSharp } from 'react-icons/io5'
+import { MdDelete } from 'react-icons/md'
 import styled from 'styled-components'
 import { Exercise } from '../../../models/Exercise'
 import { BodyText } from '../../../styles/wrappers/fonts'
-import IconButton from "../../buttons/icon-button/IconButton"
+import IconButton from '../../buttons/icon-button/IconButton'
+import { useExerciseContext } from '../Exercises'
 
 const Container = styled.div`
   display: flex;
@@ -34,20 +35,17 @@ const ActionRow = styled.div`
 
 interface ExerciseCellProps {
   exercise: Exercise
-  onEdit: () => void
   onConfirmDelete: () => void
 }
 
 const ExerciseCell: React.FC<ExerciseCellProps> = ({
   exercise,
-  onEdit,
   onConfirmDelete,
 }) => {
+  const { onShowEdit } = useExerciseContext()
   const exerciseDetails = `${exercise.name}`
 
-  const onDelete = () => {
-    
-  }
+  const onDelete = () => {}
 
   return (
     <Container>
@@ -55,7 +53,10 @@ const ExerciseCell: React.FC<ExerciseCellProps> = ({
         <BodyText>{exerciseDetails}</BodyText>
       </MainRow>
       <ActionRow>
-        <IconButton iconName={IoPencilSharp} onClick={onEdit} />
+        <IconButton
+          iconName={IoPencilSharp}
+          onClick={() => onShowEdit(exercise.id)}
+        />
         <IconButton iconName={MdDelete} onClick={onDelete} />
       </ActionRow>
     </Container>

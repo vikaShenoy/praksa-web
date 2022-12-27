@@ -4,6 +4,7 @@ import { Exercise } from '../../../models/Exercise'
 import { BodyText } from '../../../styles/wrappers/fonts'
 import SecondaryBtn from '../../buttons/secondary-btn/SecondaryBtn'
 import ExerciseCell from '../exercise-cell/ExerciseCell'
+import { useExerciseContext } from '../Exercises'
 
 const MarginTopWrapper = styled.div`
   margin-top: auto;
@@ -11,14 +12,14 @@ const MarginTopWrapper = styled.div`
 
 interface ViewExercisesProps {
   exercises: Exercise[]
-  onCreate: () => void
 }
 
 const ViewExercises: React.FC<ViewExercisesProps> = ({
   exercises,
-  onCreate,
 }) => {
   const { t } = useTranslation()
+  const { showCreateExercise } = useExerciseContext()
+
   return (
     <>
       {exercises.length > 0 ? (
@@ -28,18 +29,18 @@ const ViewExercises: React.FC<ViewExercisesProps> = ({
               key={exercise.id}
               exercise={exercise}
               onEdit={() => console.log('TODO: On edit')}
-              onDelete={() => console.log('TODO: On delete')}
+              onConfirmDelete={() => console.log('TODO: On delete')}
             />
           ))}
           <MarginTopWrapper>
-            <SecondaryBtn text={t('common.add')} onClick={onCreate} />
+            <SecondaryBtn text={t('common.add')} onClick={showCreateExercise} />
           </MarginTopWrapper>
         </>
       ) : (
         <>
           <BodyText>{t('exercises.prompt')}</BodyText>
           <MarginTopWrapper>
-            <SecondaryBtn text={t('common.add')} onClick={onCreate} />
+            <SecondaryBtn text={t('common.add')} onClick={showCreateExercise} />
           </MarginTopWrapper>
         </>
       )}

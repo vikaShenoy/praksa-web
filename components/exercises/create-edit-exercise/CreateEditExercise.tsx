@@ -1,6 +1,7 @@
 import { Field, Form, Formik, FormikErrors, FormikHelpers } from 'formik'
 import { useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
+import { Exercise } from '../../../models/Exercise'
 import { Input } from '../../../styles/wrappers/components'
 import { ErrorText, Label } from '../../../styles/wrappers/fonts'
 import PrimaryBtn from '../../buttons/primary-btn/PrimaryBtn'
@@ -42,23 +43,32 @@ export interface ExerciseForm {
   durationSeconds?: number
 }
 
-interface CreateExerciseProps {
-  onCreate: (
+interface CreateEditExerciseProps {
+  onSubmit: (
     values: ExerciseForm,
     { setSubmitting }: FormikHelpers<ExerciseForm>
-  ) => void,
+  ) => void
   onCancel: () => void
+  exercise?: Exercise
 }
 
-const CreateExercise: React.FC<CreateExerciseProps> = ({ onCreate, onCancel }) => {
+const CreateEditExercise: React.FC<CreateEditExerciseProps> = ({
+  onSubmit,
+  onCancel,
+  exercise,
+}) => {
   const { t } = useTranslation()
 
+  console.log(`Exercise: ${exercise?.name}`)
+
   const defaultFormValues: ExerciseForm = {
-    name: '',
-    currentBpm: undefined,
-    targetBpm: undefined,
-    durationSeconds: undefined,
+    name: exercise ? exercise.name : '',
+    currentBpm: exercise ? exercise.currentBpm : undefined,
+    targetBpm: exercise ? exercise.targetBpm : undefined,
+    durationSeconds: exercise ? exercise.durationSeconds : undefined,
   }
+
+  console.log(defaultFormValues)
 
   function validateExerciseForm(values: ExerciseForm) {
     const errors: FormikErrors<ExerciseForm> = {}
@@ -72,14 +82,15 @@ const CreateExercise: React.FC<CreateExerciseProps> = ({ onCreate, onCancel }) =
     <Formik
       initialValues={defaultFormValues}
       validate={validateExerciseForm}
-      onSubmit={onCreate}
+      onSubmit={onSubmit}
     >
-      {({ isSubmitting, handleChange, errors, submitCount }) => (
+      {({ handleChange, errors, submitCount, values }) => (
         <FormWrapper>
           <FieldPair>
             <Label htmlFor="name">{t('exercises.form.name')}</Label>
             <Field
               id="name"
+              value={values.name}
               component={Input}
               placeholder={t('placeholders.exercise_name')}
               onChange={handleChange}
@@ -99,6 +110,7 @@ const CreateExercise: React.FC<CreateExerciseProps> = ({ onCreate, onCancel }) =
                 component={Input}
                 type="number"
                 onChange={handleChange}
+                value={values.currentBpm}
                 placeholder="180"
               />
             </FieldPair>
@@ -109,6 +121,7 @@ const CreateExercise: React.FC<CreateExerciseProps> = ({ onCreate, onCancel }) =
                 id="targetBpm"
                 component={Input}
                 onChange={handleChange}
+                value={values.targetBpm}
                 placeholder="210"
               />
             </FieldPair>
@@ -122,15 +135,13 @@ const CreateExercise: React.FC<CreateExerciseProps> = ({ onCreate, onCancel }) =
               id="durationSeconds"
               component={Input}
               onChange={handleChange}
+              value={values.durationSeconds}
               placeholder="180"
             />
           </FieldPair>
 
           <FlexRowCenter>
-            <PrimaryBtn
-              text={t('common.cancel')}
-              onClick={onCancel}
-            />
+            <PrimaryBtn text={t('common.cancel')} onClick={onCancel} />
             <PrimaryBtn isSubmitBtn text={t('common.save')} />
           </FlexRowCenter>
         </FormWrapper>
@@ -139,4 +150,4 @@ const CreateExercise: React.FC<CreateExerciseProps> = ({ onCreate, onCancel }) =
   )
 }
 
-export default CreateExercise
+export default CreateEditExercise
