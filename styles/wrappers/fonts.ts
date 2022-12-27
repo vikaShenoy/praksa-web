@@ -18,7 +18,6 @@ export const BodyText = styled.p<{ uppercase?: boolean }>`
   font-family: ${(props) => props.theme.typography.font.body};
   font-size: ${(props) => props.theme.typography.size.sm};
   color: ${(props) => props.theme.colors.text.primary};
-  margin: 0;
   ${(props) => props.uppercase && css`text-transform: uppercase;`}
 `
 
@@ -32,7 +31,6 @@ export const BoldText = styled.p`
   font-weight: ${(props) => props.theme.typography.weight.bold};
   font-size: ${(props) => props.theme.typography.size.lg};
   color: ${(props) => props.theme.colors.text.primary};
-  margin: 0;
 `
 
 export const H2 = styled.h2`
@@ -40,5 +38,4 @@ export const H2 = styled.h2`
   font-weight: ${(props) => props.theme.typography.weight.bold};
   font-size: ${(props) => props.theme.typography.size.smmd};
   color: ${(props) => props.theme.colors.text.primary};
-  margin: 0;
 `
