@@ -16,6 +16,7 @@
     "@fontsource/lato": "^4.5.10",
     "@fontsource/proza-libre": "^4.5.8",
     "@types/styled-components": "^5.1.26",
+    "@types/uuid": "^9.0.0",
     "formik": "^2.2.9",
     "i18next": "^21.10.0",
     "i18next-browser-languagedetector": "^6.1.8",
