@@ -21,7 +21,7 @@ const modalStyles = {
 const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 2.25rem 1.5rem;
+  padding: 1.5rem;
 
   background-color: ${(props) => props.theme.colors.background};
 `
