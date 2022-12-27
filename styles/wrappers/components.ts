@@ -5,12 +5,11 @@ export const Card = styled.div<{ isMobile: boolean }>`
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
-
-  min-height: 416px;
-  min-width: ${(props) => props.theme.sizes.components.minCardWidth};
-  width: ${(props) => (props.isMobile ? '100%' : '22%')};
-
+  
   flex: 1;
+
+  min-height: 580px;
+  min-width: ${(props) => props.theme.sizes.components.minCardWidth};
 
   background: ${(props) => props.theme.colors.primary};
   border-radius: ${(props) => props.theme.sizes.borderRadius};
@@ -29,10 +28,12 @@ export const Input = styled.input`
   font-family: ${(props) => props.theme.typography.font.body};
   font-size: ${(props) => props.theme.typography.size.sm};
   color: ${(props) => props.theme.colors.text.primary};
-  height: 2rem;
+  height: 3rem;
   padding: 0.5rem 1rem;
   outline: none;
   border: none;
+
+  width: 100%;
 
   &::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
     -webkit-appearance: none;

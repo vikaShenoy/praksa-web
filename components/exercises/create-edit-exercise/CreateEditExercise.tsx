@@ -1,39 +1,47 @@
 import { Field, Form, Formik, FormikErrors, FormikHelpers } from 'formik'
 import { useTranslation } from 'react-i18next'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { Exercise } from '../../../models/Exercise'
 import { Input } from '../../../styles/wrappers/components'
 import { ErrorText, Label } from '../../../styles/wrappers/fonts'
 import PrimaryBtn from '../../buttons/primary-btn/PrimaryBtn'
 
 const FormWrapper = styled(Form)`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   gap: ${(props) => props.theme.spacing.sm};
+  width: 100%; */
+
+  display: grid;
+  height: 100%;
+  row-gap: ${(props) => props.theme.spacing.md};
+  column-gap: ${(props) => props.theme.spacing.xs};
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    'name name'
+    'currentBpm targetBpm'
+    'duration .'
+    'btns btns';
   width: 100%;
+  /* max-width: 50px; */
 `
 
-const FieldPair = styled.div<{ solo?: boolean }>`
+const FieldPair = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${(props) => props.theme.spacing.xs};
-  width: 100%;
-
-  ${(props) =>
-    props.solo &&
-    css`
-      width: calc(50% - 0.5rem);
-    `};
+  max-width: 100%;
 `
 
-const FlexRow = styled.div`
+const BtnContainer = styled.div`
   display: flex;
-  gap: ${(props) => props.theme.spacing.sm};
-`
-
-const FlexRowCenter = styled(FlexRow)`
+  align-items: center;
   margin-top: 1rem;
   justify-content: center;
+  gap: ${(props) => props.theme.spacing.xs};
+  grid-area: btns;
+  margin-top: ${(props) => props.theme.spacing.lg};
 `
 
 export interface ExerciseForm {
@@ -82,7 +90,7 @@ const CreateEditExercise: React.FC<CreateEditExerciseProps> = ({
     >
       {({ handleChange, errors, submitCount, values }) => (
         <FormWrapper>
-          <FieldPair>
+          <FieldPair style={{ gridArea: 'name' }}>
             <Label htmlFor="name">{t('exercises.form.name')}</Label>
             <Field
               id="name"
@@ -96,34 +104,30 @@ const CreateEditExercise: React.FC<CreateEditExerciseProps> = ({
             )}
           </FieldPair>
 
-          <FlexRow>
-            <FieldPair>
-              <Label htmlFor="currentBpm">
-                {t('exercises.form.currentBpm')}
-              </Label>
-              <Field
-                id="currentBpm"
-                component={Input}
-                type="number"
-                onChange={handleChange}
-                value={values.currentBpm}
-                placeholder="180"
-              />
-            </FieldPair>
+          <FieldPair style={{ gridArea: 'currentBpm' }}>
+            <Label htmlFor="currentBpm">{t('exercises.form.currentBpm')}</Label>
+            <Field
+              id="currentBpm"
+              component={Input}
+              type="number"
+              onChange={handleChange}
+              value={values.currentBpm}
+              placeholder="180"
+            />
+          </FieldPair>
 
-            <FieldPair>
-              <Label htmlFor="targetBpm">{t('exercises.form.targetBpm')}</Label>
-              <Field
-                id="targetBpm"
-                component={Input}
-                onChange={handleChange}
-                value={values.targetBpm}
-                placeholder="210"
-              />
-            </FieldPair>
-          </FlexRow>
+          <FieldPair style={{ gridArea: 'targetBpm' }}>
+            <Label htmlFor="targetBpm">{t('exercises.form.targetBpm')}</Label>
+            <Field
+              id="targetBpm"
+              component={Input}
+              onChange={handleChange}
+              value={values.targetBpm}
+              placeholder="210"
+            />
+          </FieldPair>
 
-          <FieldPair solo>
+          <FieldPair style={{ gridArea: 'duration' }}>
             <Label htmlFor="durationSeconds">
               {t('exercises.form.duration')}
             </Label>
@@ -136,10 +140,10 @@ const CreateEditExercise: React.FC<CreateEditExerciseProps> = ({
             />
           </FieldPair>
 
-          <FlexRowCenter>
+          <BtnContainer>
             <PrimaryBtn text={t('common.cancel')} onClick={onCancel} isFluid />
             <PrimaryBtn isSubmitBtn text={t('common.save')} isFluid />
-          </FlexRowCenter>
+          </BtnContainer>
         </FormWrapper>
       )}
     </Formik>
