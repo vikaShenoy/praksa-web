@@ -30,7 +30,7 @@ export const Input = styled.input`
   font-size: ${(props) => props.theme.typography.size.sm};
   color: ${(props) => props.theme.colors.text.primary};
   height: 2rem;
-  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  padding: 0.5rem 1rem;
   outline: none;
   border: none;
 
