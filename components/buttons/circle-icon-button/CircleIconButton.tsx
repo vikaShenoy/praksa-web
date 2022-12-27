@@ -28,14 +28,20 @@ const Icon = styled.div<{ size: ButtonSize }>`
   color: ${(props) => props.theme.colors.icon};
   font-size: ${(props) => `${props.size * (2 / 3)}px`};
 `
-interface Props {
+
+interface CircleIconButtonProps {
   iconName: IconType
   size: ButtonSize
   onClick: () => void
   ariaLabel: string
 }
 
-const IconButton = ({ iconName, onClick, size, ariaLabel }: Props) => {
+const CircleIconButton: React.FC<CircleIconButtonProps> = ({
+  iconName,
+  onClick,
+  size,
+  ariaLabel,
+}: CircleIconButtonProps) => {
   return (
     <Button
       onClick={onClick}
@@ -49,4 +55,4 @@ const IconButton = ({ iconName, onClick, size, ariaLabel }: Props) => {
   )
 }
 
-export default IconButton
+export default CircleIconButton

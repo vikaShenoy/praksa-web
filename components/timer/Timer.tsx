@@ -1,20 +1,17 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { MdOutlineRestartAlt } from 'react-icons/md'
-import styled, { useTheme } from 'styled-components'
+import { useTheme } from 'styled-components'
 import useMediaQuery from '../../hooks/useMediaQuery'
 import { Card } from '../../styles/wrappers/components'
 import { CenteredFlexRow } from '../../styles/wrappers/containers'
 import { BoldText } from '../../styles/wrappers/fonts'
 import { DEFAULT_COUNTDOWN_TIME } from '../../utils/constants'
-import IconButton, { ButtonSize } from '../buttons/IconButton'
+import IconButton, {
+  ButtonSize,
+} from '../buttons/circle-icon-button/CircleIconButton'
 import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton'
-import ProgressBar from '../utils/ProgressBar'
-import TimeInput from '../utils/TimeInput'
-
-const TimerCard = styled(Card)<{ isMobile: boolean }>`
-  min-width: ${(props) => props.theme.sizes.components.minCardWidth};
-  width: ${(props) => (props.isMobile ? '100%' : '25%')};
-`
+import ProgressBar from '../utils/progress-bar/ProgressBar'
+import TimeInput from '../utils/time-input/TimeInput'
 
 const Timer = ({
   initialTime = DEFAULT_COUNTDOWN_TIME,
@@ -98,7 +95,7 @@ const Timer = ({
   }, [secondsRemaining])
 
   return (
-    <TimerCard isMobile={isMobile}>
+    <Card isMobile={isMobile}>
       {isEditingTime ? (
         <TimeInput onEnter={onTimeEntered} />
       ) : (
@@ -119,7 +116,7 @@ const Timer = ({
           ariaLabel="reset-timer-button"
         />
       </CenteredFlexRow>
-    </TimerCard>
+    </Card>
   )
 }
 

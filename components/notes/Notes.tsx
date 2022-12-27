@@ -7,14 +7,12 @@ import { BodyText, BoldText } from '../../styles/wrappers/fonts'
 import SecondaryBtn from '../buttons/secondary-btn/SecondaryBtn'
 
 const NotesCard = styled(Card)<{ isMobile: boolean; spaceBetween: boolean }>`
-  min-width: ${(props) => props.theme.sizes.components.minCardWidth};
-  width: ${(props) => (props.isMobile ? '100%' : '25%')};
   gap: ${(props) => props.theme.spacing.lg};
   justify-content: flex-start;
 `
 
 const TextInput = styled.textarea`
-  width: 90%;
+  width: 100%;
   padding: ${(props) => props.theme.spacing.sm};
   background-color: ${(props) => props.theme.colors.disabled};
   resize: none;

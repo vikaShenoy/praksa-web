@@ -14,6 +14,8 @@ const NavbarWrapper = styled.div<{ isMobile: boolean }>`
   padding: 0 ${(props) => props.theme.spacing.lg};
   box-shadow: ${(props) => props.theme.shadows.md};
 
+  height: 80px;
+
   position: ${(props) => (props.isMobile ? 'relative' : '')};
 `
 
@@ -39,7 +41,6 @@ const NavbarLink = styled.a<{ isMobile: boolean }>`
   font-family: ${(props) => props.theme.typography.font.body};
   padding: ${(props) =>
     props.isMobile ? props.theme.spacing.sm : props.theme.spacing.md};
-  margin: 0;
   cursor: pointer;
 
   &:hover {

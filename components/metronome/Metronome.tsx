@@ -7,14 +7,11 @@ import { Card } from '../../styles/wrappers/components'
 import { CenteredFlexRow } from '../../styles/wrappers/containers'
 import { BoldText } from '../../styles/wrappers/fonts'
 import { DEFAULT_BPM, MAX_BPM, MIN_BPM } from '../../utils/constants'
-import IconButton, { ButtonSize } from '../buttons/IconButton'
+import IconButton, {
+  ButtonSize,
+} from '../buttons/circle-icon-button/CircleIconButton'
 import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton'
-import Slider from '../utils/Slider'
-
-const MetronomeCard = styled(Card)<{ isMobile: boolean }>`
-  min-width: ${(props) => props.theme.sizes.components.minCardWidth};
-  width: ${(props) => (props.isMobile ? '100%' : '25%')};
-`
+import Slider from '../utils/slider/Slider'
 
 const SliderWrapper = styled.div`
   height: ${(props) => props.theme.sizes.components.sliderHeight};
@@ -41,7 +38,7 @@ const Metronome = () => {
   }
 
   return (
-    <MetronomeCard isMobile={isMobile}>
+    <Card isMobile={isMobile}>
       <BoldText aria-label="tempo-label">{bpm.toString()}</BoldText>
       <SliderWrapper>
         <IconButton
@@ -75,7 +72,7 @@ const Metronome = () => {
           isPlaying={isPlaying}
         />
       </CenteredFlexRow>
-    </MetronomeCard>
+    </Card>
   )
 }
 
