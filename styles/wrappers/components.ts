@@ -8,7 +8,8 @@ export const Card = styled.div<{ isMobile: boolean }>`
   
   flex: 1;
 
-  min-height: 580px;
+  min-height: 400px;
+  height: 500px;
   min-width: ${(props) => props.theme.sizes.components.minCardWidth};
 
   background: ${(props) => props.theme.colors.primary};

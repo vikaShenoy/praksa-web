@@ -14,7 +14,7 @@ const FormWrapper = styled(Form)`
 
   display: grid;
   height: 100%;
-  row-gap: ${(props) => props.theme.spacing.md};
+  row-gap: ${(props) => props.theme.spacing.xs};
   column-gap: ${(props) => props.theme.spacing.xs};
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
@@ -41,7 +41,7 @@ const BtnContainer = styled.div`
   justify-content: center;
   gap: ${(props) => props.theme.spacing.xs};
   grid-area: btns;
-  margin-top: ${(props) => props.theme.spacing.lg};
+  margin-top: auto;
 `
 
 export interface ExerciseForm {

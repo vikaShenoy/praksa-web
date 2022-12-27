@@ -12,7 +12,7 @@ const NotesCard = styled(Card)<{ isMobile: boolean; spaceBetween: boolean }>`
 `
 
 const TextInput = styled.textarea`
-  width: 90%;
+  width: 100%;
   padding: ${(props) => props.theme.spacing.sm};
   background-color: ${(props) => props.theme.colors.disabled};
   resize: none;
