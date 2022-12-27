@@ -10,6 +10,7 @@
     "test:watch": "jest --watch",
     "format": "prettier --check --ignore-path .gitignore",
     "format:fix": "prettier --write . --ignore-path .prettierignore",
+    "fix": "yarn lint ; yarn format:fix",
     "precommit": "yarn format:fix ; yarn lint ; yarn test"
   },
   "dependencies": {
