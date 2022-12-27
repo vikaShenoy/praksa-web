@@ -23,7 +23,6 @@ export const BodyText = styled.p<{ uppercase?: boolean }>`
 
 export const ErrorText = styled(Label)`
   color: ${(props) => props.theme.colors.text.error};
-
 `
 
 export const BoldText = styled.p`

@@ -25,7 +25,6 @@ const Container = styled.button`
 `
 
 const Text = styled.p`
-  margin: 0;
   text-transform: uppercase;
   font-family: ${(props) => props.theme.typography.font.body};
   font-size: ${(props) => props.theme.typography.size.xs};

@@ -4,6 +4,8 @@ import Exercises from '../components/exercises/Exercises'
 import Metronome from '../components/metronome/Metronome'
 import Notes from '../components/notes/Notes'
 import Timer from '../components/timer/Timer'
+import Tuner from '../components/tuner/Tuner'
+import VideoLooper from '../components/video-looper/VideoLooper'
 import { CenteredFlexRow } from '../styles/wrappers/containers'
 
 const Home: NextPage = () => {
@@ -17,6 +19,10 @@ const Home: NextPage = () => {
         <Timer />
         <Exercises />
         <Notes />
+      </CenteredFlexRow>
+      <CenteredFlexRow gap={16}>
+        <VideoLooper />
+        <Tuner />
       </CenteredFlexRow>
     </section>
   )

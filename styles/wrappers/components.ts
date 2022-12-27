@@ -34,6 +34,8 @@ export const Input = styled.input`
   outline: none;
   border: none;
 
+  position: relative;
+
   width: 100%;
 
   &::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
