@@ -1,9 +1,12 @@
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { IoPencilSharp } from 'react-icons/io5'
 import { MdDelete } from 'react-icons/md'
 import styled from 'styled-components'
 import { Exercise } from '../../../models/Exercise'
 import { BodyText } from '../../../styles/wrappers/fonts'
 import IconButton from '../../buttons/icon-button/IconButton'
+import BasicModal from '../../utils/basic-modal/BasicModal'
 import { useExerciseContext } from '../Exercises'
 
 const Container = styled.div`
@@ -35,31 +38,41 @@ const ActionRow = styled.div`
 
 interface ExerciseCellProps {
   exercise: Exercise
-  onConfirmDelete: () => void
 }
 
-const ExerciseCell: React.FC<ExerciseCellProps> = ({
-  exercise,
-  onConfirmDelete,
-}) => {
-  const { onShowEdit } = useExerciseContext()
+const ExerciseCell: React.FC<ExerciseCellProps> = ({ exercise }) => {
+  const { t } = useTranslation()
+  const { onShowEdit, onDelete } = useExerciseContext()
   const exerciseDetails = `${exercise.name}`
+  const [isDeleting, setIsDeleting] = useState(false)
 
-  const onDelete = () => {}
+  const onConfirmDelete = () => {
+    setIsDeleting(false)
+    onDelete(exercise.id)
+  }
 
   return (
-    <Container>
-      <MainRow>
-        <BodyText>{exerciseDetails}</BodyText>
-      </MainRow>
-      <ActionRow>
-        <IconButton
-          iconName={IoPencilSharp}
-          onClick={() => onShowEdit(exercise.id)}
-        />
-        <IconButton iconName={MdDelete} onClick={onDelete} />
-      </ActionRow>
-    </Container>
+    <>
+      <BasicModal
+        isOpen={isDeleting}
+        title={t('exercises.delete_modal.title')}
+        subtitle={t('exercises.delete_modal.subtitle', { name: exercise.name })}
+        onCancel={() => setIsDeleting(false)}
+        onConfirm={onConfirmDelete}
+      />
+      <Container>
+        <MainRow>
+          <BodyText>{exerciseDetails}</BodyText>
+        </MainRow>
+        <ActionRow>
+          <IconButton
+            iconName={IoPencilSharp}
+            onClick={() => onShowEdit(exercise.id)}
+          />
+          <IconButton iconName={MdDelete} onClick={() => setIsDeleting(true)} />
+        </ActionRow>
+      </Container>
+    </>
   )
 }
 

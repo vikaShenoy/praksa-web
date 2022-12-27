@@ -1,17 +1,10 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { BodyText } from '../../../styles/wrappers/fonts'
 
-interface PrimaryBtnProps {
-  text: string
-  onClick?: () => void
-  disabled?: boolean
-  isSubmitBtn?: boolean
-}
-
-const Button = styled.button`
+const Button = styled.button<{ isFluid?: boolean }>`
   border-radius: 0.5rem;
   height: 3rem;
-  width: 140px;
+  width: ${(props) => (props.isFluid ? 'auto' : '140px')};
   background-color: ${(props) => props.theme.colors.secondary};
   border: none;
   cursor: pointer;
@@ -19,19 +12,35 @@ const Button = styled.button`
   &:hover {
     background-color: ${(props) => props.theme.colors.secondaryHover};
   }
+
+  ${(props) =>
+    props.isFluid &&
+    css`
+      flex: 1;
+    `}
 `
 
-const PrimaryBtn = ({
+interface PrimaryBtnProps {
+  text: string
+  disabled?: boolean
+  isSubmitBtn?: boolean
+  onClick?: () => void
+  isFluid?: boolean
+}
+
+const PrimaryBtn: React.FC<PrimaryBtnProps> = ({
   text,
   onClick,
   disabled,
   isSubmitBtn,
-}: PrimaryBtnProps) => {
+  isFluid,
+}) => {
   return (
     <Button
       onClick={onClick}
       disabled={disabled}
       type={isSubmitBtn ? 'submit' : 'button'}
+      isFluid={isFluid}
     >
       <BodyText uppercase>{text}</BodyText>
     </Button>

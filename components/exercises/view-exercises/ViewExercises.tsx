@@ -14,9 +14,7 @@ interface ViewExercisesProps {
   exercises: Exercise[]
 }
 
-const ViewExercises: React.FC<ViewExercisesProps> = ({
-  exercises,
-}) => {
+const ViewExercises: React.FC<ViewExercisesProps> = ({ exercises }) => {
   const { t } = useTranslation()
   const { showCreateExercise } = useExerciseContext()
 
@@ -25,12 +23,7 @@ const ViewExercises: React.FC<ViewExercisesProps> = ({
       {exercises.length > 0 ? (
         <>
           {exercises.map((exercise) => (
-            <ExerciseCell
-              key={exercise.id}
-              exercise={exercise}
-              onEdit={() => console.log('TODO: On edit')}
-              onConfirmDelete={() => console.log('TODO: On delete')}
-            />
+            <ExerciseCell key={exercise.id} exercise={exercise} />
           ))}
           <MarginTopWrapper>
             <SecondaryBtn text={t('common.add')} onClick={showCreateExercise} />

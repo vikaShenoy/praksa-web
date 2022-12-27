@@ -7,9 +7,11 @@ import { Card } from '../../styles/wrappers/components'
 import { CenteredFlexRow } from '../../styles/wrappers/containers'
 import { BoldText } from '../../styles/wrappers/fonts'
 import { DEFAULT_BPM, MAX_BPM, MIN_BPM } from '../../utils/constants'
-import IconButton, { ButtonSize } from '../buttons/circle-icon-button/CircleIconButton'
+import IconButton, {
+  ButtonSize,
+} from '../buttons/circle-icon-button/CircleIconButton'
 import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton'
-import Slider from '../utils/Slider'
+import Slider from '../utils/slider/Slider'
 
 const SliderWrapper = styled.div`
   height: ${(props) => props.theme.sizes.components.sliderHeight};

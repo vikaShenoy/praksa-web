@@ -70,7 +70,7 @@ const CreateEditExercise: React.FC<CreateEditExerciseProps> = ({
 
   console.log(defaultFormValues)
 
-  function validateExerciseForm(values: ExerciseForm) {
+  const validateExerciseForm = (values: ExerciseForm) => {
     const errors: FormikErrors<ExerciseForm> = {}
     if (!values.name) {
       errors.name = t('errors.field_required')

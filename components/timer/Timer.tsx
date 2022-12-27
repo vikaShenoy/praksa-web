@@ -6,10 +6,12 @@ import { Card } from '../../styles/wrappers/components'
 import { CenteredFlexRow } from '../../styles/wrappers/containers'
 import { BoldText } from '../../styles/wrappers/fonts'
 import { DEFAULT_COUNTDOWN_TIME } from '../../utils/constants'
-import IconButton, { ButtonSize } from '../buttons/circle-icon-button/CircleIconButton'
+import IconButton, {
+  ButtonSize,
+} from '../buttons/circle-icon-button/CircleIconButton'
 import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton'
-import ProgressBar from '../utils/ProgressBar'
-import TimeInput from '../utils/TimeInput'
+import ProgressBar from '../utils/progress-bar/ProgressBar'
+import TimeInput from '../utils/time-input/TimeInput'
 
 const Timer = ({
   initialTime = DEFAULT_COUNTDOWN_TIME,

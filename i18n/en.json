@@ -24,6 +24,10 @@
       "currentBpm": "Current BPM",
       "targetBpm": "Target BPM",
       "duration": "Duration (seconds)"
+    },
+    "delete_modal": {
+      "title": "Delete exercise",
+      "subtitle": "Are you sure you want to delete the exercise: {{ name }}?"
     }
   },
   "errors": {

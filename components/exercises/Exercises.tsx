@@ -8,7 +8,7 @@ import { Exercise } from '../../models/Exercise'
 import { Card } from '../../styles/wrappers/components'
 import { BoldText } from '../../styles/wrappers/fonts'
 import CreateEditExercise, {
-  ExerciseForm
+  ExerciseForm,
 } from './create-edit-exercise/CreateEditExercise'
 
 import ViewExercises from './view-exercises/ViewExercises'
@@ -20,7 +20,8 @@ const ExercisesCard = styled(Card)`
 
 interface ExerciseContextData {
   showCreateExercise: () => void
-  onShowEdit: (id: string) => void
+  onShowEdit: (exerciseId: string) => void
+  onDelete: (exerciseId: string) => void
 }
 
 const ExerciseContext = createContext<ExerciseContextData | undefined>(
@@ -49,10 +50,10 @@ const Exercises = () => {
     useState<Exercise | null>(null)
 
   // TODO: remove dev code and use a real API request to persist the new exercise
-  function onCreate(
+  const onCreate = (
     values: ExerciseForm,
     { setSubmitting }: FormikHelpers<ExerciseForm>
-  ) {
+  ) => {
     setSubmitting(true)
     const exercise: Exercise = {
       id: uuidv4(),
@@ -64,8 +65,8 @@ const Exercises = () => {
     setIsCreating(false)
   }
 
-  function onShowEdit(id: string) {
-    const exercise = exercises.find((exercise) => exercise.id === id)
+  const onShowEdit = (exerciseId: string) => {
+    const exercise = exercises.find((exercise) => exercise.id === exerciseId)
     if (exercise) {
       setExerciseBeingEdited(exercise)
       setIsEditing(true)
@@ -73,10 +74,10 @@ const Exercises = () => {
   }
 
   // TODO: remove dev code and a use a real API to edit the exercise
-  function onEdit(
+  const onEdit = (
     values: ExerciseForm,
     { setSubmitting }: FormikHelpers<ExerciseForm>
-  ) {
+  ) => {
     if (!exerciseBeingEdited) {
       return
     }
@@ -93,12 +94,24 @@ const Exercises = () => {
     setIsEditing(false)
   }
 
+  // TODO: remove dev code and use real API to delete the exercise
+  const onDelete = (exerciseId: string) => {
+    const updatedExercises = exercises.filter(
+      (exercise) => exercise.id !== exerciseId
+    )
+    setExercises(updatedExercises)
+  }
+
   return (
     <ExercisesCard isMobile={isMobile}>
       <BoldText>{t('exercises.title')}</BoldText>
 
       <ExerciseContext.Provider
-        value={{ showCreateExercise: () => setIsCreating(true), onShowEdit }}
+        value={{
+          showCreateExercise: () => setIsCreating(true),
+          onShowEdit,
+          onDelete,
+        }}
       >
         {isCreating && (
           <CreateEditExercise
@@ -111,7 +124,7 @@ const Exercises = () => {
           <CreateEditExercise
             onSubmit={onEdit}
             onCancel={() => setIsEditing(false)}
-            exercise={exerciseBeingEdited}
+            exercise={exerciseBeingEdited ? exerciseBeingEdited : undefined}
           />
         )}
 
