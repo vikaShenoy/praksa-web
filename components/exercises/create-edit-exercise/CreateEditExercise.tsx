@@ -59,16 +59,12 @@ const CreateEditExercise: React.FC<CreateEditExerciseProps> = ({
 }) => {
   const { t } = useTranslation()
 
-  console.log(`Exercise: ${exercise?.name}`)
-
   const defaultFormValues: ExerciseForm = {
     name: exercise ? exercise.name : '',
     currentBpm: exercise ? exercise.currentBpm : undefined,
     targetBpm: exercise ? exercise.targetBpm : undefined,
     durationSeconds: exercise ? exercise.durationSeconds : undefined,
   }
-
-  console.log(defaultFormValues)
 
   const validateExerciseForm = (values: ExerciseForm) => {
     const errors: FormikErrors<ExerciseForm> = {}
