@@ -141,8 +141,8 @@ const CreateEditExercise: React.FC<CreateEditExerciseProps> = ({
           </FieldPair>
 
           <FlexRowCenter>
-            <PrimaryBtn text={t('common.cancel')} onClick={onCancel} />
-            <PrimaryBtn isSubmitBtn text={t('common.save')} />
+            <PrimaryBtn text={t('common.cancel')} onClick={onCancel} isFluid />
+            <PrimaryBtn isSubmitBtn text={t('common.save')} isFluid />
           </FlexRowCenter>
         </FormWrapper>
       )}
