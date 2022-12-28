@@ -14,15 +14,17 @@ export interface ColorStyles {
   }
 }
 
+const hex75Opacity = 'BF'
+
 export const colors: ColorStyles = {
   background: '#121212',
   primary: '#1E113A',
   secondary: '#513097',
-  secondaryHover: '#513097BF',
+  secondaryHover: `#513097${hex75Opacity}`,
   tertiary: '#321A66',
   accent: '#87693B',
-  accentHover: '#87693BBF',
-  disabled: '#E0E0E01A',
+  accentHover: `#87693B$${hex75Opacity}`,
+  disabled: '#32264B',
   icon: '#FFFFFF',
   text: {
     primary: '#E0E0E0',
