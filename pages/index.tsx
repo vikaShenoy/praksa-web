@@ -7,16 +7,44 @@ import Notes from '../components/notes/Notes'
 import Timer from '../components/timer/Timer'
 import Tuner from '../components/tuner/Tuner'
 import VideoLooper from '../components/video-looper/VideoLooper'
+import { DESKTOP_BREAKPOINT, TABLET_BREAKPOINT } from '../hooks/useResponsive'
+import { NAVBAR_HEIGHT } from '../styles/size'
 
 const HomepageGrid = styled.section`
   display: grid;
   gap: ${(props) => props.theme.spacing.sm};
-
   padding: ${(props) => props.theme.spacing.sm};
 
-  grid-template-areas: 
-    "metronome timer exercises notes"
-    "videoLooper videoLooper tuner tuner";
+  /* height: calc(100vh - ${NAVBAR_HEIGHT}); */
+
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+
+  grid-auto-rows: minmax(0, 1fr);
+  
+
+  // Mobile
+  grid-template-areas:
+    'metronome'
+    'timer'
+    'exercises'
+    'notes'
+    'videoLooper'
+    'tuner';
+
+  @media (min-width: ${TABLET_BREAKPOINT}px) {
+    grid-template-areas:
+      'metronome timer'
+      'exercises notes'
+      'videoLooper videoLooper'
+      'tuner tuner';
+  }
+
+  @media (min-width: ${DESKTOP_BREAKPOINT}px) {
+    grid-template-areas:
+      'metronome timer exercises notes'
+      'videoLooper videoLooper tuner tuner';
+  }
 `
 
 const Home: NextPage = () => {
@@ -34,17 +62,6 @@ const Home: NextPage = () => {
         <VideoLooper />
         <Tuner />
       </HomepageGrid>
-      {/* 
-      <CenteredFlexRow gap={16}>
-        <Metronome />
-        <Timer />
-        <Exercises />
-        <Notes />
-      </CenteredFlexRow>
-      <CenteredFlexRow gap={16}>
-        <VideoLooper />
-        <Tuner />
-      </CenteredFlexRow> */}
     </section>
   )
 }

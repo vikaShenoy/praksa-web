@@ -6,8 +6,8 @@ export enum Resolution {
   Mobile,
 }
 
-const DESKTOP_BREAKPOINT = 1024
-const TABLET_BREAKPOINT = 767
+export const DESKTOP_BREAKPOINT = 1024
+export const TABLET_BREAKPOINT = 767
 
 export const useResponsive = (): Resolution => {
   const [resolution, setResolution] = useState<Resolution>(Resolution.Desktop)

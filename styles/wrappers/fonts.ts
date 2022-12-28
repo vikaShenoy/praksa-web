@@ -28,7 +28,7 @@ export const ErrorText = styled(Label)`
 export const BoldText = styled.p`
   font-family: ${(props) => props.theme.typography.font.body};
   font-weight: ${(props) => props.theme.typography.weight.bold};
-  font-size: ${(props) => props.theme.typography.size.lg};
+  font-size: ${(props) => props.theme.typography.size.mdlg};
   color: ${(props) => props.theme.colors.text.primary};
 `
 

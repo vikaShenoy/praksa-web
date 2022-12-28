@@ -13,7 +13,7 @@ import CreateEditExercise, {
 import ViewExercises from './view-exercises/ViewExercises'
 
 const ExercisesCard = styled(Card)`
-  gap: ${(props) => props.theme.spacing.lg};
+  gap: ${(props) => props.theme.spacing.md};
   justify-content: flex-start;
 `
 

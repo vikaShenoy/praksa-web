@@ -1,17 +1,15 @@
 import styled from "styled-components";
+import { NAVBAR_HEIGHT } from "../size";
 
 export const Card = styled.div<{ gridArea: string }>`
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
-  flex: 1;
 
   grid-area: ${(props) => props.gridArea};
 
-  min-height: 400px;
-  height: 500px;
-  min-width: 20rem;
+  min-height: calc(50vh - ${NAVBAR_HEIGHT});
 
   background: ${(props) => props.theme.colors.primary};
   border-radius: 1.5rem;
@@ -29,7 +27,7 @@ export const Input = styled.input`
   font-family: ${(props) => props.theme.typography.font.body};
   font-size: ${(props) => props.theme.typography.size.sm};
   color: ${(props) => props.theme.colors.text.primary};
-  height: 3rem;
+  height: 2.5rem;
   padding: 0.5rem 1rem;
   outline: none;
   border: none;

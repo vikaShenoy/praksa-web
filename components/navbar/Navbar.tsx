@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import { Resolution, useResponsive } from '../../hooks/useResponsive'
 import HamburgerIcon from '../../public/icons/HarmburgerIcon'
+import { NAVBAR_HEIGHT } from '../../styles/size'
 import { TitleText } from '../../styles/wrappers/fonts'
 
 const NavbarWrapper = styled.div<{ isMobile: boolean }>`
@@ -14,7 +15,7 @@ const NavbarWrapper = styled.div<{ isMobile: boolean }>`
   padding: 0 ${(props) => props.theme.spacing.lg};
   box-shadow: ${(props) => props.theme.shadows.md};
 
-  height: 80px;
+  height: ${NAVBAR_HEIGHT};
 
   position: ${(props) => (props.isMobile ? 'relative' : '')};
 `
