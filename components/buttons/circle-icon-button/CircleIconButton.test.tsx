@@ -5,7 +5,7 @@ import CircleIconButton, { ButtonSize } from './CircleIconButton'
 
 describe('Circle icon button component', () => {
   let onClick: jest.Func
-  
+
   function reset(size: ButtonSize = ButtonSize.LARGE) {
     onClick = jest.fn()
     const props = {

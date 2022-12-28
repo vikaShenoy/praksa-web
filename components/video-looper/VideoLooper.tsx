@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { TABLET_BREAKPOINT } from '../../hooks/useResponsive'
 import { Card, Input } from '../../styles/wrappers/components'
 import CircleIconButton, {
-  ButtonSize
+  ButtonSize,
 } from '../buttons/circle-icon-button/CircleIconButton'
 import IconButton from '../buttons/icon-button/IconButton'
 import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton'

@@ -18,7 +18,7 @@ describe('Icon button component', () => {
 
   describe('on mount', () => {
     beforeEach(reset)
-    
+
     it('renders the icon button', () => {
       expect(screen.getByRole('button')).toBeDefined()
     })
