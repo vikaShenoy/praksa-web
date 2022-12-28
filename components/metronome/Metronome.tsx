@@ -2,7 +2,6 @@ import { ChangeEvent, useState } from 'react'
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 import styled from 'styled-components'
 import useMetronomeRunner from '../../hooks/useMetronomeRunner'
-import { Resolution, useResponsive } from '../../hooks/useResponsive'
 import { SLIDER_HEIGHT } from '../../styles/size'
 import { Card } from '../../styles/wrappers/components'
 import { CenteredFlexRow } from '../../styles/wrappers/containers'
@@ -28,8 +27,6 @@ const Margin = styled.div`
 `
 
 const Metronome = () => {
-  const resolution = useResponsive()
-  const isMobile = resolution === Resolution.Mobile
   const [bpm, setBpm] = useState(DEFAULT_BPM)
   const [isPlaying, setIsPlaying] = useState(false)
   useMetronomeRunner({ bpm, isPlaying })

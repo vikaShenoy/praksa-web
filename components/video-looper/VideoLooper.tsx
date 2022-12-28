@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { IoSearchSharp } from 'react-icons/io5'
 import styled from 'styled-components'
-import { Resolution, useResponsive } from '../../hooks/useResponsive'
 import { Card, Input } from '../../styles/wrappers/components'
 import IconButton from '../buttons/icon-button/IconButton'
 
@@ -47,9 +46,6 @@ enum YTPlayerStates {
 }
 
 const VideoLooper = () => {
-  const resolution = useResponsive()
-  const isMobile = resolution === Resolution.Mobile
-
   const [player, setPlayer] = useState<YT.Player | null>(null)
 
   const id = 'PbrP9RbSIWo'

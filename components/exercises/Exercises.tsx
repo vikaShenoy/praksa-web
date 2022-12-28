@@ -3,7 +3,6 @@ import { createContext, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import { v4 as uuidv4 } from 'uuid'
-import { Resolution, useResponsive } from '../../hooks/useResponsive'
 import { Exercise } from '../../models/Exercise'
 import { Card } from '../../styles/wrappers/components'
 import { BoldText } from '../../styles/wrappers/fonts'
@@ -40,8 +39,6 @@ export const useExerciseContext = () => {
 
 const Exercises = () => {
   const { t } = useTranslation()
-  const resolution = useResponsive()
-  const isMobile = resolution === Resolution.Mobile
 
   const [exercises, setExercises] = useState<Exercise[]>([])
 

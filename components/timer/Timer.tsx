@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { MdOutlineRestartAlt } from 'react-icons/md'
-import { Resolution, useResponsive } from '../../hooks/useResponsive'
 import { Card } from '../../styles/wrappers/components'
 import { CenteredFlexRow } from '../../styles/wrappers/containers'
 import { BoldText } from '../../styles/wrappers/fonts'
@@ -17,8 +16,6 @@ const Timer = ({
 }: {
   initialTime?: number
 }) => {
-  const resolution = useResponsive()
-  const isMobile = resolution === Resolution.Mobile
   const [totalSeconds, setTotalSeconds] = useState(initialTime)
   const [secondsRemaining, setSecondsRemaining] = useState(totalSeconds)
   const [isEditingTime, setIsEditingTime] = useState(false)
