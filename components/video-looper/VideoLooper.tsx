@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { IoSearchSharp } from 'react-icons/io5'
 import { MdDelete, MdOutlineRestartAlt } from 'react-icons/md'
 import styled from 'styled-components'
@@ -16,43 +16,27 @@ const VideoCard = styled(Card)`
   gap: ${(props) => props.theme.spacing.sm};
 `
 
-const VideoAndControlsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  gap: ${(props) => props.theme.spacing.sm};
-
-  @media (min-width: ${TABLET_BREAKPOINT}px) {
-    flex-direction: row;
-  }
-`
-
 const Video = styled.video`
   height: 100%;
-  max-width: 100%;
+  width: 100%;
+
   align-self: flex-start;
 
   border-radius: 1rem;
   overflow: hidden;
 
-  flex: 1;
+  min-height: 250px;
   @media (min-width: ${TABLET_BREAKPOINT}px) {
-    flex: 9;
+    min-height: 380px;
   }
 `
 
 const ControlsContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: ${(props) => props.theme.spacing.md};
   width: 100%;
-
-  @media (min-width: ${TABLET_BREAKPOINT}px) {
-    flex: 1;
-    flex-direction: column;
-    justify-content: space-evenly;
-  }
 `
 
 const SearchContainer = styled.div`
@@ -81,8 +65,20 @@ enum YTPlayerStates {
 const VideoLooper = () => {
   const [player, setPlayer] = useState<YT.Player | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
+  const searchInputRef = useRef<HTMLInputElement>(null)
 
-  const id = 'PbrP9RbSIWo'
+  const [videoID, setVideoID] = useState('PbrP9RbSIWo')
+
+  const loadVideo = () => {
+    const youTubePlayer = new YT.Player(`youtube-player-${videoID}`, {
+      videoId: videoID,
+      events: {
+        onStateChange: onPlayerStateChange,
+      },
+    })
+
+    setPlayer(youTubePlayer)
+  }
 
   useEffect(() => {
     const win = window as any
@@ -97,25 +93,10 @@ const VideoLooper = () => {
     } else {
       loadVideo()
     }
-  }, [])
-
-  const loadVideo = () => {
-    const youTubePlayer = new YT.Player(`youtube-player-${id}`, {
-      videoId: id,
-      events: {
-        onStateChange: onPlayerStateChange,
-      },
-    })
-
-    setPlayer(youTubePlayer)
-  }
+  }, [loadVideo])
 
   const onPlayerStateChange = (event: any) => {
     console.log('TODO: player state change')
-  }
-
-  const onSearch = () => {
-    console.log('TODO: search button clicked')
   }
 
   const onPlay = () => {
@@ -136,34 +117,48 @@ const VideoLooper = () => {
     console.log('TODO: clear button clicked')
   }
 
+  const onSearchboxKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      onSearch()
+    }
+  }
+
+  const onSearch = () => {
+    console.log(
+      `TODO: handle search. Current val: ${searchInputRef.current!.value}`
+    )
+  }
+
   return (
     <VideoCard gridArea="videoLooper">
-      <VideoAndControlsWrapper>
-        <Video id={`youtube-player-${id}`} />
+      <Video id={`youtube-player-${videoID}`} />
 
-        <ControlsContainer>
-          <PlayStopButton
-            isPlaying={isPlaying}
-            onClick={isPlaying ? onStop : onPlay}
-          />
-          <CircleIconButton
-            iconName={MdOutlineRestartAlt}
-            size={ButtonSize.LARGE}
-            onClick={onReset}
-            ariaLabel="Reset video looper button"
-          />
-          <CircleIconButton
-            iconName={MdDelete}
-            size={ButtonSize.LARGE}
-            onClick={onClear}
-            ariaLabel="Clear video looper button"
-          />
-        </ControlsContainer>
-      </VideoAndControlsWrapper>
+      <ControlsContainer>
+        <PlayStopButton
+          isPlaying={isPlaying}
+          onClick={isPlaying ? onStop : onPlay}
+        />
+        <CircleIconButton
+          iconName={MdOutlineRestartAlt}
+          size={ButtonSize.LARGE}
+          onClick={onReset}
+          ariaLabel="Reset video looper button"
+        />
+        <CircleIconButton
+          iconName={MdDelete}
+          size={ButtonSize.LARGE}
+          onClick={onClear}
+          ariaLabel="Clear video looper button"
+        />
+      </ControlsContainer>
 
       <BottomControlsContainer>
         <SearchContainer>
-          <Input />
+          <Input
+            type="text"
+            onKeyDown={onSearchboxKeyDown}
+            ref={searchInputRef}
+          />
           <SearchIconWrapper>
             <IconButton iconName={IoSearchSharp} onClick={onSearch} />
           </SearchIconWrapper>
