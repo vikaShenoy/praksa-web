@@ -15,29 +15,22 @@ const VideoCard = styled(Card)`
   justify-content: space-evenly;
 `
 
-const TopWrapper = styled.div`
-  display: flex;
-  gap: ${(props) => props.theme.spacing.sm};
-
-  height: 100%;
-  width: 100%;
-`
-
 const Video = styled.video`
   height: 100%;
   align-self: flex-start;
-  flex: 9;
 
   border-radius: 1rem;
   overflow: hidden;
+
+  width: 100%;
+  max-width: 100%;
 `
 
 const ControlsContainer = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  flex: 1;
+  width: 100%;
 `
 
 const SearchContainer = styled.div`
@@ -117,28 +110,26 @@ const VideoLooper = () => {
 
   return (
     <VideoCard gridArea="videoLooper">
-      <TopWrapper>
-        <Video id={`youtube-player-${id}`}></Video>
+      <Video id={`youtube-player-${id}`} />
 
-        <ControlsContainer>
-          <PlayStopButton
-            isPlaying={isPlaying}
-            onClick={() => setIsPlaying((prev) => !prev)}
-          />
-          <CircleIconButton
-            iconName={MdOutlineRestartAlt}
-            size={ButtonSize.LARGE}
-            onClick={onReset}
-            ariaLabel="Reset video looper button"
-          />
-          <CircleIconButton
-            iconName={MdDelete}
-            size={ButtonSize.LARGE}
-            onClick={onClear}
-            ariaLabel="Clear video looper button"
-          />
-        </ControlsContainer>
-      </TopWrapper>
+      <ControlsContainer>
+        <PlayStopButton
+          isPlaying={isPlaying}
+          onClick={() => setIsPlaying((prev) => !prev)}
+        />
+        <CircleIconButton
+          iconName={MdOutlineRestartAlt}
+          size={ButtonSize.LARGE}
+          onClick={onReset}
+          ariaLabel="Reset video looper button"
+        />
+        <CircleIconButton
+          iconName={MdDelete}
+          size={ButtonSize.LARGE}
+          onClick={onClear}
+          ariaLabel="Clear video looper button"
+        />
+      </ControlsContainer>
 
       <BottomControlsContainer>
         <SearchContainer>

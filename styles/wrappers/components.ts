@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { TABLET_BREAKPOINT } from "../../hooks/useResponsive";
 import { NAVBAR_HEIGHT } from "../size";
 
 export const Card = styled.div<{ gridArea: string }>`
@@ -14,12 +15,16 @@ export const Card = styled.div<{ gridArea: string }>`
   background: ${(props) => props.theme.colors.primary};
   border-radius: 1.5rem;
   box-shadow: ${(props) => props.theme.shadows.md};
-  padding: ${(props) => props.theme.spacing.lg} ${(props) => props.theme.spacing.md};
-
+  
   &:hover {
     box-shadow: ${(props) => props.theme.shadows.mdDark};
   };
   transition: box-shadow 0.2s;
+
+  padding: ${(props) => props.theme.spacing.sm};
+  @media (min-width: ${TABLET_BREAKPOINT}px) {
+    padding: ${(props) => props.theme.spacing.lg};
+  };
 `
 
 export const Input = styled.input`

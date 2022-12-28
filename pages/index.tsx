@@ -12,8 +12,8 @@ import { NAVBAR_HEIGHT } from '../styles/size'
 
 const HomepageGrid = styled.section`
   display: grid;
-  gap: ${(props) => props.theme.spacing.sm};
-  padding: ${(props) => props.theme.spacing.sm};
+  gap: ${(props) => props.theme.spacing.xs};
+  padding: ${(props) => props.theme.spacing.xs};
 
   /* height: calc(100vh - ${NAVBAR_HEIGHT}); */
 
@@ -33,6 +33,8 @@ const HomepageGrid = styled.section`
     'tuner';
 
   @media (min-width: ${TABLET_BREAKPOINT}px) {
+    gap: ${(props) => props.theme.spacing.sm};
+  padding: ${(props) => props.theme.spacing.sm};
     grid-template-areas:
       'metronome timer'
       'exercises notes'
