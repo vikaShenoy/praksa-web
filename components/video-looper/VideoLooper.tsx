@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { IoSearchSharp } from 'react-icons/io5'
-import styled, { useTheme } from 'styled-components'
-import useMediaQuery from '../../hooks/useMediaQuery'
+import styled from 'styled-components'
+import { Resolution, useResponsive } from '../../hooks/useResponsive'
 import { Card, Input } from '../../styles/wrappers/components'
 import IconButton from '../buttons/icon-button/IconButton'
 
@@ -47,9 +47,8 @@ enum YTPlayerStates {
 }
 
 const VideoLooper = () => {
-  const theme = useTheme()
-  let isMobile = useMediaQuery(theme.sizes.breakpoints.sm)
-  const videoRef = useRef<HTMLIFrameElement>(null)
+  const resolution = useResponsive()
+  const isMobile = resolution === Resolution.Mobile
 
   const [player, setPlayer] = useState<YT.Player | null>(null)
 
@@ -105,11 +104,10 @@ const VideoLooper = () => {
       <Video id={`youtube-player-${id}`}></Video>
       <VideoControlsContainer>
         <SearchContainer>
-        <Input />
-        <SearchIconWrapper>
-        <IconButton iconName={IoSearchSharp} onClick={onSearch} />
-        </SearchIconWrapper>
-
+          <Input />
+          <SearchIconWrapper>
+            <IconButton iconName={IoSearchSharp} onClick={onSearch} />
+          </SearchIconWrapper>
         </SearchContainer>
       </VideoControlsContainer>
     </VideoCard>

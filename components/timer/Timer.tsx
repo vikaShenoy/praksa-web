@@ -1,13 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { MdOutlineRestartAlt } from 'react-icons/md'
-import { useTheme } from 'styled-components'
-import useMediaQuery from '../../hooks/useMediaQuery'
+import { Resolution, useResponsive } from '../../hooks/useResponsive'
 import { Card } from '../../styles/wrappers/components'
 import { CenteredFlexRow } from '../../styles/wrappers/containers'
 import { BoldText } from '../../styles/wrappers/fonts'
 import { DEFAULT_COUNTDOWN_TIME } from '../../utils/constants'
 import IconButton, {
-  ButtonSize,
+  ButtonSize
 } from '../buttons/circle-icon-button/CircleIconButton'
 import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton'
 import ProgressBar from '../utils/progress-bar/ProgressBar'
@@ -18,8 +17,8 @@ const Timer = ({
 }: {
   initialTime?: number
 }) => {
-  const theme = useTheme()
-  let isMobile = useMediaQuery(theme.sizes.breakpoints.sm)
+  const resolution = useResponsive()
+  const isMobile = resolution === Resolution.Mobile
   const [totalSeconds, setTotalSeconds] = useState(initialTime)
   const [secondsRemaining, setSecondsRemaining] = useState(totalSeconds)
   const [isEditingTime, setIsEditingTime] = useState(false)

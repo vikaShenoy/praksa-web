@@ -1,14 +1,13 @@
-import styled, { useTheme } from 'styled-components'
-import useMediaQuery from '../../hooks/useMediaQuery'
+import styled from 'styled-components'
+import { Resolution, useResponsive } from '../../hooks/useResponsive'
 import { Card } from '../../styles/wrappers/components'
 import { BoldText } from '../../styles/wrappers/fonts'
 
 const TunerCard = styled(Card)``
 
 const Tuner = () => {
-  const theme = useTheme()
-  let isMobile = useMediaQuery(theme.sizes.breakpoints.sm)
-
+  const resolution = useResponsive()
+  const isMobile = resolution === Resolution.Mobile
   return (
     <TunerCard isMobile={isMobile}>
       <BoldText>Tuner (coming soon)</BoldText>

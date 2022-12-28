@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import styled, { useTheme } from 'styled-components'
-import useMediaQuery from '../../hooks/useMediaQuery'
+import styled from 'styled-components'
+import { Resolution, useResponsive } from '../../hooks/useResponsive'
 import { Card } from '../../styles/wrappers/components'
 import { BodyText, BoldText } from '../../styles/wrappers/fonts'
 import SecondaryBtn from '../buttons/secondary-btn/SecondaryBtn'
@@ -46,12 +46,12 @@ const EditBtnContainer = styled.div`
 `
 
 const Notes = () => {
-  const theme = useTheme()
   const { t } = useTranslation()
   const [isEditing, setIsEditing] = useState(false)
   const [notes, setNotes] = useState('')
   const notesInput = useRef<HTMLTextAreaElement>(null)
-  let isMobile = useMediaQuery(theme.sizes.breakpoints.sm)
+  const resolution = useResponsive()
+  const isMobile = resolution === Resolution.Mobile
 
   const onSave = () => {
     if (

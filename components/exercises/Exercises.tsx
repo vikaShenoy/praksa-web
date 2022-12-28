@@ -1,14 +1,14 @@
 import { FormikHelpers } from 'formik'
 import { createContext, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import styled, { useTheme } from 'styled-components'
+import styled from 'styled-components'
 import { v4 as uuidv4 } from 'uuid'
-import useMediaQuery from '../../hooks/useMediaQuery'
+import { Resolution, useResponsive } from '../../hooks/useResponsive'
 import { Exercise } from '../../models/Exercise'
 import { Card } from '../../styles/wrappers/components'
 import { BoldText } from '../../styles/wrappers/fonts'
 import CreateEditExercise, {
-  ExerciseForm,
+  ExerciseForm
 } from './create-edit-exercise/CreateEditExercise'
 
 import ViewExercises from './view-exercises/ViewExercises'
@@ -40,8 +40,9 @@ export const useExerciseContext = () => {
 
 const Exercises = () => {
   const { t } = useTranslation()
-  const theme = useTheme()
-  let isMobile = useMediaQuery(theme.sizes.breakpoints.sm)
+  const resolution = useResponsive()
+  const isMobile = resolution === Resolution.Mobile
+
   const [exercises, setExercises] = useState<Exercise[]>([])
 
   const [isCreating, setIsCreating] = useState(false)

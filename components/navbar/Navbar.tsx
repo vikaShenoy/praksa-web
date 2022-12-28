@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import styled, { useTheme } from 'styled-components'
-import useMediaQuery from '../../hooks/useMediaQuery'
+import styled from 'styled-components'
+import { Resolution, useResponsive } from '../../hooks/useResponsive'
 import HamburgerIcon from '../../public/icons/HarmburgerIcon'
 import { TitleText } from '../../styles/wrappers/fonts'
 
@@ -57,8 +57,8 @@ const MenuIconWrapper = styled.div`
 `
 
 const Navbar = () => {
-  const theme = useTheme()
-  let isMobile = useMediaQuery(theme.sizes.breakpoints.sm)
+  const resolution = useResponsive()
+  const isMobile = resolution === Resolution.Mobile
   const [showDropdown, setShowDropdown] = useState(false)
   const { t } = useTranslation()
 
