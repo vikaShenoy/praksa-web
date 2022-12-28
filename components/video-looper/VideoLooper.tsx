@@ -1,15 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { IoSearchSharp } from 'react-icons/io5'
-import { MdDelete, MdOutlineRestartAlt } from 'react-icons/md'
 import styled from 'styled-components'
 import { TABLET_BREAKPOINT } from '../../hooks/useResponsive'
 import { Card, Input } from '../../styles/wrappers/components'
-import CircleIconButton, {
-  ButtonSize
-} from '../buttons/circle-icon-button/CircleIconButton'
+import { BodyText } from '../../styles/wrappers/fonts'
 import IconButton from '../buttons/icon-button/IconButton'
-import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton'
-import NoVideoPlaceholder from './no-video-placeholder/NoVideoPlaceholder'
 
 const VideoCard = styled(Card)`
   flex-direction: column;
@@ -17,25 +13,50 @@ const VideoCard = styled(Card)`
   gap: ${(props) => props.theme.spacing.sm};
 `
 
-const Video = styled.video`
+const VideoContainer = styled.div`
+  position: relative;
+
   height: 100%;
+  min-height: 250px;
   width: 100%;
 
   border-radius: 1rem;
   overflow: hidden;
 
-  min-height: 250px;
   @media (min-width: ${TABLET_BREAKPOINT}px) {
     min-height: 380px;
   }
 `
 
-const ControlsContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: ${(props) => props.theme.spacing.md};
+const Video = styled.video<{ isVisible: boolean }>`
+  height: 100%;
   width: 100%;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+`
+
+const NoVideoContainer = styled.div<{ isVisible: boolean }>`
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: ${(props) => props.theme.colors.background};
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
+  opacity: ${(props) => (props.isVisible ? 1 : 0)};
 `
 
 const SearchContainer = styled.div`
@@ -56,62 +77,48 @@ const BottomControlsContainer = styled.div`
   width: 100%;
 `
 
-enum YTPlayerStates {
-  PLAY = 1,
-  PAUSE = 2,
-}
-
 const VideoLooper = () => {
+  const { t } = useTranslation()
   const [player, setPlayer] = useState<YT.Player | null>(null)
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [videoID, setVideoID] = useState<string | null>(null)
   const searchInputRef = useRef<HTMLInputElement>(null)
-
-  const [videoID, setVideoID] = useState(null)
-
-  const loadVideo = () => {
-    // const youTubePlayer = new YT.Player(`youtube-player-${videoID}`, {
-    //   videoId: videoID,
-    //   events: {
-    //     onStateChange: onPlayerStateChange,
-    //   },
-    // })
-
-    // setPlayer(youTubePlayer)
-  }
 
   useEffect(() => {
     const win = window as any
     if (!win.YT) {
+      const win = window as any
       const tag = document.createElement('script')
       tag.src = 'https://www.youtube.com/iframe_api'
-      win.onYouTubeIframeAPIReady = loadVideo
+      win.onYouTubeIframeAPIReady = loadPlayer
       const firstScriptTag = document.getElementsByTagName('script')[0]
       firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag)
     } else {
-      loadVideo()
+      loadPlayer()
     }
-  }, [loadVideo])
+  }, [])
 
-  const onPlayerStateChange = (event: any) => {
-    console.log('TODO: player state change')
+  const loadPlayer = () => {
+    const youTubePlayer = new YT.Player('player')
+    setPlayer(youTubePlayer)
   }
 
-  const onPlay = () => {
-    console.log('TODO: play button clicked')
-    setIsPlaying(true)
+  const loadVideo = (id: string) => {
+    if (!player) {
+      return
+    }
+    player.loadVideoById(id)
+    setVideoID(id)
   }
 
-  const onStop = () => {
-    console.log('TODO: stop button clicked')
-    setIsPlaying(false)
-  }
-
-  const onReset = () => {
-    console.log('TODO: reset button clicked')
-  }
-
-  const onClear = () => {
-    console.log('TODO: clear button clicked')
+  const onSearch = () => {
+    const currentSearchVal = searchInputRef.current!.value
+    if (currentSearchVal && player) {
+      // TODO: Parsing of the url
+      // loadVideo(currentSearchVal)
+      // Dev code
+      // loadVideo()
+      loadVideo('hxsld16TjSU')
+    }
   }
 
   const onSearchboxKeyDown = (event: React.KeyboardEvent) => {
@@ -120,38 +127,14 @@ const VideoLooper = () => {
     }
   }
 
-  const onSearch = () => {
-    console.log(
-      `TODO: handle search. Current val: ${searchInputRef.current!.value}`
-    )
-  }
-
   return (
     <VideoCard gridArea="videoLooper">
-      {videoID ? (
-        <Video id={`youtube-player-${videoID}`} />
-      ) : (
-        <NoVideoPlaceholder />
-      )}
-
-      <ControlsContainer>
-        <CircleIconButton
-          iconName={MdOutlineRestartAlt}
-          size={ButtonSize.LARGE}
-          onClick={onReset}
-          ariaLabel="Reset video looper button"
-        />
-        <PlayStopButton
-          isPlaying={isPlaying}
-          onClick={isPlaying ? onStop : onPlay}
-        />
-        <CircleIconButton
-          iconName={MdDelete}
-          size={ButtonSize.LARGE}
-          onClick={onClear}
-          ariaLabel="Clear video looper button"
-        />
-      </ControlsContainer>
+      <VideoContainer>
+        <Video id="player" isVisible={!!videoID} />
+        <NoVideoContainer isVisible={!videoID}>
+          <BodyText>{t('video_looper.placeholder')}</BodyText>
+        </NoVideoContainer>
+      </VideoContainer>
 
       <BottomControlsContainer>
         <SearchContainer>
