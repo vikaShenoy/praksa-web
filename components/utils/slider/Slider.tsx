@@ -7,7 +7,7 @@ const SliderInput = styled.input`
   appearance: none;
   width: 100%;
   height: ${SLIDER_HEIGHT};
-  background: ${(props) => props.theme.colors.disabled};
+  background: ${(props) => props.theme.colors.faded};
   border-radius: 1.5rem;
 
   &::-webkit-slider-thumb {

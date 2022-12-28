@@ -6,7 +6,7 @@ export interface ColorStyles {
   tertiary: string
   accent: string
   accentHover: string
-  disabled: string
+  faded: string
   icon: string
   text: {
     primary: string,
@@ -24,7 +24,7 @@ export const colors: ColorStyles = {
   tertiary: '#321A66',
   accent: '#87693B',
   accentHover: `#87693B$${hex75Opacity}`,
-  disabled: '#32264B',
+  faded: '#32264B',
   icon: '#FFFFFF',
   text: {
     primary: '#E0E0E0',

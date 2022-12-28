@@ -25,7 +25,7 @@ export const Card = styled.div<{ isMobile: boolean }>`
 `
 
 export const Input = styled.input`
-  background-color: ${(props) => props.theme.colors.disabled};
+  background-color: ${(props) => props.theme.colors.faded};
   font-family: ${(props) => props.theme.typography.font.body};
   font-size: ${(props) => props.theme.typography.size.sm};
   color: ${(props) => props.theme.colors.text.primary};

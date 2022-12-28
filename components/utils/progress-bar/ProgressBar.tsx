@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 const OuterBar = styled.div`
   height: ${PROGRESS_BAR_HEIGHT};
   width: 100%;
-  background-color: ${(props) => props.theme.colors.disabled};
+  background-color: ${(props) => props.theme.colors.faded};
   border-radius: 1.5rem;
 `
 
