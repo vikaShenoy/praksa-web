@@ -17,7 +17,7 @@ const VideoContainer = styled.div`
   position: relative;
 
   height: 100%;
-  min-height: 250px;
+  min-height: 225px;
   width: 100%;
 
   border-radius: 1rem;
@@ -102,22 +102,28 @@ const VideoLooper = () => {
     setPlayer(youTubePlayer)
   }
 
-  const loadVideo = (id: string) => {
+  const loadVideo = (url: string) => {
     if (!player) {
       return
     }
-    player.loadVideoById(id)
-    setVideoID(id)
+
+    const videoId = url.split('=')[1]
+    if (videoId) {
+      try {
+        player.loadVideoById(videoId)
+        setVideoID(videoId)
+      } catch (error) {
+        // TODO: Show some kind of error message
+      }
+    } else {
+      // TODO: Show some kind of error message
+    }
   }
 
   const onSearch = () => {
     const currentSearchVal = searchInputRef.current!.value
     if (currentSearchVal && player) {
-      // TODO: Parsing of the url
-      // loadVideo(currentSearchVal)
-      // Dev code
-      // loadVideo()
-      loadVideo('hxsld16TjSU')
+      loadVideo(currentSearchVal)
     }
   }
 
