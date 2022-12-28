@@ -67,7 +67,12 @@ const Notes = () => {
       <BoldText>{t('notes.title')}</BoldText>
       {isEditing && (
         <>
-          <TextInput rows={10} ref={notesInput} defaultValue={notes} />
+          <TextInput
+            rows={10}
+            ref={notesInput}
+            defaultValue={notes}
+            role="textbox"
+          />
           <EditBtnContainer>
             <SecondaryBtn
               text={t('common.cancel')}
