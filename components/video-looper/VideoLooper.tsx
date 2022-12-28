@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { IoSearchSharp } from 'react-icons/io5'
 import { MdDelete, MdOutlineRestartAlt } from 'react-icons/md'
 import styled from 'styled-components'
+import { TABLET_BREAKPOINT } from '../../hooks/useResponsive'
 import { Card, Input } from '../../styles/wrappers/components'
 import CircleIconButton, {
   ButtonSize
@@ -10,20 +11,35 @@ import IconButton from '../buttons/icon-button/IconButton'
 import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton'
 
 const VideoCard = styled(Card)`
-  gap: ${(props) => props.theme.spacing.sm};
   flex-direction: column;
   justify-content: space-evenly;
+  gap: ${(props) => props.theme.spacing.sm};
+`
+
+const VideoAndControlsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  gap: ${(props) => props.theme.spacing.sm};
+
+  @media (min-width: ${TABLET_BREAKPOINT}px) {
+    flex-direction: row;
+  }
 `
 
 const Video = styled.video`
   height: 100%;
+  max-width: 100%;
   align-self: flex-start;
 
   border-radius: 1rem;
   overflow: hidden;
 
-  width: 100%;
-  max-width: 100%;
+  flex: 1;
+  @media (min-width: ${TABLET_BREAKPOINT}px) {
+    flex: 9;
+  }
 `
 
 const ControlsContainer = styled.div`
@@ -31,6 +47,12 @@ const ControlsContainer = styled.div`
   align-items: center;
   justify-content: space-evenly;
   width: 100%;
+
+  @media (min-width: ${TABLET_BREAKPOINT}px) {
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
 `
 
 const SearchContainer = styled.div`
@@ -100,6 +122,16 @@ const VideoLooper = () => {
     console.log('TODO: search button clicked')
   }
 
+  const onPlay = () => {
+    console.log('TODO: play button clicked')
+    setIsPlaying(true)
+  }
+
+  const onStop = () => {
+    console.log('TODO: stop button clicked')
+    setIsPlaying(false)
+  }
+
   const onReset = () => {
     console.log('TODO: reset button clicked')
   }
@@ -110,26 +142,28 @@ const VideoLooper = () => {
 
   return (
     <VideoCard gridArea="videoLooper">
-      <Video id={`youtube-player-${id}`} />
+      <VideoAndControlsWrapper>
+        <Video id={`youtube-player-${id}`} />
 
-      <ControlsContainer>
-        <PlayStopButton
-          isPlaying={isPlaying}
-          onClick={() => setIsPlaying((prev) => !prev)}
-        />
-        <CircleIconButton
-          iconName={MdOutlineRestartAlt}
-          size={ButtonSize.LARGE}
-          onClick={onReset}
-          ariaLabel="Reset video looper button"
-        />
-        <CircleIconButton
-          iconName={MdDelete}
-          size={ButtonSize.LARGE}
-          onClick={onClear}
-          ariaLabel="Clear video looper button"
-        />
-      </ControlsContainer>
+        <ControlsContainer>
+          <PlayStopButton
+            isPlaying={isPlaying}
+            onClick={isPlaying ? onStop : onPlay}
+          />
+          <CircleIconButton
+            iconName={MdOutlineRestartAlt}
+            size={ButtonSize.LARGE}
+            onClick={onReset}
+            ariaLabel="Reset video looper button"
+          />
+          <CircleIconButton
+            iconName={MdDelete}
+            size={ButtonSize.LARGE}
+            onClick={onClear}
+            ariaLabel="Clear video looper button"
+          />
+        </ControlsContainer>
+      </VideoAndControlsWrapper>
 
       <BottomControlsContainer>
         <SearchContainer>
