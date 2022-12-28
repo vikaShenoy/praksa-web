@@ -93,7 +93,7 @@ const VideoLooper = () => {
   }
 
   return (
-    <VideoCard isMobile={isMobile}>
+    <VideoCard gridArea='videoLooper'>
       {/* <Video
         src="https://www.youtube.com/embed/PbrP9RbSIWo"
         title="YouTube video player"

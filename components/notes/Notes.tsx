@@ -6,7 +6,7 @@ import { Card } from '../../styles/wrappers/components'
 import { BodyText, BoldText } from '../../styles/wrappers/fonts'
 import SecondaryBtn from '../buttons/secondary-btn/SecondaryBtn'
 
-const NotesCard = styled(Card)<{ isMobile: boolean; spaceBetween: boolean }>`
+const NotesCard = styled(Card)<{ spaceBetween: boolean }>`
   gap: ${(props) => props.theme.spacing.lg};
   justify-content: flex-start;
 `
@@ -66,7 +66,7 @@ const Notes = () => {
 
   return (
     <NotesCard
-      isMobile={isMobile}
+      gridArea='notes'
       spaceBetween={!isEditing && notes.length > 0}
     >
       <BoldText>{t('notes.title')}</BoldText>

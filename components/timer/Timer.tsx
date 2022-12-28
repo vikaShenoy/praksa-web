@@ -94,7 +94,7 @@ const Timer = ({
   }, [secondsRemaining])
 
   return (
-    <Card isMobile={isMobile}>
+    <Card gridArea='timer'>
       {isEditingTime ? (
         <TimeInput onEnter={onTimeEntered} />
       ) : (

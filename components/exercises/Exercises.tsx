@@ -104,7 +104,7 @@ const Exercises = () => {
   }
 
   return (
-    <ExercisesCard isMobile={isMobile}>
+    <ExercisesCard gridArea='exercises'>
       <BoldText>{t('exercises.title')}</BoldText>
 
       <ExerciseContext.Provider

@@ -9,7 +9,7 @@ const Tuner = () => {
   const resolution = useResponsive()
   const isMobile = resolution === Resolution.Mobile
   return (
-    <TunerCard isMobile={isMobile}>
+    <TunerCard gridArea="tuner">
       <BoldText>Tuner (coming soon)</BoldText>
     </TunerCard>
   )

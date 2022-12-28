@@ -39,7 +39,7 @@ const Metronome = () => {
   }
 
   return (
-    <Card isMobile={isMobile}>
+    <Card gridArea='metronome'>
       <BoldText aria-label="tempo-label">{bpm.toString()}</BoldText>
       <SliderWrapper>
         <IconButton

@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
-export const Card = styled.div<{ isMobile: boolean }>`
+export const Card = styled.div<{ gridArea: string }>`
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
-  
   flex: 1;
+
+  grid-area: ${(props) => props.gridArea};
 
   min-height: 400px;
   height: 500px;
@@ -20,7 +21,6 @@ export const Card = styled.div<{ isMobile: boolean }>`
   &:hover {
     box-shadow: ${(props) => props.theme.shadows.mdDark};
   };
-
   transition: box-shadow 0.2s;
 `
 
