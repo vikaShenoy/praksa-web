@@ -3,6 +3,7 @@ import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 import styled from 'styled-components'
 import useMetronomeRunner from '../../hooks/useMetronomeRunner'
 import { Resolution, useResponsive } from '../../hooks/useResponsive'
+import { SLIDER_HEIGHT } from '../../styles/size'
 import { Card } from '../../styles/wrappers/components'
 import { CenteredFlexRow } from '../../styles/wrappers/containers'
 import { BoldText } from '../../styles/wrappers/fonts'
@@ -14,7 +15,7 @@ import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton'
 import Slider from '../utils/slider/Slider'
 
 const SliderWrapper = styled.div`
-  height: ${(props) => props.theme.sizes.components.sliderHeight};
+  height: ${SLIDER_HEIGHT};
   display: flex;
   align-items: center;
   width: 100%;

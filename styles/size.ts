@@ -1,0 +1,1 @@
+export const SLIDER_HEIGHT = '0.75rem'

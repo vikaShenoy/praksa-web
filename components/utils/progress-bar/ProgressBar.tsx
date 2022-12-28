@@ -1,26 +1,28 @@
 import { useMemo, useRef } from 'react'
 import styled from 'styled-components'
 
+const PROGRESS_BAR_HEIGHT = '1.5rem'
+
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: ${(props) => props.theme.sizes.components.progressBarHeight};
+  height: ${PROGRESS_BAR_HEIGHT};
   margin: ${(props) => props.theme.spacing.lg} 0;
 `
 
 const OuterBar = styled.div`
-  height: ${(props) => props.theme.sizes.components.progressBarHeight};
+  height: ${PROGRESS_BAR_HEIGHT};
   width: 100%;
   background-color: ${(props) => props.theme.colors.disabled};
-  border-radius: ${(props) => props.theme.sizes.borderRadius};
+  border-radius: 1.5rem;
 `
 
 const InnerBar = styled.div<{ width: number; fullBar: boolean }>`
-  height: ${(props) => props.theme.sizes.components.progressBarHeight};
+  height: ${PROGRESS_BAR_HEIGHT};
   width: ${(props) => (props.fullBar ? '100%' : `${props.width}%`)};
   background-color: ${(props) => props.theme.colors.secondary};
-  border-radius: ${(props) => props.theme.sizes.borderRadius};
+  border-radius: 1.5rem;
 
   transition: width 0.2s;
 `

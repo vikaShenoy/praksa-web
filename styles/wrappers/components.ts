@@ -10,10 +10,10 @@ export const Card = styled.div<{ isMobile: boolean }>`
 
   min-height: 400px;
   height: 500px;
-  min-width: ${(props) => props.theme.sizes.components.minCardWidth};
+  min-width: 20rem;
 
   background: ${(props) => props.theme.colors.primary};
-  border-radius: ${(props) => props.theme.sizes.borderRadius};
+  border-radius: 1.5rem;
   box-shadow: ${(props) => props.theme.shadows.md};
   padding: ${(props) => props.theme.spacing.xxl} ${(props) => props.theme.spacing.md};
 
