@@ -14,11 +14,11 @@
   },
   "notes": {
     "title": "Notes",
-    "prompt": "Add practice notes here!"
+    "prompt": "Add practice notes here"
   },
   "exercises": {
     "title": "Exercises",
-    "prompt": "Add exercises to track your progress!",
+    "prompt": "Add exercises to track your progress",
     "form": {
       "name": "Exercise name",
       "currentBpm": "Current BPM",
@@ -29,6 +29,9 @@
       "title": "Delete exercise",
       "subtitle": "Are you sure you want to delete the exercise: {{ name }}?"
     }
+  },
+  "video_looper": {
+    "placeholder": "Load a video from YouTube using the searchbox below"
   },
   "errors": {
     "field_required": "This field is required"

@@ -9,6 +9,7 @@ import CircleIconButton, {
 } from '../buttons/circle-icon-button/CircleIconButton'
 import IconButton from '../buttons/icon-button/IconButton'
 import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton'
+import NoVideoPlaceholder from './no-video-placeholder/NoVideoPlaceholder'
 
 const VideoCard = styled(Card)`
   flex-direction: column;
@@ -19,8 +20,6 @@ const VideoCard = styled(Card)`
 const Video = styled.video`
   height: 100%;
   width: 100%;
-
-  align-self: flex-start;
 
   border-radius: 1rem;
   overflow: hidden;
@@ -67,17 +66,17 @@ const VideoLooper = () => {
   const [isPlaying, setIsPlaying] = useState(false)
   const searchInputRef = useRef<HTMLInputElement>(null)
 
-  const [videoID, setVideoID] = useState('PbrP9RbSIWo')
+  const [videoID, setVideoID] = useState(null)
 
   const loadVideo = () => {
-    const youTubePlayer = new YT.Player(`youtube-player-${videoID}`, {
-      videoId: videoID,
-      events: {
-        onStateChange: onPlayerStateChange,
-      },
-    })
+    // const youTubePlayer = new YT.Player(`youtube-player-${videoID}`, {
+    //   videoId: videoID,
+    //   events: {
+    //     onStateChange: onPlayerStateChange,
+    //   },
+    // })
 
-    setPlayer(youTubePlayer)
+    // setPlayer(youTubePlayer)
   }
 
   useEffect(() => {
@@ -85,9 +84,7 @@ const VideoLooper = () => {
     if (!win.YT) {
       const tag = document.createElement('script')
       tag.src = 'https://www.youtube.com/iframe_api'
-
       win.onYouTubeIframeAPIReady = loadVideo
-
       const firstScriptTag = document.getElementsByTagName('script')[0]
       firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag)
     } else {
@@ -131,18 +128,22 @@ const VideoLooper = () => {
 
   return (
     <VideoCard gridArea="videoLooper">
-      <Video id={`youtube-player-${videoID}`} />
+      {videoID ? (
+        <Video id={`youtube-player-${videoID}`} />
+      ) : (
+        <NoVideoPlaceholder />
+      )}
 
       <ControlsContainer>
-        <PlayStopButton
-          isPlaying={isPlaying}
-          onClick={isPlaying ? onStop : onPlay}
-        />
         <CircleIconButton
           iconName={MdOutlineRestartAlt}
           size={ButtonSize.LARGE}
           onClick={onReset}
           ariaLabel="Reset video looper button"
+        />
+        <PlayStopButton
+          isPlaying={isPlaying}
+          onClick={isPlaying ? onStop : onPlay}
         />
         <CircleIconButton
           iconName={MdDelete}
