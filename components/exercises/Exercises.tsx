@@ -1,9 +1,8 @@
 import { FormikHelpers } from 'formik'
 import { createContext, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import styled, { useTheme } from 'styled-components'
+import styled from 'styled-components'
 import { v4 as uuidv4 } from 'uuid'
-import useMediaQuery from '../../hooks/useMediaQuery'
 import { Exercise } from '../../models/Exercise'
 import { Card } from '../../styles/wrappers/components'
 import { BoldText } from '../../styles/wrappers/fonts'
@@ -14,7 +13,7 @@ import CreateEditExercise, {
 import ViewExercises from './view-exercises/ViewExercises'
 
 const ExercisesCard = styled(Card)`
-  gap: ${(props) => props.theme.spacing.lg};
+  gap: ${(props) => props.theme.spacing.md};
   justify-content: flex-start;
 `
 
@@ -40,8 +39,7 @@ export const useExerciseContext = () => {
 
 const Exercises = () => {
   const { t } = useTranslation()
-  const theme = useTheme()
-  let isMobile = useMediaQuery(theme.sizes.breakpoints.sm)
+
   const [exercises, setExercises] = useState<Exercise[]>([])
 
   const [isCreating, setIsCreating] = useState(false)
@@ -103,7 +101,7 @@ const Exercises = () => {
   }
 
   return (
-    <ExercisesCard isMobile={isMobile}>
+    <ExercisesCard gridArea="exercises">
       <BoldText>{t('exercises.title')}</BoldText>
 
       <ExerciseContext.Provider

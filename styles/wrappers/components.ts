@@ -1,38 +1,42 @@
 import styled from "styled-components";
+import { TABLET_BREAKPOINT } from "../../hooks/useResponsive";
 
-export const Card = styled.div<{ isMobile: boolean }>`
+export const Card = styled.div<{ gridArea: string }>`
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
-  
-  flex: 1;
 
-  min-height: 400px;
-  height: 500px;
-  min-width: ${(props) => props.theme.sizes.components.minCardWidth};
+  grid-area: ${(props) => props.gridArea};
+  
+  min-height: 500px;
 
   background: ${(props) => props.theme.colors.primary};
-  border-radius: ${(props) => props.theme.sizes.borderRadius};
+  border-radius: 1.5rem;
   box-shadow: ${(props) => props.theme.shadows.md};
-  padding: ${(props) => props.theme.spacing.xxl} ${(props) => props.theme.spacing.md};
-
+  
   &:hover {
     box-shadow: ${(props) => props.theme.shadows.mdDark};
   };
-
   transition: box-shadow 0.2s;
+
+  padding: ${(props) => props.theme.spacing.sm};
+  @media (min-width: ${TABLET_BREAKPOINT}px) {
+    padding: ${(props) => props.theme.spacing.lg};
+  };
 `
 
 export const Input = styled.input`
-  background-color: ${(props) => props.theme.colors.disabled};
+  background-color: ${(props) => props.theme.colors.faded};
   font-family: ${(props) => props.theme.typography.font.body};
   font-size: ${(props) => props.theme.typography.size.sm};
   color: ${(props) => props.theme.colors.text.primary};
-  height: 3rem;
+  height: 2.5rem;
   padding: 0.5rem 1rem;
   outline: none;
   border: none;
+
+  position: relative;
 
   width: 100%;
 

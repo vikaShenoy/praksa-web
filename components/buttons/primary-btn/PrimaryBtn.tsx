@@ -41,6 +41,7 @@ const PrimaryBtn: React.FC<PrimaryBtnProps> = ({
       disabled={disabled}
       type={isSubmitBtn ? 'submit' : 'button'}
       isFluid={isFluid}
+      role="button"
     >
       <BodyText uppercase>{text}</BodyText>
     </Button>

@@ -1,9 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { MdOutlineRestartAlt } from 'react-icons/md'
-import { useTheme } from 'styled-components'
-import useMediaQuery from '../../hooks/useMediaQuery'
+import styled from 'styled-components'
 import { Card } from '../../styles/wrappers/components'
-import { CenteredFlexRow } from '../../styles/wrappers/containers'
 import { BoldText } from '../../styles/wrappers/fonts'
 import { DEFAULT_COUNTDOWN_TIME } from '../../utils/constants'
 import IconButton, {
@@ -13,13 +11,17 @@ import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton'
 import ProgressBar from '../utils/progress-bar/ProgressBar'
 import TimeInput from '../utils/time-input/TimeInput'
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: ${(props) => props.theme.spacing.md};
+`
+
 const Timer = ({
   initialTime = DEFAULT_COUNTDOWN_TIME,
 }: {
   initialTime?: number
 }) => {
-  const theme = useTheme()
-  let isMobile = useMediaQuery(theme.sizes.breakpoints.sm)
   const [totalSeconds, setTotalSeconds] = useState(initialTime)
   const [secondsRemaining, setSecondsRemaining] = useState(totalSeconds)
   const [isEditingTime, setIsEditingTime] = useState(false)
@@ -95,7 +97,7 @@ const Timer = ({
   }, [secondsRemaining])
 
   return (
-    <Card isMobile={isMobile}>
+    <Card gridArea="timer">
       {isEditingTime ? (
         <TimeInput onEnter={onTimeEntered} />
       ) : (
@@ -104,7 +106,7 @@ const Timer = ({
         </BoldText>
       )}
       <ProgressBar currentVal={secondsRemaining} maxVal={totalSeconds} />
-      <CenteredFlexRow gap={24}>
+      <ButtonContainer>
         <PlayStopButton
           isPlaying={isPlaying}
           onClick={() => (isPlaying ? stopTimer() : startTimer())}
@@ -115,7 +117,7 @@ const Timer = ({
           onClick={resetTimer}
           ariaLabel="reset-timer-button"
         />
-      </CenteredFlexRow>
+      </ButtonContainer>
     </Card>
   )
 }

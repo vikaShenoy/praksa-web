@@ -9,6 +9,7 @@ export interface TypographyStyles {
     sm: string
     smmd: string
     md: string
+    mdlg: string
     lg: string
   }
   font: {
@@ -28,6 +29,7 @@ export const typography: TypographyStyles = {
     sm: '1rem',
     smmd: '1.5rem',
     md: '2rem',
+    mdlg: '2.5rem',
     lg: '3rem',
   },
   font: {

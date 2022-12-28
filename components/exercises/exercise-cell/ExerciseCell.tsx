@@ -21,7 +21,7 @@ const MainRow = styled.div`
   align-items: center;
   justify-content: center;
 
-  background-color: ${(props) => props.theme.colors.disabled};
+  background-color: ${(props) => props.theme.colors.faded};
   width: 80%;
   height: 100%;
 `

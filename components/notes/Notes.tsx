@@ -1,20 +1,20 @@
 import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import styled, { useTheme } from 'styled-components'
-import useMediaQuery from '../../hooks/useMediaQuery'
+import styled from 'styled-components'
 import { Card } from '../../styles/wrappers/components'
 import { BodyText, BoldText } from '../../styles/wrappers/fonts'
 import SecondaryBtn from '../buttons/secondary-btn/SecondaryBtn'
 
-const NotesCard = styled(Card)<{ isMobile: boolean; spaceBetween: boolean }>`
-  gap: ${(props) => props.theme.spacing.lg};
+const NotesCard = styled(Card)<{ spaceBetween: boolean }>`
+  gap: ${(props) => props.theme.spacing.md};
   justify-content: flex-start;
 `
 
 const TextInput = styled.textarea`
   width: 100%;
+  height: 100%;
   padding: ${(props) => props.theme.spacing.sm};
-  background-color: ${(props) => props.theme.colors.disabled};
+  background-color: ${(props) => props.theme.colors.faded};
   resize: none;
 
   border: none;
@@ -46,12 +46,10 @@ const EditBtnContainer = styled.div`
 `
 
 const Notes = () => {
-  const theme = useTheme()
   const { t } = useTranslation()
   const [isEditing, setIsEditing] = useState(false)
   const [notes, setNotes] = useState('')
   const notesInput = useRef<HTMLTextAreaElement>(null)
-  let isMobile = useMediaQuery(theme.sizes.breakpoints.sm)
 
   const onSave = () => {
     if (
@@ -65,14 +63,16 @@ const Notes = () => {
   }
 
   return (
-    <NotesCard
-      isMobile={isMobile}
-      spaceBetween={!isEditing && notes.length > 0}
-    >
+    <NotesCard gridArea="notes" spaceBetween={!isEditing && notes.length > 0}>
       <BoldText>{t('notes.title')}</BoldText>
       {isEditing && (
         <>
-          <TextInput rows={10} ref={notesInput} defaultValue={notes} />
+          <TextInput
+            rows={10}
+            ref={notesInput}
+            defaultValue={notes}
+            role="textbox"
+          />
           <EditBtnContainer>
             <SecondaryBtn
               text={t('common.cancel')}

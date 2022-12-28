@@ -7,15 +7,7 @@ import { ErrorText, Label } from '../../../styles/wrappers/fonts'
 import PrimaryBtn from '../../buttons/primary-btn/PrimaryBtn'
 
 const FormWrapper = styled(Form)`
-  /* display: flex;
-  flex-direction: column;
-  gap: ${(props) => props.theme.spacing.sm};
-  width: 100%; */
-
   display: grid;
-  height: 100%;
-  row-gap: ${(props) => props.theme.spacing.xs};
-  column-gap: ${(props) => props.theme.spacing.xs};
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
   grid-template-areas:
@@ -23,8 +15,12 @@ const FormWrapper = styled(Form)`
     'currentBpm targetBpm'
     'duration .'
     'btns btns';
+
+  row-gap: ${(props) => props.theme.spacing.xs};
+  column-gap: ${(props) => props.theme.spacing.xs};
+
+  height: 100%;
   width: 100%;
-  /* max-width: 50px; */
 `
 
 const FieldPair = styled.div`
