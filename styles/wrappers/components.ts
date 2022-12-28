@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { TABLET_BREAKPOINT } from "../../hooks/useResponsive";
-import { NAVBAR_HEIGHT } from "../size";
 
 export const Card = styled.div<{ gridArea: string }>`
   display: flex;
@@ -9,8 +8,8 @@ export const Card = styled.div<{ gridArea: string }>`
   justify-content: space-between;
 
   grid-area: ${(props) => props.gridArea};
-
-  min-height: calc(50vh - ${NAVBAR_HEIGHT});
+  
+  min-height: 500px;
 
   background: ${(props) => props.theme.colors.primary};
   border-radius: 1.5rem;

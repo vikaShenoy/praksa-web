@@ -8,14 +8,11 @@ import Timer from '../components/timer/Timer'
 import Tuner from '../components/tuner/Tuner'
 import VideoLooper from '../components/video-looper/VideoLooper'
 import { DESKTOP_BREAKPOINT, TABLET_BREAKPOINT } from '../hooks/useResponsive'
-import { NAVBAR_HEIGHT } from '../styles/size'
 
 const HomepageGrid = styled.section`
   display: grid;
   gap: ${(props) => props.theme.spacing.xs};
   padding: ${(props) => props.theme.spacing.xs};
-
-  /* height: calc(100vh - ${NAVBAR_HEIGHT}); */
 
   grid-auto-columns: minmax(0, 1fr);
   grid-auto-flow: column;
@@ -42,6 +39,7 @@ const HomepageGrid = styled.section`
   }
 
   @media (min-width: ${DESKTOP_BREAKPOINT}px) {
+    grid-template-rows: 1fr 1.25fr;
     grid-template-areas:
       'metronome timer exercises notes'
       'videoLooper videoLooper tuner tuner';
