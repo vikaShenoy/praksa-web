@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import useMetronomeRunner from '../../hooks/useMetronomeRunner'
 import { SLIDER_HEIGHT } from '../../styles/size'
 import { Card } from '../../styles/wrappers/components'
-import { CenteredFlexRow } from '../../styles/wrappers/containers'
 import { BoldText } from '../../styles/wrappers/fonts'
 import { DEFAULT_BPM, MAX_BPM, MIN_BPM } from '../../utils/constants'
 import IconButton, {
@@ -36,7 +35,7 @@ const Metronome = () => {
   }
 
   return (
-    <Card gridArea='metronome'>
+    <Card gridArea="metronome">
       <BoldText aria-label="tempo-label">{bpm.toString()}</BoldText>
       <SliderWrapper>
         <IconButton
@@ -64,12 +63,10 @@ const Metronome = () => {
           ariaLabel="plus"
         />
       </SliderWrapper>
-      <CenteredFlexRow gap={24}>
-        <PlayStopButton
-          onClick={() => setIsPlaying((prev) => !prev)}
-          isPlaying={isPlaying}
-        />
-      </CenteredFlexRow>
+      <PlayStopButton
+        onClick={() => setIsPlaying((prev) => !prev)}
+        isPlaying={isPlaying}
+      />
     </Card>
   )
 }

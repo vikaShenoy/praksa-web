@@ -1,27 +1,49 @@
 import { useEffect, useState } from 'react'
 import { IoSearchSharp } from 'react-icons/io5'
+import { MdDelete, MdOutlineRestartAlt } from 'react-icons/md'
 import styled from 'styled-components'
 import { Card, Input } from '../../styles/wrappers/components'
+import CircleIconButton, {
+  ButtonSize
+} from '../buttons/circle-icon-button/CircleIconButton'
 import IconButton from '../buttons/icon-button/IconButton'
+import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton'
 
 const VideoCard = styled(Card)`
-  flex-direction: row;
   gap: ${(props) => props.theme.spacing.sm};
+  flex-direction: column;
+  justify-content: space-evenly;
+`
+
+const TopWrapper = styled.div`
+  display: flex;
+  gap: ${(props) => props.theme.spacing.sm};
+
+  height: 100%;
+  width: 100%;
 `
 
 const Video = styled.video`
-  /* height: 200px; */
-  width: 50%;
   height: 100%;
-  flex: 1.5;
+  align-self: flex-start;
+  flex: 9;
+
   border-radius: 1rem;
   overflow: hidden;
 `
 
+const ControlsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  flex: 1;
+`
+
 const SearchContainer = styled.div`
-  position: relative;
   display: flex;
   align-items: center;
+  position: relative;
 `
 
 const SearchIconWrapper = styled.div`
@@ -30,14 +52,10 @@ const SearchIconWrapper = styled.div`
   cursor: pointer;
 `
 
-const VideoControlsContainer = styled.div`
+const BottomControlsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-
-  height: 100%;
-
-  flex: 1;
+  width: 100%;
 `
 
 enum YTPlayerStates {
@@ -47,6 +65,7 @@ enum YTPlayerStates {
 
 const VideoLooper = () => {
   const [player, setPlayer] = useState<YT.Player | null>(null)
+  const [isPlaying, setIsPlaying] = useState(false)
 
   const id = 'PbrP9RbSIWo'
 
@@ -88,24 +107,47 @@ const VideoLooper = () => {
     console.log('TODO: search button clicked')
   }
 
+  const onReset = () => {
+    console.log('TODO: reset button clicked')
+  }
+
+  const onClear = () => {
+    console.log('TODO: clear button clicked')
+  }
+
   return (
-    <VideoCard gridArea='videoLooper'>
-      {/* <Video
-        src="https://www.youtube.com/embed/PbrP9RbSIWo"
-        title="YouTube video player"
-        ref={videoRef}
-        allowFullScreen
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      ></Video> */}
-      <Video id={`youtube-player-${id}`}></Video>
-      <VideoControlsContainer>
+    <VideoCard gridArea="videoLooper">
+      <TopWrapper>
+        <Video id={`youtube-player-${id}`}></Video>
+
+        <ControlsContainer>
+          <PlayStopButton
+            isPlaying={isPlaying}
+            onClick={() => setIsPlaying((prev) => !prev)}
+          />
+          <CircleIconButton
+            iconName={MdOutlineRestartAlt}
+            size={ButtonSize.LARGE}
+            onClick={onReset}
+            ariaLabel="Reset video looper button"
+          />
+          <CircleIconButton
+            iconName={MdDelete}
+            size={ButtonSize.LARGE}
+            onClick={onClear}
+            ariaLabel="Clear video looper button"
+          />
+        </ControlsContainer>
+      </TopWrapper>
+
+      <BottomControlsContainer>
         <SearchContainer>
           <Input />
           <SearchIconWrapper>
             <IconButton iconName={IoSearchSharp} onClick={onSearch} />
           </SearchIconWrapper>
         </SearchContainer>
-      </VideoControlsContainer>
+      </BottomControlsContainer>
     </VideoCard>
   )
 }

@@ -6,12 +6,13 @@ import { BodyText, BoldText } from '../../styles/wrappers/fonts'
 import SecondaryBtn from '../buttons/secondary-btn/SecondaryBtn'
 
 const NotesCard = styled(Card)<{ spaceBetween: boolean }>`
-  gap: ${(props) => props.theme.spacing.lg};
+  gap: ${(props) => props.theme.spacing.md};
   justify-content: flex-start;
 `
 
 const TextInput = styled.textarea`
   width: 100%;
+  height: 100%;
   padding: ${(props) => props.theme.spacing.sm};
   background-color: ${(props) => props.theme.colors.faded};
   resize: none;

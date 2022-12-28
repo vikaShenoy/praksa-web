@@ -14,7 +14,7 @@ export const Card = styled.div<{ gridArea: string }>`
   background: ${(props) => props.theme.colors.primary};
   border-radius: 1.5rem;
   box-shadow: ${(props) => props.theme.shadows.md};
-  padding: ${(props) => props.theme.spacing.xxl} ${(props) => props.theme.spacing.md};
+  padding: ${(props) => props.theme.spacing.lg} ${(props) => props.theme.spacing.md};
 
   &:hover {
     box-shadow: ${(props) => props.theme.shadows.mdDark};
