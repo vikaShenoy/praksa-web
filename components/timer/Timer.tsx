@@ -5,7 +5,7 @@ import { Card } from '../../styles/wrappers/components'
 import { BoldText } from '../../styles/wrappers/fonts'
 import { DEFAULT_COUNTDOWN_TIME } from '../../utils/constants'
 import IconButton, {
-  ButtonSize
+  ButtonSize,
 } from '../buttons/circle-icon-button/CircleIconButton'
 import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton'
 import ProgressBar from '../utils/progress-bar/ProgressBar'
@@ -107,16 +107,16 @@ const Timer = ({
       )}
       <ProgressBar currentVal={secondsRemaining} maxVal={totalSeconds} />
       <ButtonContainer>
-      <PlayStopButton
-        isPlaying={isPlaying}
-        onClick={() => (isPlaying ? stopTimer() : startTimer())}
-      />
-      <IconButton
-        iconName={MdOutlineRestartAlt}
-        size={ButtonSize.LARGE}
-        onClick={resetTimer}
-        ariaLabel="reset-timer-button"
-      />
+        <PlayStopButton
+          isPlaying={isPlaying}
+          onClick={() => (isPlaying ? stopTimer() : startTimer())}
+        />
+        <IconButton
+          iconName={MdOutlineRestartAlt}
+          size={ButtonSize.LARGE}
+          onClick={resetTimer}
+          ariaLabel="reset-timer-button"
+        />
       </ButtonContainer>
     </Card>
   )

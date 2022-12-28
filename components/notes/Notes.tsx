@@ -63,10 +63,7 @@ const Notes = () => {
   }
 
   return (
-    <NotesCard
-      gridArea='notes'
-      spaceBetween={!isEditing && notes.length > 0}
-    >
+    <NotesCard gridArea="notes" spaceBetween={!isEditing && notes.length > 0}>
       <BoldText>{t('notes.title')}</BoldText>
       {isEditing && (
         <>

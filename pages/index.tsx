@@ -21,7 +21,6 @@ const HomepageGrid = styled.section`
   grid-auto-flow: column;
 
   grid-auto-rows: minmax(0, 1fr);
-  
 
   // Mobile
   grid-template-areas:
@@ -34,7 +33,7 @@ const HomepageGrid = styled.section`
 
   @media (min-width: ${TABLET_BREAKPOINT}px) {
     gap: ${(props) => props.theme.spacing.sm};
-  padding: ${(props) => props.theme.spacing.sm};
+    padding: ${(props) => props.theme.spacing.sm};
     grid-template-areas:
       'metronome timer'
       'exercises notes'

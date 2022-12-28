@@ -7,7 +7,7 @@ import { Exercise } from '../../models/Exercise'
 import { Card } from '../../styles/wrappers/components'
 import { BoldText } from '../../styles/wrappers/fonts'
 import CreateEditExercise, {
-  ExerciseForm
+  ExerciseForm,
 } from './create-edit-exercise/CreateEditExercise'
 
 import ViewExercises from './view-exercises/ViewExercises'
@@ -101,7 +101,7 @@ const Exercises = () => {
   }
 
   return (
-    <ExercisesCard gridArea='exercises'>
+    <ExercisesCard gridArea="exercises">
       <BoldText>{t('exercises.title')}</BoldText>
 
       <ExerciseContext.Provider

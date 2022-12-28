@@ -11,10 +11,10 @@ const FormWrapper = styled(Form)`
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
   grid-template-areas:
-  'name name'
-  'currentBpm targetBpm'
-  'duration .'
-  'btns btns';
+    'name name'
+    'currentBpm targetBpm'
+    'duration .'
+    'btns btns';
 
   row-gap: ${(props) => props.theme.spacing.xs};
   column-gap: ${(props) => props.theme.spacing.xs};
