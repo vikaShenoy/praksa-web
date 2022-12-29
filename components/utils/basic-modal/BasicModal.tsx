@@ -43,6 +43,7 @@ interface BasicModalProps {
   subtitle: string
   onCancel: () => void
   onConfirm: () => void
+  ariaHide?: boolean
 }
 
 const BasicModal: React.FC<BasicModalProps> = ({
@@ -51,9 +52,10 @@ const BasicModal: React.FC<BasicModalProps> = ({
   subtitle,
   onCancel,
   onConfirm,
+  ariaHide
 }) => {
   return (
-    <Modal isOpen={isOpen} onRequestClose={onCancel} style={modalStyles}>
+    <Modal isOpen={isOpen} onRequestClose={onCancel} style={modalStyles} ariaHideApp={!ariaHide}>
       <ModalContent>
         <BoldText>{title}</BoldText>
         <MarginWrapper value={16}>
