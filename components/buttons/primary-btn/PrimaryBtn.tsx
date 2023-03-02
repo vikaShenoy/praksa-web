@@ -8,7 +8,7 @@ const Button = styled.button<{ isFluid?: boolean }>`
   background-color: ${(props) => props.theme.colors.secondary};
   border: none;
   cursor: pointer;
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,7 +42,7 @@ const PrimaryBtn: React.FC<PrimaryBtnProps> = ({
   isSubmitBtn,
   isFluid,
   children,
-  lowercase
+  lowercase,
 }) => {
   return (
     <Button

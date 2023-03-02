@@ -22,7 +22,7 @@ describe('Basic modal component', () => {
       subtitle,
       onConfirm,
       onCancel,
-      ariaHide: true
+      ariaHide: true,
     }
 
     render(

@@ -52,10 +52,15 @@ const BasicModal: React.FC<BasicModalProps> = ({
   subtitle,
   onCancel,
   onConfirm,
-  ariaHide
+  ariaHide,
 }) => {
   return (
-    <Modal isOpen={isOpen} onRequestClose={onCancel} style={modalStyles} ariaHideApp={!ariaHide}>
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={onCancel}
+      style={modalStyles}
+      ariaHideApp={!ariaHide}
+    >
       <ModalContent>
         <BoldText>{title}</BoldText>
         <MarginWrapper value={16}>

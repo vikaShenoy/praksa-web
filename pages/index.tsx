@@ -62,10 +62,8 @@ const Centered = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width:20vw;
+  width: 20vw;
 `
-
-const SignInButton = styled.button``
 
 const Home: NextPage = () => {
   const { data: session } = useSession()
