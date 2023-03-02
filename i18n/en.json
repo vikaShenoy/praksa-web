@@ -31,7 +31,7 @@
     }
   },
   "video_looper": {
-    "placeholder": "Load a video from YouTube using the searchbox below"
+    "placeholder": "Paste a YouTube URL into the searchbox below to load a video"
   },
   "errors": {
     "field_required": "This field is required"

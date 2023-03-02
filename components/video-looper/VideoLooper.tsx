@@ -55,6 +55,8 @@ const NoVideoContainer = styled.div<{ isVisible: boolean }>`
   right: 0;
   bottom: 0;
 
+  padding: ${(props) => props.theme.spacing.md};
+
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
 `
