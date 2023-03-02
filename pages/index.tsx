@@ -1,6 +1,10 @@
 import type { NextPage } from 'next'
+import { useSession } from 'next-auth/react'
 import Head from 'next/head'
+import { useTranslation } from 'react-i18next'
+import { FcGoogle } from 'react-icons/fc'
 import styled from 'styled-components'
+import PrimaryBtn from '../components/buttons/primary-btn/PrimaryBtn'
 import Exercises from '../components/exercises/Exercises'
 import Metronome from '../components/metronome/Metronome'
 import Notes from '../components/notes/Notes'
@@ -46,22 +50,57 @@ const HomepageGrid = styled.section`
   }
 `
 
+const Container = styled.section`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: hidden;
+`
+
+const Centered = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width:20vw;
+`
+
+const SignInButton = styled.button``
+
 const Home: NextPage = () => {
+  const { data: session } = useSession()
+  const { t } = useTranslation()
+
+  function onSignIn() {}
+
   return (
-    <section>
+    <Container>
       <Head>
         <title>Praksa - Home</title>
       </Head>
 
-      <HomepageGrid>
-        <Metronome />
-        <Timer />
-        <Exercises />
-        <Notes />
-        <VideoLooper />
-        <Tuner />
-      </HomepageGrid>
-    </section>
+      {session ? (
+        <HomepageGrid>
+          <Metronome />
+          <Timer />
+          <Exercises />
+          <Notes />
+          <VideoLooper />
+          <Tuner />
+        </HomepageGrid>
+      ) : (
+        <Centered>
+          <PrimaryBtn
+            text={t('auth.sign_in_google')}
+            onClick={onSignIn}
+            isFluid
+            lowercase
+          >
+            <FcGoogle />
+          </PrimaryBtn>
+        </Centered>
+      )}
+    </Container>
   )
 }
 

@@ -8,6 +8,9 @@
     "confirm": "Confirm",
     "cancel": "Cancel"
   },
+  "auth": {
+    "sign_in_google": "Sign in with Google"
+  },
   "nav": {
     "home": "Home",
     "about": "About"
