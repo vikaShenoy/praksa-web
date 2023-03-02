@@ -8,6 +8,11 @@ const Button = styled.button<{ isFluid?: boolean }>`
   background-color: ${(props) => props.theme.colors.secondary};
   border: none;
   cursor: pointer;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: ${(props) => props.theme.spacing.xs};
 
   &:hover {
     background-color: ${(props) => props.theme.colors.secondaryHover};
@@ -26,6 +31,8 @@ interface PrimaryBtnProps {
   isSubmitBtn?: boolean
   onClick?: () => void
   isFluid?: boolean
+  children?: JSX.Element
+  lowercase?: boolean
 }
 
 const PrimaryBtn: React.FC<PrimaryBtnProps> = ({
@@ -34,6 +41,8 @@ const PrimaryBtn: React.FC<PrimaryBtnProps> = ({
   disabled,
   isSubmitBtn,
   isFluid,
+  children,
+  lowercase
 }) => {
   return (
     <Button
@@ -43,7 +52,8 @@ const PrimaryBtn: React.FC<PrimaryBtnProps> = ({
       isFluid={isFluid}
       role="button"
     >
-      <BodyText uppercase>{text}</BodyText>
+      <BodyText uppercase={!lowercase}>{text}</BodyText>
+      {children}
     </Button>
   )
 }
