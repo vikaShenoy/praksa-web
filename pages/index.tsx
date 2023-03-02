@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { useSession } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import Head from 'next/head'
 import { useTranslation } from 'react-i18next'
 import { FcGoogle } from 'react-icons/fc'
@@ -50,11 +50,10 @@ const HomepageGrid = styled.section`
   }
 `
 
-const Container = styled.section`
-  display: flex;
+const Container = styled.section<{ flex: boolean }>`
+  display: ${(props) => (props.flex ? 'flex' : 'block')};
   align-items: center;
   justify-content: center;
-  overflow-y: hidden;
 `
 
 const Centered = styled.div`
@@ -69,10 +68,8 @@ const Home: NextPage = () => {
   const { data: session } = useSession()
   const { t } = useTranslation()
 
-  function onSignIn() {}
-
   return (
-    <Container>
+    <Container flex={!session}>
       <Head>
         <title>Praksa - Home</title>
       </Head>
@@ -90,7 +87,7 @@ const Home: NextPage = () => {
         <Centered>
           <PrimaryBtn
             text={t('auth.sign_in_google')}
-            onClick={onSignIn}
+            onClick={() => signIn('google')}
             isFluid
             lowercase
           >
