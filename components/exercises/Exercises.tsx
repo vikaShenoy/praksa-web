@@ -37,6 +37,7 @@ export const useExerciseContext = () => {
   return exerciseContext
 }
 
+// TODO: Test
 const Exercises = () => {
   const { t } = useTranslation()
 

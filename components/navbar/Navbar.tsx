@@ -1,11 +1,12 @@
+import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import { Resolution, useResponsive } from '../../hooks/useResponsive'
 import HamburgerIcon from '../../public/icons/HarmburgerIcon'
 import { NAVBAR_HEIGHT } from '../../styles/size'
-import { TitleText } from '../../styles/wrappers/fonts'
+import { BodyText, TitleText } from '../../styles/wrappers/fonts'
 
 const NavbarWrapper = styled.div<{ isMobile: boolean }>`
   display: flex;
@@ -62,21 +63,20 @@ const Navbar = () => {
   const isMobile = resolution === Resolution.Mobile
   const [showDropdown, setShowDropdown] = useState(false)
   const { t } = useTranslation()
+  const session = useSession()
 
-  const NavItems = useMemo(() => {
-    return [
-      {
-        id: 1,
-        name: t('nav.home'),
-        href: '/',
-      },
-      {
-        id: 2,
-        name: t('nav.about'),
-        href: '/about',
-      },
-    ]
-  }, [t])
+  const NavItems = [
+    {
+      id: 1,
+      name: t('nav.home'),
+      href: '/',
+    },
+    {
+      id: 2,
+      name: t('nav.about'),
+      href: '/about',
+    },
+  ]
 
   return (
     <NavbarWrapper isMobile={isMobile}>
@@ -88,6 +88,11 @@ const Navbar = () => {
         >
           <HamburgerIcon />
         </MenuIconWrapper>
+      )}
+      {session.status === 'authenticated' && session.data.user && (
+        <BodyText>
+          {t('nav.user_greeting', { name: session.data.user.name })}
+        </BodyText>
       )}
       <LinkWrapper
         isMobile={isMobile}
@@ -101,6 +106,11 @@ const Navbar = () => {
             </NavbarLink>
           </Link>
         ))}
+        {session.status === 'authenticated' && (
+          <NavbarLink isMobile={isMobile} onClick={() => signOut()}>
+            {t('common.logout')}
+          </NavbarLink>
+        )}
       </LinkWrapper>
     </NavbarWrapper>
   )

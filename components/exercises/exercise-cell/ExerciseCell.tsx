@@ -40,6 +40,7 @@ interface ExerciseCellProps {
   exercise: Exercise
 }
 
+// TODO: Test
 const ExerciseCell: React.FC<ExerciseCellProps> = ({ exercise }) => {
   const { t } = useTranslation()
   const { onShowEdit, onDelete } = useExerciseContext()

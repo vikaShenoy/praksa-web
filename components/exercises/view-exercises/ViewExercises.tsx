@@ -14,6 +14,7 @@ interface ViewExercisesProps {
   exercises: Exercise[]
 }
 
+// TODO: Test
 const ViewExercises: React.FC<ViewExercisesProps> = ({ exercises }) => {
   const { t } = useTranslation()
   const { showCreateExercise } = useExerciseContext()
