@@ -21,7 +21,7 @@ describe('Navbar', () => {
       status: loggedIn ? 'authenticated' : 'unauthenticated ',
       user: { name: 'Russell Westbrook' },
     }
-    
+
     render(
       <SessionProvider session={session}>
         <I18nextProvider i18n={i18n}>
