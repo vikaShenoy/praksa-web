@@ -7,7 +7,7 @@ import { Exercise } from '../../models/Exercise'
 import { Card } from '../../styles/wrappers/components'
 import { BoldText } from '../../styles/wrappers/fonts'
 import CreateEditExercise, {
-  ExerciseForm,
+  ExerciseForm
 } from './create-edit-exercise/CreateEditExercise'
 
 import ViewExercises from './view-exercises/ViewExercises'
@@ -37,6 +37,7 @@ export const useExerciseContext = () => {
   return exerciseContext
 }
 
+// TODO: Test
 const Exercises = () => {
   const { t } = useTranslation()
 
