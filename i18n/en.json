@@ -6,14 +6,16 @@
     "edit": "Edit",
     "save": "Save",
     "confirm": "Confirm",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "logout": "Logout"
   },
   "auth": {
     "sign_in_google": "Sign in with Google"
   },
   "nav": {
     "home": "Home",
-    "about": "About"
+    "about": "About",
+    "user_greeting": "Hello, {{ name }}!"
   },
   "notes": {
     "title": "Notes",

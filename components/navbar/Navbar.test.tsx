@@ -39,8 +39,25 @@ describe('Navbar', () => {
     expect(aboutLink).toBeInTheDocument()
   })
 
-  it('does not show the hamburger icon when the screen is wide', () => {
+  it('does not render the hamburger icon when the screen is wide', () => {
     const menuIcon = screen.queryByTestId('menu-icon')
     expect(menuIcon).not.toBeInTheDocument()
   })
+
+  it('does not render the logout button when the user is not authenticated', () => {
+    const logout = screen.queryByText('Log out')
+    expect(logout).toBeFalsy()
+  })
+
+  // TODO: Figure out how to mock auth
+
+  // it('renders a logout button when the user is authenticated', () => {
+  //   const logout = screen.queryByText('Log out')
+  //   expect(logout).toBeTruthy()
+  // })
+
+  // it('renders the users name when authenticated', () => {
+  //   const userText = screen.queryByText('Hello, Russell Westbrook!')
+  //   expect(userText).toBeTruthy()
+  // })
 })
