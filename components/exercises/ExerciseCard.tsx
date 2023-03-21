@@ -1,5 +1,6 @@
 import { FormikHelpers } from 'formik'
 import { createContext, useContext, useState } from 'react'
+import { toast } from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import { useCreateExercise } from '../../hooks/api/useCreateExercise'
@@ -13,7 +14,7 @@ import CreateEditExercise, {
 } from './create-edit-exercise/CreateEditExercise'
 import ViewExercises from './view-exercises/ViewExercises'
 
-const ExercisesCard = styled(Card)`
+const CardContainer = styled(Card)`
   gap: ${(props) => props.theme.spacing.md};
   justify-content: flex-start;
 `
@@ -41,7 +42,7 @@ export const useExerciseContext = () => {
 }
 
 // TODO: Test
-const Exercises = () => {
+export const ExerciseCard = () => {
   const { t } = useTranslation()
   const [isCreating, setIsCreating] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
@@ -50,9 +51,11 @@ const Exercises = () => {
 
   const {
     data: exerciseData,
+    refetch: refetchExercises,
     isError: errorLoadingExercise,
     isSuccess: successLoadingExercise,
   } = useExercises()
+
   const { mutate: createExercise } = useCreateExercise()
 
   async function updateExercise(
@@ -85,11 +88,13 @@ const Exercises = () => {
     createExercise(
       { ...values },
       {
-        onError: (error) => {
-          // TODO: Error handling
-          console.error(error)
+        onSuccess: () => {
+          refetchExercises()
         },
-        onSettled: () => {
+        onError: () => {
+          toast.error('Error creating exercise. Please try again later.')
+        },
+        onSettled: async () => {
           setSubmitting(false)
           setIsCreating(false)
         },
@@ -111,7 +116,6 @@ const Exercises = () => {
       await updateExercise(exerciseBeingEdited.id, { ...values })
     } catch (error) {
       // TODO: Error handling
-      console.error(error)
     }
 
     setSubmitting(false)
@@ -123,7 +127,6 @@ const Exercises = () => {
       await deleteExercise(exerciseId)
     } catch (error) {
       // TODO: Error handling
-      console.error(error)
     }
   }
 
@@ -138,7 +141,7 @@ const Exercises = () => {
   }
 
   return (
-    <ExercisesCard gridArea="exercises">
+    <CardContainer gridArea="exercises">
       <BoldText>{t('exercises.title')}</BoldText>
       {errorLoadingExercise && <ExerciseLoadingError />}
       {successLoadingExercise && (
@@ -169,8 +172,6 @@ const Exercises = () => {
           )}
         </ExerciseContext.Provider>
       )}
-    </ExercisesCard>
+    </CardContainer>
   )
 }
-
-export default Exercises

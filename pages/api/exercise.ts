@@ -9,7 +9,7 @@ export default async function handler(
   const userId = session?.user.id
 
   if (!userId) {
-    return res.status(401)
+    return res.status(401).end()
   }
 
   try {
@@ -23,11 +23,10 @@ export default async function handler(
         data: { ...data, createdAt: new Date(), userId },
       })
 
-      return res.status(200)
+      return res.status(200).end()
     }
   } catch (e) {
-    console.error(e)
-    return res.status(500)
+    return res.status(500).end()
   }
 
   return res.status(500).json({ error: 'Route not implemented' })

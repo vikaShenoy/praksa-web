@@ -21,7 +21,6 @@ export default async function handler(
       })
       return res.status(200).json({ data: exercises })
     } catch (error) {
-      console.error(error)
       return res.status(500)
     }
   }

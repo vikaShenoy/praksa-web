@@ -21,7 +21,6 @@ export default async function handler(
       return res.status(501)
     }
   } catch (e) {
-    console.error(e)
     return res.status(500)
   }
 

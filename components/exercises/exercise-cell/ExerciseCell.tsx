@@ -7,7 +7,7 @@ import { Exercise } from '../../../models/Exercise'
 import { BodyText } from '../../../styles/wrappers/fonts'
 import IconButton from '../../buttons/icon-button/IconButton'
 import BasicModal from '../../utils/basic-modal/BasicModal'
-import { useExerciseContext } from '../Exercises'
+import { useExerciseContext } from '../ExerciseCard'
 
 const Container = styled.div`
   display: flex;
