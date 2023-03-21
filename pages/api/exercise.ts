@@ -14,8 +14,16 @@ export default async function handler(
 
   try {
     if (req.method === 'POST') {
-      // TODO
-      return res.status(501)
+      const data = req.body
+      if (!data.name) {
+        return res.status(400).json({ error: 'Name is required' })
+      }
+
+      await prisma?.exercise.create({
+        data: { ...data, createdAt: new Date(), userId },
+      })
+
+      return res.status(200)
     }
   } catch (e) {
     console.error(e)
