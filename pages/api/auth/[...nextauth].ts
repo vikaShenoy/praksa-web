@@ -12,7 +12,12 @@ export default NextAuth({
     }),
   ],
   callbacks: {
-    session({ session, token, user }) {
+    async session({ session, token, user }) {
+      if (token) {
+        session.user.id = token.id
+      } else {
+        session.user.id = user.id
+      }
       return session
     },
   },
