@@ -1,15 +1,16 @@
 import { FormikHelpers } from 'formik'
 import { createContext, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useQuery } from 'react-query'
 import styled from 'styled-components'
+import { useCreateExercise } from '../../hooks/api/useCreateExercise'
+import { useExercises } from '../../hooks/api/useExercises'
 import { Exercise } from '../../models/Exercise'
 import { Card } from '../../styles/wrappers/components'
 import { BoldText } from '../../styles/wrappers/fonts'
+import { ExerciseLoadingError } from '../exercise-loading-error/ExerciseLoadingError'
 import CreateEditExercise, {
   ExerciseForm,
 } from './create-edit-exercise/CreateEditExercise'
-
 import ViewExercises from './view-exercises/ViewExercises'
 
 const ExercisesCard = styled(Card)`
@@ -27,8 +28,6 @@ const ExerciseContext = createContext<ExerciseContextData | undefined>(
   undefined
 )
 
-type CreateExerciseData = Omit<Exercise, 'id'>
-
 type UpdateExerciseData = Partial<Exercise>
 
 export const useExerciseContext = () => {
@@ -44,34 +43,17 @@ export const useExerciseContext = () => {
 // TODO: Test
 const Exercises = () => {
   const { t } = useTranslation()
-  const [exercises, setExercises] = useState<Exercise[]>([])
   const [isCreating, setIsCreating] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [exerciseBeingEdited, setExerciseBeingEdited] =
     useState<Exercise | null>(null)
 
-  // TODO: Extract to hook
-  useQuery(['exercises'], getExercises)
-
-  async function createExercise(exerciseData: CreateExerciseData) {
-    await fetch('/api/exercise', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(exerciseData),
-    })
-  }
-
-  async function getExercises() {
-    const response = await fetch('/api/exercises', {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    })
-    const json = await response.json()
-    const exercises: Exercise[] = json.data
-    setExercises(exercises)
-  }
+  const {
+    data: exerciseData,
+    isError: errorLoadingExercise,
+    isSuccess: successLoadingExercise,
+  } = useExercises()
+  const { mutate: createExercise } = useCreateExercise()
 
   async function updateExercise(
     exerciseId: string,
@@ -100,20 +82,19 @@ const Exercises = () => {
     { setSubmitting }: FormikHelpers<ExerciseForm>
   ) {
     setSubmitting(true)
-    const createExerciseData: CreateExerciseData = {
-      createdAt: new Date(),
-      ...values,
-    }
-
-    try {
-      await createExercise(createExerciseData)
-    } catch (error) {
-      // TODO: Error handling
-      console.error(error)
-    }
-
-    setSubmitting(false)
-    setIsCreating(false)
+    createExercise(
+      { ...values },
+      {
+        onError: (error) => {
+          // TODO: Error handling
+          console.error(error)
+        },
+        onSettled: () => {
+          setSubmitting(false)
+          setIsCreating(false)
+        },
+      }
+    )
   }
 
   async function onEdit(
@@ -147,7 +128,9 @@ const Exercises = () => {
   }
 
   function onShowEdit(exerciseId: string) {
-    const exercise = exercises.find((exercise) => exercise.id === exerciseId)
+    const exercise = exerciseData?.find(
+      (exercise) => exercise.id === exerciseId
+    )
     if (exercise) {
       setExerciseBeingEdited(exercise)
       setIsEditing(true)
@@ -157,31 +140,35 @@ const Exercises = () => {
   return (
     <ExercisesCard gridArea="exercises">
       <BoldText>{t('exercises.title')}</BoldText>
+      {errorLoadingExercise && <ExerciseLoadingError />}
+      {successLoadingExercise && (
+        <ExerciseContext.Provider
+          value={{
+            showCreateExercise: () => setIsCreating(true),
+            onShowEdit,
+            onDelete,
+          }}
+        >
+          {isCreating && (
+            <CreateEditExercise
+              onSubmit={onCreate}
+              onCancel={() => setIsCreating(false)}
+            />
+          )}
 
-      <ExerciseContext.Provider
-        value={{
-          showCreateExercise: () => setIsCreating(true),
-          onShowEdit,
-          onDelete,
-        }}
-      >
-        {isCreating && (
-          <CreateEditExercise
-            onSubmit={onCreate}
-            onCancel={() => setIsCreating(false)}
-          />
-        )}
+          {isEditing && (
+            <CreateEditExercise
+              onSubmit={onEdit}
+              onCancel={() => setIsEditing(false)}
+              exercise={exerciseBeingEdited ? exerciseBeingEdited : undefined}
+            />
+          )}
 
-        {isEditing && (
-          <CreateEditExercise
-            onSubmit={onEdit}
-            onCancel={() => setIsEditing(false)}
-            exercise={exerciseBeingEdited ? exerciseBeingEdited : undefined}
-          />
-        )}
-
-        {!isCreating && !isEditing && <ViewExercises exercises={exercises} />}
-      </ExerciseContext.Provider>
+          {!isCreating && !isEditing && (
+            <ViewExercises exercises={exerciseData ?? []} />
+          )}
+        </ExerciseContext.Provider>
+      )}
     </ExercisesCard>
   )
 }
