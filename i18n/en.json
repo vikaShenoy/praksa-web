@@ -40,7 +40,12 @@
   },
   "errors": {
     "field_required": "This field is required",
-    "exercise_loading": "There was an error loading your exercises. Please try again later."
+    "exercise": {
+      "create": "Error creating exercise. Please try again later.",
+      "load": "There was an error loading your exercises. Please try again later.",
+      "update": "There was an error updating your exercise. Please try again later.",
+      "delete": "There was an error deleting your exercise. Please try again later."
+    }
   },
   "placeholders": {
     "exercise_name": "Downpicking"

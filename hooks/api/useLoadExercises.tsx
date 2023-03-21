@@ -11,6 +11,6 @@ async function getExercises() {
   return exercises
 }
 
-export const useExercises = () => {
+export const useLoadExercises = () => {
   return useQuery(['exercises'], getExercises)
 }

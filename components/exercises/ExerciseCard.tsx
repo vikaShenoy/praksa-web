@@ -4,7 +4,9 @@ import { toast } from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import { useCreateExercise } from '../../hooks/api/useCreateExercise'
-import { useExercises } from '../../hooks/api/useExercises'
+import { useDeleteExercise } from '../../hooks/api/useDeleteExercise'
+import { useLoadExercises } from '../../hooks/api/useLoadExercises'
+import { useUpdateExercise } from '../../hooks/api/useUpdateExercise'
 import { Exercise } from '../../models/Exercise'
 import { Card } from '../../styles/wrappers/components'
 import { BoldText } from '../../styles/wrappers/fonts'
@@ -29,8 +31,6 @@ const ExerciseContext = createContext<ExerciseContextData | undefined>(
   undefined
 )
 
-type UpdateExerciseData = Partial<Exercise>
-
 export const useExerciseContext = () => {
   const exerciseContext = useContext(ExerciseContext)
   if (!exerciseContext) {
@@ -54,33 +54,12 @@ export const ExerciseCard = () => {
     refetch: refetchExercises,
     isError: errorLoadingExercise,
     isSuccess: successLoadingExercise,
-  } = useExercises()
-
+  } = useLoadExercises()
   const { mutate: createExercise } = useCreateExercise()
+  const { mutate: updateExercise } = useUpdateExercise()
+  const { mutate: deleteExercise } = useDeleteExercise()
 
-  async function updateExercise(
-    exerciseId: string,
-    updateExerciseData: UpdateExerciseData
-  ) {
-    await fetch(`/api/exercise/${exerciseId}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updateExerciseData),
-    })
-  }
-
-  async function deleteExercise(exerciseId: string) {
-    await fetch(`/api/exercise/${exerciseId}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-  }
-
-  async function onCreate(
+  function onCreate(
     values: ExerciseForm,
     { setSubmitting }: FormikHelpers<ExerciseForm>
   ) {
@@ -92,9 +71,9 @@ export const ExerciseCard = () => {
           refetchExercises()
         },
         onError: () => {
-          toast.error('Error creating exercise. Please try again later.')
+          toast.error(t('errors.exercise.create'))
         },
-        onSettled: async () => {
+        onSettled: () => {
           setSubmitting(false)
           setIsCreating(false)
         },
@@ -102,7 +81,7 @@ export const ExerciseCard = () => {
     )
   }
 
-  async function onEdit(
+  function onEdit(
     values: ExerciseForm,
     { setSubmitting }: FormikHelpers<ExerciseForm>
   ) {
@@ -111,23 +90,35 @@ export const ExerciseCard = () => {
     }
 
     setSubmitting(true)
-
-    try {
-      await updateExercise(exerciseBeingEdited.id, { ...values })
-    } catch (error) {
-      // TODO: Error handling
-    }
-
-    setSubmitting(false)
-    setIsEditing(false)
+    updateExercise(
+      { exerciseId: exerciseBeingEdited.id, data: { ...values } },
+      {
+        onSuccess: () => {
+          refetchExercises()
+        },
+        onError: () => {
+          toast.error(t('errors.exercise.update'))
+        },
+        onSettled: () => {
+          setSubmitting(false)
+          setIsEditing(false)
+        },
+      }
+    )
   }
 
-  async function onDelete(exerciseId: string) {
-    try {
-      await deleteExercise(exerciseId)
-    } catch (error) {
-      // TODO: Error handling
-    }
+  function onDelete(exerciseId: string) {
+    deleteExercise(
+      { exerciseId },
+      {
+        onSuccess: () => {
+          refetchExercises()
+        },
+        onError: () => {
+          toast.error(t('errors.exercise.delete'))
+        },
+      }
+    )
   }
 
   function onShowEdit(exerciseId: string) {

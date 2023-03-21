@@ -11,7 +11,7 @@ export const ExerciseLoadingError = () => {
   return (
     <FlexColumn gap={16}>
       <FaSadCry role="img" color={theme.colors.error} fontSize={36} />
-      <ErrorText>{t('errors.exercise_loading')}</ErrorText>
+      <ErrorText>{t('errors.exercise.load')}</ErrorText>
     </FlexColumn>
   )
 }
