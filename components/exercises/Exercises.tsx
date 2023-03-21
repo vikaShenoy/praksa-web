@@ -1,8 +1,8 @@
 import { FormikHelpers } from 'formik'
 import { createContext, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useQuery } from 'react-query'
 import styled from 'styled-components'
-import { v4 as uuidv4 } from 'uuid'
 import { Exercise } from '../../models/Exercise'
 import { Card } from '../../styles/wrappers/components'
 import { BoldText } from '../../styles/wrappers/fonts'
@@ -27,11 +27,15 @@ const ExerciseContext = createContext<ExerciseContextData | undefined>(
   undefined
 )
 
+type CreateExerciseData = Omit<Exercise, 'id'>
+
+type UpdateExerciseData = Partial<Exercise>
+
 export const useExerciseContext = () => {
   const exerciseContext = useContext(ExerciseContext)
   if (!exerciseContext) {
     throw new Error(
-      'No ExerciseContenxt.Provider found when using ExerciseContext'
+      'No ExerciseContext.Provider found when using ExerciseContext'
     )
   }
   return exerciseContext
@@ -40,65 +44,114 @@ export const useExerciseContext = () => {
 // TODO: Test
 const Exercises = () => {
   const { t } = useTranslation()
-
   const [exercises, setExercises] = useState<Exercise[]>([])
-
   const [isCreating, setIsCreating] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [exerciseBeingEdited, setExerciseBeingEdited] =
     useState<Exercise | null>(null)
 
-  // TODO: remove dev code and use a real API request to persist the new exercise
-  const onCreate = (
+  // TODO: Extract to hook
+  useQuery(['exercises'], getExercises)
+
+  async function createExercise(exerciseData: CreateExerciseData) {
+    await fetch('/api/exercise', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(exerciseData),
+    })
+  }
+
+  async function getExercises() {
+    const response = await fetch('/api/exercises', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    })
+    const json = await response.json()
+    const exercises: Exercise[] = json.data
+    setExercises(exercises)
+  }
+
+  async function updateExercise(
+    exerciseId: string,
+    updateExerciseData: UpdateExerciseData
+  ) {
+    await fetch(`/api/exercise/${exerciseId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updateExerciseData),
+    })
+  }
+
+  async function deleteExercise(exerciseId: string) {
+    await fetch(`/api/exercise/${exerciseId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }
+
+  async function onCreate(
     values: ExerciseForm,
     { setSubmitting }: FormikHelpers<ExerciseForm>
-  ) => {
+  ) {
     setSubmitting(true)
-    const exercise: Exercise = {
-      id: uuidv4(),
+    const createExerciseData: CreateExerciseData = {
       createdAt: new Date(),
       ...values,
     }
-    setExercises([exercise])
+
+    try {
+      await createExercise(createExerciseData)
+    } catch (error) {
+      // TODO: Error handling
+      console.error(error)
+    }
+
     setSubmitting(false)
     setIsCreating(false)
   }
 
-  const onShowEdit = (exerciseId: string) => {
-    const exercise = exercises.find((exercise) => exercise.id === exerciseId)
-    if (exercise) {
-      setExerciseBeingEdited(exercise)
-      setIsEditing(true)
-    }
-  }
-
-  // TODO: remove dev code and a use a real API to edit the exercise
-  const onEdit = (
+  async function onEdit(
     values: ExerciseForm,
     { setSubmitting }: FormikHelpers<ExerciseForm>
-  ) => {
+  ) {
     if (!exerciseBeingEdited) {
       return
     }
 
     setSubmitting(true)
-    const newExerciseData: Exercise = {
-      id: exerciseBeingEdited.id,
-      createdAt: exerciseBeingEdited.createdAt,
-      ...values,
+
+    try {
+      await updateExercise(exerciseBeingEdited.id, { ...values })
+    } catch (error) {
+      // TODO: Error handling
+      console.error(error)
     }
-    const index = exercises.indexOf(exerciseBeingEdited)
-    exercises[index] = newExerciseData
+
     setSubmitting(false)
     setIsEditing(false)
   }
 
-  // TODO: remove dev code and use real API to delete the exercise
-  const onDelete = (exerciseId: string) => {
-    const updatedExercises = exercises.filter(
-      (exercise) => exercise.id !== exerciseId
-    )
-    setExercises(updatedExercises)
+  async function onDelete(exerciseId: string) {
+    try {
+      await deleteExercise(exerciseId)
+    } catch (error) {
+      // TODO: Error handling
+      console.error(error)
+    }
+  }
+
+  function onShowEdit(exerciseId: string) {
+    const exercise = exercises.find((exercise) => exercise.id === exerciseId)
+    if (exercise) {
+      setExerciseBeingEdited(exercise)
+      setIsEditing(true)
+    }
   }
 
   return (
