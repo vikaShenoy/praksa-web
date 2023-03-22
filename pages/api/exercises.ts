@@ -6,7 +6,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session: any = await getServerSession(req, res, authOptions)
+  const session = await getServerSession(req, res, authOptions)
   const userId = session?.user.id
 
   if (!userId) {
