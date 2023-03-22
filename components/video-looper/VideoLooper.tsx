@@ -100,12 +100,12 @@ const VideoLooper = () => {
     }
   }, [])
 
-  const loadPlayer = () => {
+  function loadPlayer() {
     const youTubePlayer = new YT.Player('player')
     setPlayer(youTubePlayer)
   }
 
-  const loadVideo = (url: string) => {
+  function loadVideo(url: string) {
     if (!player) {
       return
     }
@@ -123,14 +123,14 @@ const VideoLooper = () => {
     }
   }
 
-  const onSearch = () => {
+  function onSearch() {
     const currentSearchVal = searchInputRef.current!.value
     if (currentSearchVal && player) {
       loadVideo(currentSearchVal)
     }
   }
 
-  const onSearchboxKeyDown = (event: React.KeyboardEvent) => {
+  function onSearchboxKeyDown(event: React.KeyboardEvent) {
     if (event.key === 'Enter') {
       onSearch()
     }

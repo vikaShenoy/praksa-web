@@ -51,7 +51,7 @@ const Notes = () => {
   const [notes, setNotes] = useState('')
   const notesInput = useRef<HTMLTextAreaElement>(null)
 
-  const onSave = () => {
+  function onSave() {
     if (
       notesInput &&
       notesInput.current &&

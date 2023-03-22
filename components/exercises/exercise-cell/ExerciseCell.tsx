@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next'
 import { IoPencilSharp } from 'react-icons/io5'
 import { MdDelete } from 'react-icons/md'
 import styled from 'styled-components'
+import { useExerciseContext } from '../../../contexts/ExerciseContext'
 import { Exercise } from '../../../models/Exercise'
 import { BodyText } from '../../../styles/wrappers/fonts'
 import IconButton from '../../buttons/icon-button/IconButton'
 import BasicModal from '../../utils/basic-modal/BasicModal'
-import { useExerciseContext } from '../ExerciseCard'
 
 const Container = styled.div`
   display: flex;
@@ -47,7 +47,7 @@ const ExerciseCell: React.FC<ExerciseCellProps> = ({ exercise }) => {
   const exerciseDetails = `${exercise.name}`
   const [isDeleting, setIsDeleting] = useState(false)
 
-  const onConfirmDelete = () => {
+  function onConfirmDelete() {
     setIsDeleting(false)
     onDelete(exercise.id)
   }
