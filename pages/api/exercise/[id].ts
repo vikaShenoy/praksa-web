@@ -1,13 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getServerSession } from 'next-auth'
+import { UpdateExerciseData } from '../../../hooks/api/useUpdateExercise'
 import { authOptions } from '../auth/[...nextauth]'
-
-interface UpdateExerciseData {
-  name?: string
-  durationSeconds?: number
-  currentBpm?: number
-  targetBpm?: number
-}
 
 export default async function handler(
   req: NextApiRequest,
@@ -34,12 +28,12 @@ export default async function handler(
       const exercise = await prisma?.exercise.findUnique({
         where: {
           id,
-        }
+        },
       })
       if (!exercise) {
         return res.status(404).end()
       }
-      await prisma?.exercise.delete({where: { id }})
+      await prisma?.exercise.delete({ where: { id } })
       return res.status(200).end()
     }
   } catch (e) {
