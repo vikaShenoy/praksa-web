@@ -8,6 +8,13 @@ export const Flex = styled.div`
   gap: ${(props) => props.theme.spacing.sm};
 `
 
+export const FlexColumn = styled.div<{ gap: number }>`
+  display: flex;
+  flex-direction: column;
+  gap: ${(props) => props.gap}px;
+  align-items: center;
+`
+
 export const CenteredFlexRow = styled(Flex)<{ gap: number }>`
   flex-direction: row;
   justify-content: center;

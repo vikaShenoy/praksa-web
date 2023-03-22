@@ -3,7 +3,11 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
-import { Resolution, useResponsive } from '../../hooks/useResponsive'
+import {
+  Resolution,
+  TABLET_BREAKPOINT,
+  useResponsive,
+} from '../../hooks/useResponsive'
 import HamburgerIcon from '../../public/icons/HarmburgerIcon'
 import { NAVBAR_HEIGHT } from '../../styles/size'
 import { BodyText, TitleText } from '../../styles/wrappers/fonts'
@@ -25,6 +29,7 @@ const LinkWrapper = styled.div<{ isMobile: boolean; isVisible: boolean }>`
   display: flex;
   flex-direction: ${(props) => (props.isMobile ? 'column' : 'row')};
   justify-content: space-evenly;
+  align-items: center;
   background: ${(props) => props.theme.colors.primary};
   gap: ${(props) => (props.isMobile ? 0 : props.theme.spacing.md)};
 
@@ -37,16 +42,20 @@ const LinkWrapper = styled.div<{ isMobile: boolean; isVisible: boolean }>`
   transition: opacity 0.3s;
 `
 
-const NavbarLink = styled.a<{ isMobile: boolean }>`
+const NavbarLink = styled(Link)`
   font-size: ${(props) => props.theme.typography.size.sm};
   color: ${(props) => props.theme.colors.text.primary};
   font-family: ${(props) => props.theme.typography.font.body};
-  padding: ${(props) =>
-    props.isMobile ? props.theme.spacing.sm : props.theme.spacing.md};
+  padding: ${(props) => props.theme.spacing.md};
   cursor: pointer;
+  text-decoration: none;
 
   &:hover {
     background: ${(props) => props.theme.colors.secondary};
+  }
+
+  @media (max-width: ${TABLET_BREAKPOINT}) {
+    padding: ${(props) => props.theme.spacing.sm};
   }
 `
 
@@ -100,14 +109,12 @@ const Navbar = () => {
         role="navigation"
       >
         {NavItems.map((navItem) => (
-          <Link key={navItem.id} href={navItem.href}>
-            <NavbarLink isMobile={isMobile} key={navItem.id}>
-              {navItem.name}
-            </NavbarLink>
-          </Link>
+          <div key={navItem.id}>
+            <NavbarLink href={navItem.href}>{navItem.name}</NavbarLink>
+          </div>
         ))}
         {session.status === 'authenticated' && (
-          <NavbarLink isMobile={isMobile} onClick={() => signOut()}>
+          <NavbarLink href={'/'} onClick={() => signOut()}>
             {t('common.logout')}
           </NavbarLink>
         )}

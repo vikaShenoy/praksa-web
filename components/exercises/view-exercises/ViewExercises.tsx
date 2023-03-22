@@ -4,7 +4,7 @@ import { Exercise } from '../../../models/Exercise'
 import { BodyText } from '../../../styles/wrappers/fonts'
 import SecondaryBtn from '../../buttons/secondary-btn/SecondaryBtn'
 import ExerciseCell from '../exercise-cell/ExerciseCell'
-import { useExerciseContext } from '../Exercises'
+import { useExerciseContext } from '../ExerciseCard'
 
 const MarginTopWrapper = styled.div`
   margin-top: auto;

@@ -71,7 +71,7 @@ const CreateEditExercise: React.FC<CreateEditExerciseProps> = ({
     durationSeconds: exercise ? exercise.durationSeconds : undefined,
   }
 
-  const validateExerciseForm = (values: ExerciseForm) => {
+  function validateExerciseForm(values: ExerciseForm) {
     const errors: FormikErrors<ExerciseForm> = {}
     if (!values.name) {
       errors.name = t('errors.field_required')
@@ -118,6 +118,7 @@ const CreateEditExercise: React.FC<CreateEditExerciseProps> = ({
             <Field
               id="targetBpm"
               component={Input}
+              type="number"
               onChange={handleChange}
               value={values.targetBpm}
               placeholder="210"
@@ -131,6 +132,7 @@ const CreateEditExercise: React.FC<CreateEditExerciseProps> = ({
             <Field
               id="durationSeconds"
               component={Input}
+              type="number"
               onChange={handleChange}
               value={values.durationSeconds}
               placeholder="180"

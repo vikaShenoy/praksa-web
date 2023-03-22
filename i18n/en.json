@@ -39,7 +39,13 @@
     "placeholder": "Paste a YouTube URL into the searchbox below to load a video"
   },
   "errors": {
-    "field_required": "This field is required"
+    "field_required": "This field is required",
+    "exercise": {
+      "create": "Error creating exercise. Please try again later.",
+      "load": "There was an error loading your exercises. Please try again later.",
+      "update": "There was an error updating your exercise. Please try again later.",
+      "delete": "There was an error deleting your exercise. Please try again later."
+    }
   },
   "placeholders": {
     "exercise_name": "Downpicking"

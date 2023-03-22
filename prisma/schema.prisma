@@ -11,13 +11,25 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(uuid())
+  id            String     @id @default(uuid())
   name          String?
-  email         String?   @unique
+  email         String?    @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
+  exercises     Exercise[]
+}
+
+model Exercise {
+  id              String @id @default(uuid())
+  name            String
+  createdAt       String
+  currentBpm      Int?
+  targetBpm       Int?
+  durationSeconds Int?
+  user            User   @relation(fields: [userId], references: id)
+  userId          String
 }
 
 model Account {

@@ -1,11 +1,12 @@
 import type { NextPage } from 'next'
 import { signIn, useSession } from 'next-auth/react'
 import Head from 'next/head'
+import { Toaster } from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
 import { FcGoogle } from 'react-icons/fc'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import PrimaryBtn from '../components/buttons/primary-btn/PrimaryBtn'
-import Exercises from '../components/exercises/Exercises'
+import { ExerciseCard } from '../components/exercises/ExerciseCard'
 import Metronome from '../components/metronome/Metronome'
 import Notes from '../components/notes/Notes'
 import Timer from '../components/timer/Timer'
@@ -67,9 +68,20 @@ const Centered = styled.div`
 const Home: NextPage = () => {
   const { data: session } = useSession()
   const { t } = useTranslation()
+  const theme = useTheme()
 
   return (
     <Container flex={!session}>
+      <Toaster
+        toastOptions={{
+          className: '',
+          style: {
+            color: theme.colors.text.primary,
+            background: theme.colors.background,
+            fontFamily: theme.typography.font.body,
+          },
+        }}
+      />
       <Head>
         <title>Praksa - Home</title>
       </Head>
@@ -78,7 +90,7 @@ const Home: NextPage = () => {
         <HomepageGrid>
           <Metronome />
           <Timer />
-          <Exercises />
+          <ExerciseCard />
           <Notes />
           <VideoLooper />
           <Tuner />
