@@ -9,13 +9,17 @@ interface UpdateExerciseVars {
 }
 
 async function updateExercise({ exerciseId, data }: UpdateExerciseVars) {
-  await fetch(`/api/exercise/${exerciseId}`, {
+  const res = await fetch(`/api/exercise/${exerciseId}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
   })
+
+  if (!res.ok) {
+    throw new Error('Error updating exercise')
+  }
 }
 
 export const useUpdateExercise = () => {
