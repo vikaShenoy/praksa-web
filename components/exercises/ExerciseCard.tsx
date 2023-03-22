@@ -1,8 +1,9 @@
 import { FormikHelpers } from 'formik'
-import { createContext, useContext, useState } from 'react'
+import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
+import { ExerciseContext } from '../../contexts/ExerciseContext'
 import { useCreateExercise } from '../../hooks/api/useCreateExercise'
 import { useDeleteExercise } from '../../hooks/api/useDeleteExercise'
 import { useLoadExercises } from '../../hooks/api/useLoadExercises'
@@ -12,7 +13,7 @@ import { Card } from '../../styles/wrappers/components'
 import { BoldText } from '../../styles/wrappers/fonts'
 import { ExerciseLoadingError } from '../exercise-loading-error/ExerciseLoadingError'
 import CreateEditExercise, {
-  ExerciseForm,
+  ExerciseForm
 } from './create-edit-exercise/CreateEditExercise'
 import ViewExercises from './view-exercises/ViewExercises'
 
@@ -20,26 +21,6 @@ const CardContainer = styled(Card)`
   gap: ${(props) => props.theme.spacing.md};
   justify-content: flex-start;
 `
-
-interface ExerciseContextData {
-  showCreateExercise: () => void
-  onShowEdit: (exerciseId: string) => void
-  onDelete: (exerciseId: string) => void
-}
-
-const ExerciseContext = createContext<ExerciseContextData | undefined>(
-  undefined
-)
-
-export const useExerciseContext = () => {
-  const exerciseContext = useContext(ExerciseContext)
-  if (!exerciseContext) {
-    throw new Error(
-      'No ExerciseContext.Provider found when using ExerciseContext'
-    )
-  }
-  return exerciseContext
-}
 
 // TODO: Test
 export const ExerciseCard = () => {
