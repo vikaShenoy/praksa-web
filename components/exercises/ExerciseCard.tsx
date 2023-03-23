@@ -1,5 +1,5 @@
 import { FormikHelpers } from 'formik'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
@@ -39,19 +39,6 @@ export const ExerciseCard = () => {
   const { mutate: createExercise } = useCreateExercise()
   const { mutate: updateExercise } = useUpdateExercise()
   const { mutate: deleteExercise } = useDeleteExercise()
-
-  async function testApi() {
-    const res = await fetch("/api/test")
-    if (res.ok) {
-      console.log("success", res)
-    } else {
-      console.log("fail", res)
-    }
-  }
-
-  useEffect(() => {
-    testApi()
-  }, [])
 
   function onCreate(
     values: ExerciseForm,
