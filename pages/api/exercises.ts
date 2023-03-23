@@ -9,6 +9,9 @@ export default async function handler(
   const session = await getServerSession(req, res, authOptions)
   const userId = session?.user.id
 
+  console.log("in exercise route")
+  console.log("prisma", prisma)
+
   if (!userId) {
     return res.status(401)
   }
