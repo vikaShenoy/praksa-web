@@ -30,20 +30,21 @@ const TimeInput = ({ onEnter }: Props) => {
   const [minutes, setMinutes] = useState('00')
   const containerRef = useRef<HTMLDivElement | null>(null)
 
-  const onCloseInput = () => {
+  function onCloseInput() {
     onEnter(Number(minutes) * 60 + Number(seconds))
   }
+
   useClickOutside({ ref: containerRef, onClick: onCloseInput })
 
-  const validRange = (val: number) => {
+  function validRange(val: number) {
     return Number(val) > 0 && Number(val) < 60
   }
 
-  const firstEntry = (val: string) => {
+  function firstEntry(val: string) {
     return val.length === 3 && val.at(0) === '0'
   }
 
-  const onSecondsChanged = (e: ChangeEvent<HTMLInputElement>) => {
+  function onSecondsChanged(e: ChangeEvent<HTMLInputElement>) {
     const seconds = e.target.value
     if (firstEntry(seconds)) {
       setSeconds(seconds.slice(1, 3))
@@ -56,7 +57,7 @@ const TimeInput = ({ onEnter }: Props) => {
     }
   }
 
-  const onMinutesChanged = (e: ChangeEvent<HTMLInputElement>) => {
+  function onMinutesChanged(e: ChangeEvent<HTMLInputElement>) {
     const minutes = e.target.value
     if (firstEntry(minutes)) {
       setMinutes(minutes.slice(1, 3))
@@ -69,7 +70,7 @@ const TimeInput = ({ onEnter }: Props) => {
     }
   }
 
-  const onEnterKeySubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  function onEnterKeySubmit(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === 'Enter') {
       onCloseInput()
     }

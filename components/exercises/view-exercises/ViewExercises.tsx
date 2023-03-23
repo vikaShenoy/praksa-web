@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
+import { useExerciseContext } from '../../../contexts/ExerciseContext'
 import { Exercise } from '../../../models/Exercise'
 import { BodyText } from '../../../styles/wrappers/fonts'
 import SecondaryBtn from '../../buttons/secondary-btn/SecondaryBtn'
 import ExerciseCell from '../exercise-cell/ExerciseCell'
-import { useExerciseContext } from '../ExerciseCard'
 
 const MarginTopWrapper = styled.div`
   margin-top: auto;

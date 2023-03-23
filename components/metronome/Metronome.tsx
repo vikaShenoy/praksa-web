@@ -30,7 +30,7 @@ const Metronome = () => {
   const [isPlaying, setIsPlaying] = useState(false)
   useMetronomeRunner({ bpm, isPlaying })
 
-  const onSliderUpdate = (e: ChangeEvent<HTMLInputElement>) => {
+  function onSliderUpdate(e: ChangeEvent<HTMLInputElement>) {
     setBpm(Number(e.target.value))
   }
 

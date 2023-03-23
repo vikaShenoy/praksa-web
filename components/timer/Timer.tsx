@@ -36,7 +36,7 @@ const Timer = ({
     }
   }, [])
 
-  const tickTimerDown = () => {
+  function tickTimerDown() {
     setSecondsRemaining((prev: number) => {
       if (prev === 1) {
         stopTimer()
@@ -47,7 +47,7 @@ const Timer = ({
     })
   }
 
-  const startTimer = () => {
+  function startTimer() {
     if (secondsRemaining === 0) {
       resetTimer()
     }
@@ -56,25 +56,25 @@ const Timer = ({
     timerFunc.current = setInterval(tickTimerDown, 1000)
   }
 
-  const stopTimer = () => {
+  function stopTimer() {
     setIsPlaying(false)
     if (timerFunc.current) {
       clearInterval(timerFunc.current)
     }
   }
 
-  const resetTimer = () => {
+  function resetTimer() {
     stopTimer()
     setSecondsRemaining(totalSeconds)
   }
 
-  const onEditTime = () => {
+  function onEditTime() {
     stopTimer()
     setIsEditingTime(true)
     setSecondsRemaining(0)
   }
 
-  const onTimeEntered = (seconds: number) => {
+  function onTimeEntered(seconds: number) {
     setIsEditingTime(false)
     setTotalSeconds(seconds)
     setSecondsRemaining(seconds)
