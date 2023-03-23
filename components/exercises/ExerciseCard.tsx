@@ -1,5 +1,5 @@
 import { FormikHelpers } from 'formik'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
@@ -13,7 +13,7 @@ import { Card } from '../../styles/wrappers/components'
 import { BoldText } from '../../styles/wrappers/fonts'
 import { ExerciseLoadingError } from '../exercise-loading-error/ExerciseLoadingError'
 import CreateEditExercise, {
-  ExerciseForm,
+  ExerciseForm
 } from './create-edit-exercise/CreateEditExercise'
 import ViewExercises from './view-exercises/ViewExercises'
 
@@ -39,6 +39,19 @@ export const ExerciseCard = () => {
   const { mutate: createExercise } = useCreateExercise()
   const { mutate: updateExercise } = useUpdateExercise()
   const { mutate: deleteExercise } = useDeleteExercise()
+
+  async function testApi() {
+    const res = await fetch("/api/test")
+    if (res.ok) {
+      console.log("success", res)
+    } else {
+      console.log("fail", res)
+    }
+  }
+
+  useEffect(() => {
+    testApi()
+  }, [])
 
   function onCreate(
     values: ExerciseForm,
