@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getServerSession } from 'next-auth'
+import { prisma } from '../../utils/prismadb'
 import { authOptions } from '../api/auth/[...nextauth]'
 
 export default async function handler(
@@ -8,9 +9,6 @@ export default async function handler(
 ) {
   const session = await getServerSession(req, res, authOptions)
   const userId = session?.user.id
-
-  console.log("in exercise route")
-  console.log("prisma", prisma)
 
   if (!userId) {
     return res.status(401)
