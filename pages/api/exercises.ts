@@ -15,12 +15,12 @@ export default async function handler(
 
   if (req.method === 'GET') {
     try {
-      // const exercises = await prisma?.exercise.findMany({
-      //   where: {
-      //     userId,
-      //   },
-      // })
-      return res.status(200).json({ data: [] })
+      const exercises = await prisma?.exercise.findMany({
+        where: {
+          userId,
+        },
+      })
+      return res.status(200).json({ data: exercises })
     } catch (error) {
       return res.status(500)
     }
