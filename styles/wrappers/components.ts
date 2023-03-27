@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TABLET_BREAKPOINT } from "../../hooks/useResponsive";
+import { MOBILE_BREAKPOINT } from "../../hooks/useResponsive";
 
 export const Card = styled.div<{ gridArea: string }>`
   display: flex;
@@ -21,14 +21,13 @@ export const Card = styled.div<{ gridArea: string }>`
   transition: box-shadow 0.2s;
 
   padding: ${(props) => props.theme.spacing.sm};
-  @media (min-width: ${TABLET_BREAKPOINT}px) {
+  @media (min-width: ${MOBILE_BREAKPOINT}px) {
     padding: ${(props) => props.theme.spacing.lg};
   };
 `
 
 export const Input = styled.input`
   background-color: ${(props) => props.theme.colors.faded};
-  font-family: ${(props) => props.theme.typography.font.body};
   font-size: ${(props) => props.theme.typography.size.sm};
   color: ${(props) => props.theme.colors.text.primary};
   height: 2.5rem;

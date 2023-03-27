@@ -1,12 +1,11 @@
 import { ChangeEvent } from 'react'
 import styled from 'styled-components'
-import { SLIDER_HEIGHT } from '../../../styles/size'
 
 const SliderInput = styled.input`
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: ${SLIDER_HEIGHT};
+  height: 0.75rem;
   background: ${(props) => props.theme.colors.faded};
   border-radius: 1.5rem;
 

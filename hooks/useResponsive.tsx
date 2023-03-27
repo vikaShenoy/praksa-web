@@ -6,8 +6,8 @@ export enum Resolution {
   Mobile,
 }
 
-export const DESKTOP_BREAKPOINT = 1024
-export const TABLET_BREAKPOINT = 767
+export const TABLET_BREAKPOINT = 1024
+export const MOBILE_BREAKPOINT = 767
 
 export const useResponsive = (): Resolution => {
   const [resolution, setResolution] = useState<Resolution>(Resolution.Desktop)
@@ -15,9 +15,9 @@ export const useResponsive = (): Resolution => {
   const onWindowSizeChange = () => {
     const windowWidth = window.innerWidth
 
-    if (windowWidth >= DESKTOP_BREAKPOINT) {
+    if (windowWidth >= TABLET_BREAKPOINT) {
       setResolution(Resolution.Desktop)
-    } else if (windowWidth >= TABLET_BREAKPOINT) {
+    } else if (windowWidth >= MOBILE_BREAKPOINT) {
       setResolution(Resolution.Tablet)
     } else {
       setResolution(Resolution.Mobile)

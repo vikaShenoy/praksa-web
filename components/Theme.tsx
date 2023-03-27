@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
 
   * {
     box-sizing: border-box;
+    font-family: Lato, sans-serif;
   }
 `
 interface ThemeProps {
