@@ -1,10 +1,12 @@
+import { useAtom } from 'jotai'
 import { ChangeEvent, useState } from 'react'
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 import styled from 'styled-components'
+import { tempoAtom } from '../../contexts/jotai'
 import useMetronomeRunner from '../../hooks/useMetronomeRunner'
 import { Card } from '../../styles/wrappers/components'
 import { BoldText } from '../../styles/wrappers/fonts'
-import { DEFAULT_BPM, MAX_BPM, MIN_BPM } from '../../utils/constants'
+import { MAX_BPM, MIN_BPM } from '../../utils/constants'
 import IconButton, {
   ButtonSize,
 } from '../buttons/circle-icon-button/CircleIconButton'
@@ -25,22 +27,22 @@ const Margin = styled.div`
 `
 
 const Metronome = () => {
-  const [bpm, setBpm] = useState(DEFAULT_BPM)
   const [isPlaying, setIsPlaying] = useState(false)
-  useMetronomeRunner({ bpm, isPlaying })
+  const [tempo, setTempo] = useAtom(tempoAtom)
+  useMetronomeRunner({ tempo, isPlaying })
 
   function onSliderUpdate(e: ChangeEvent<HTMLInputElement>) {
-    setBpm(Number(e.target.value))
+    setTempo(Number(e.target.value))
   }
 
   return (
     <Card gridArea="metronome">
-      <BoldText aria-label="tempo-label">{bpm.toString()}</BoldText>
+      <BoldText aria-label="tempo-label">{tempo.toString()}</BoldText>
       <SliderWrapper>
         <IconButton
           iconName={AiOutlineMinus}
           onClick={() => {
-            setBpm((prev) => prev - 1)
+            setTempo((prev) => prev - 1)
           }}
           size={ButtonSize.SMALL}
           ariaLabel="minus"
@@ -49,14 +51,14 @@ const Metronome = () => {
           <Slider
             minVal={MIN_BPM}
             maxVal={MAX_BPM}
-            currentVal={bpm}
+            currentVal={tempo}
             onValueChange={onSliderUpdate}
           />
         </Margin>
         <IconButton
           iconName={AiOutlinePlus}
           onClick={() => {
-            setBpm((prev) => prev + 1)
+            setTempo((prev) => prev + 1)
           }}
           size={ButtonSize.SMALL}
           ariaLabel="plus"
