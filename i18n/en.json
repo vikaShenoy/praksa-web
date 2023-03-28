@@ -18,11 +18,11 @@
   },
   "notes": {
     "title": "Notes",
-    "prompt": "Add practice notes here"
+    "prompt": "Add notes on your practice routine!"
   },
   "exercises": {
     "title": "Exercises",
-    "prompt": "Add exercises to track your progress",
+    "prompt": "Add exercises to track your progress!",
     "form": {
       "name": "Exercise name",
       "currentBpm": "Current BPM",

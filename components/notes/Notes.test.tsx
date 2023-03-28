@@ -27,7 +27,7 @@ describe('Notes component', () => {
     })
 
     it('shows the no notes placeholder by default', () => {
-      expect(screen.getByText('Add practice notes here')).toBeDefined()
+      expect(screen.getByText('Add notes on your practice routine!')).toBeDefined()
     })
   })
 
@@ -65,7 +65,7 @@ describe('Notes component', () => {
     it('clicking the cancel button does not save the typed text', () => {
       const cancelBtn = screen.getByText('Cancel')
       fireEvent.click(cancelBtn)
-      expect(screen.getByText('Add practice notes here')).toBeDefined()
+      expect(screen.getByText('Add notes on your practice routine!')).toBeDefined()
     })
   })
 
