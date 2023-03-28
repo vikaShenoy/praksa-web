@@ -11,7 +11,7 @@ export const Card = styled.div<{ gridArea: string }>`
   
   min-height: 500px;
 
-  background: ${(props) => props.theme.colors.primary};
+  background-color: ${(props) => props.theme.colors.primary};
   border-radius: 1.5rem;
   box-shadow: ${(props) => props.theme.shadows.md};
   

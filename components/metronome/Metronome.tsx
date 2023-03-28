@@ -9,10 +9,10 @@ import IconButton, {
   ButtonSize,
 } from '../buttons/circle-icon-button/CircleIconButton'
 import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton'
-import Slider from '../utils/slider/Slider'
+import Slider, { SLIDER_HEIGHT } from '../utils/slider/Slider'
 
 const SliderWrapper = styled.div`
-  height: 0.75rem;
+  height: ${SLIDER_HEIGHT};
   display: flex;
   align-items: center;
   width: 100%;

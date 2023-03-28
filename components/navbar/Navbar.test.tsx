@@ -41,7 +41,7 @@ describe('Navbar', () => {
       expect(title).toBeInTheDocument()
     })
 
-    it('renders a home link', () => {
+    it('renders nav links', () => {
       const homeLink = screen.getByText('Home')
       expect(homeLink).toBeInTheDocument()
     })

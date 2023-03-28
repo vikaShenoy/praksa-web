@@ -38,7 +38,7 @@ const LinkWrapper = styled.div<{ showMobileLinks: boolean }>`
     position: absolute;
     top: 100%;
     left: 0;
-    background: ${(props) => props.theme.colors.secondary};
+    background-color: ${(props) => props.theme.colors.secondary};
 
     opacity: ${(props) => (props.showMobileLinks ? '1' : '0')};
     transition: opacity 0.3s;
@@ -68,9 +68,9 @@ const MenuIconWrapper = styled.div`
   padding: ${(props) => props.theme.spacing.sm};
   cursor: pointer;
   &:hover {
-    background: ${(props) => props.theme.colors.secondary};
+    background-color: ${(props) => props.theme.colors.secondary};
   }
-  transition: background 0.3s;
+  transition: background-color 0.3s;
 `
 
 const Navbar = () => {

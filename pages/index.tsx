@@ -75,7 +75,7 @@ const Home: NextPage = () => {
           className: '',
           style: {
             color: theme.colors.text.primary,
-            background: theme.colors.background,
+            backgroundColor: theme.colors.background,
             fontFamily: theme.typography.font.body,
           },
         }}
