@@ -86,11 +86,6 @@ const Navbar = () => {
       name: t('nav.home'),
       href: '/',
     },
-    {
-      id: 2,
-      name: t('nav.about'),
-      href: '/about',
-    },
   ]
 
   return (
