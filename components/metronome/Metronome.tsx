@@ -6,7 +6,7 @@ import { Card } from '../../styles/wrappers/components'
 import { BoldText } from '../../styles/wrappers/fonts'
 import { DEFAULT_BPM, MAX_BPM, MIN_BPM } from '../../utils/constants'
 import IconButton, {
-  ButtonSize
+  ButtonSize,
 } from '../buttons/circle-icon-button/CircleIconButton'
 import PlayStopButton from '../buttons/play-stop-btn/PlayStopButton'
 import Slider from '../utils/slider/Slider'

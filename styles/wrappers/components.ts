@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { MOBILE_BREAKPOINT } from "../../hooks/useResponsive";
+import styled, { css } from "styled-components";
+import { mobile } from "../../utils/breakpoints";
 
 export const Card = styled.div<{ gridArea: string }>`
   display: flex;
@@ -19,11 +19,11 @@ export const Card = styled.div<{ gridArea: string }>`
     box-shadow: ${(props) => props.theme.shadows.mdDark};
   };
   transition: box-shadow 0.2s;
-
-  padding: ${(props) => props.theme.spacing.sm};
-  @media (min-width: ${MOBILE_BREAKPOINT}px) {
-    padding: ${(props) => props.theme.spacing.lg};
-  };
+  
+  padding: ${(props) => props.theme.spacing.lg};
+  ${mobile(css`
+    padding: ${(props) => props.theme.spacing.sm};
+  `)}
 `
 
 export const Input = styled.input`

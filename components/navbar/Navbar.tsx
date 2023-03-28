@@ -1,6 +1,6 @@
 import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
 import { Resolution, useResponsive } from '../../hooks/useResponsive'
@@ -93,17 +93,6 @@ const Navbar = () => {
     },
   ]
 
-  useEffect(() => {
-    if (!isMobile) {
-      console.log("setting")
-      setShowDropdown(false)
-    }
-  }, [isMobile])
-
-  useEffect(() => {
-    console.log(`Show dropdown: ${showDropdown}`)
-  }, [showDropdown])
-
   return (
     <NavbarWrapper>
       <TitleText>{t('app_name')}</TitleText>
@@ -121,13 +110,10 @@ const Navbar = () => {
         </MenuIconWrapper>
       )}
 
-      <LinkWrapper
-        showMobileLinks={showDropdown}
-        role="navigation"
-      >
+      <LinkWrapper showMobileLinks={showDropdown} role="navigation">
         {NavItems.map((navItem) => (
           <NavbarLink key={navItem.id} href={navItem.href}>
-            {navItem.name}
+            <div>{navItem.name}</div>
           </NavbarLink>
         ))}
         {session.status === 'authenticated' && (
