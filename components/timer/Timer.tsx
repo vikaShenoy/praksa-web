@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useAtom } from 'jotai'
+import { FC, useEffect, useMemo, useRef, useState } from 'react'
 import { MdOutlineRestartAlt } from 'react-icons/md'
 import styled from 'styled-components'
+import { timeAtom } from '../../contexts/jotai'
 import { Card } from '../../styles/wrappers/components'
 import { BoldText } from '../../styles/wrappers/fonts'
-import { DEFAULT_COUNTDOWN_TIME } from '../../utils/constants'
 import IconButton, {
   ButtonSize,
 } from '../buttons/circle-icon-button/CircleIconButton'
@@ -17,16 +18,16 @@ const ButtonContainer = styled.div`
   gap: ${(props) => props.theme.spacing.md};
 `
 
-const Timer = ({
-  initialTime = DEFAULT_COUNTDOWN_TIME,
-}: {
-  initialTime?: number
-}) => {
-  const [totalSeconds, setTotalSeconds] = useState(initialTime)
+const Timer: FC = () => {
+  const [totalSeconds, setTotalSeconds] = useAtom(timeAtom)
   const [secondsRemaining, setSecondsRemaining] = useState(totalSeconds)
   const [isEditingTime, setIsEditingTime] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
   const timerFunc = useRef<NodeJS.Timer | null>(null)
+
+  useEffect(() => {
+    setSecondsRemaining(totalSeconds)
+  }, [totalSeconds])
 
   useEffect(() => {
     return () => {
