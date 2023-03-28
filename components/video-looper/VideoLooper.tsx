@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IoSearchSharp } from 'react-icons/io5'
-import styled from 'styled-components'
-import { TABLET_BREAKPOINT } from '../../hooks/useResponsive'
+import styled, { css } from 'styled-components'
 import { Card, Input } from '../../styles/wrappers/components'
 import { BodyText } from '../../styles/wrappers/fonts'
+import { tablet } from '../../utils/breakpoints'
 import IconButton from '../buttons/icon-button/IconButton'
 
 const VideoCard = styled(Card)`
@@ -17,15 +17,15 @@ const VideoContainer = styled.div`
   position: relative;
 
   height: 100%;
-  min-height: 225px;
   width: 100%;
 
   border-radius: 1rem;
   overflow: hidden;
 
-  @media (min-width: ${TABLET_BREAKPOINT}px) {
-    min-height: 380px;
-  }
+  min-height: 380px;
+  ${tablet(css`
+    min-height: 225px;
+  `)}
 `
 
 const Video = styled.video<{ isVisible: boolean }>`

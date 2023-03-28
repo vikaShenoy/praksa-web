@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { TABLET_BREAKPOINT } from "../../hooks/useResponsive";
+import styled, { css } from "styled-components";
+import { mobile } from "../../utils/breakpoints";
 
 export const Card = styled.div<{ gridArea: string }>`
   display: flex;
@@ -11,7 +11,7 @@ export const Card = styled.div<{ gridArea: string }>`
   
   min-height: 500px;
 
-  background: ${(props) => props.theme.colors.primary};
+  background-color: ${(props) => props.theme.colors.primary};
   border-radius: 1.5rem;
   box-shadow: ${(props) => props.theme.shadows.md};
   
@@ -19,16 +19,15 @@ export const Card = styled.div<{ gridArea: string }>`
     box-shadow: ${(props) => props.theme.shadows.mdDark};
   };
   transition: box-shadow 0.2s;
-
-  padding: ${(props) => props.theme.spacing.sm};
-  @media (min-width: ${TABLET_BREAKPOINT}px) {
-    padding: ${(props) => props.theme.spacing.lg};
-  };
+  
+  padding: ${(props) => props.theme.spacing.lg};
+  ${mobile(css`
+    padding: ${(props) => props.theme.spacing.sm};
+  `)}
 `
 
 export const Input = styled.input`
   background-color: ${(props) => props.theme.colors.faded};
-  font-family: ${(props) => props.theme.typography.font.body};
   font-size: ${(props) => props.theme.typography.size.sm};
   color: ${(props) => props.theme.colors.text.primary};
   height: 2.5rem;

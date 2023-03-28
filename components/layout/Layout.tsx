@@ -9,7 +9,7 @@ const Background = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: ${(props) => props.theme.colors.background};
+  background-color: ${(props) => props.theme.colors.background};
   overflow-y: scroll;
 `
 

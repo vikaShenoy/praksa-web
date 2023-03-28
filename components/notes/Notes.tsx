@@ -19,7 +19,6 @@ const TextInput = styled.textarea`
 
   border: none;
 
-  font-family: ${(props) => props.theme.typography.font.body};
   font-size: ${(props) => props.theme.typography.size.sm};
   color: ${(props) => props.theme.colors.text.primary};
 

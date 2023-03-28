@@ -1,13 +1,14 @@
 import { ChangeEvent } from 'react'
 import styled from 'styled-components'
-import { SLIDER_HEIGHT } from '../../../styles/size'
+
+export const SLIDER_HEIGHT = '0.75rem'
 
 const SliderInput = styled.input`
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
   height: ${SLIDER_HEIGHT};
-  background: ${(props) => props.theme.colors.faded};
+  background-color: ${(props) => props.theme.colors.faded};
   border-radius: 1.5rem;
 
   &::-webkit-slider-thumb {
@@ -15,7 +16,7 @@ const SliderInput = styled.input`
     height: 2rem;
     width: 2rem;
     border-radius: 50%;
-    background: ${(props) => props.theme.colors.secondary};
+    background-color: ${(props) => props.theme.colors.secondary};
     cursor: pointer;
   }
 `

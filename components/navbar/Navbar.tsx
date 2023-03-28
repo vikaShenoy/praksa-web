@@ -2,69 +2,75 @@ import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import styled from 'styled-components'
-import {
-  Resolution,
-  TABLET_BREAKPOINT,
-  useResponsive,
-} from '../../hooks/useResponsive'
+import styled, { css } from 'styled-components'
+import { Resolution, useResponsive } from '../../hooks/useResponsive'
 import HamburgerIcon from '../../public/icons/HarmburgerIcon'
-import { NAVBAR_HEIGHT } from '../../styles/size'
 import { BodyText, TitleText } from '../../styles/wrappers/fonts'
+import { mobile } from '../../utils/breakpoints'
 
-const NavbarWrapper = styled.div<{ isMobile: boolean }>`
+const NavbarWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: ${(props) => props.theme.colors.primary};
+
+  background-color: ${(props) => props.theme.colors.secondary};
   padding: 0 ${(props) => props.theme.spacing.lg};
   box-shadow: ${(props) => props.theme.shadows.md};
+  height: 5rem;
 
-  height: ${NAVBAR_HEIGHT};
-
-  position: ${(props) => (props.isMobile ? 'relative' : '')};
+  ${mobile(css`
+    position: relative;
+  `)}
 `
 
-const LinkWrapper = styled.div<{ isMobile: boolean; isVisible: boolean }>`
+const LinkWrapper = styled.div<{ showMobileLinks: boolean }>`
   display: flex;
-  flex-direction: ${(props) => (props.isMobile ? 'column' : 'row')};
   justify-content: space-evenly;
   align-items: center;
-  background: ${(props) => props.theme.colors.primary};
-  gap: ${(props) => (props.isMobile ? 0 : props.theme.spacing.md)};
+  gap: ${(props) => props.theme.spacing.md};
+  background-color: ${(props) => props.theme.colors.secondary};
+  width: auto;
 
-  width: ${(props) => (props.isMobile ? '100%' : 'auto')};
-  position: ${(props) => (props.isMobile ? 'absolute' : '')};
-  top: ${(props) => (props.isMobile ? '100%' : '')};
-  left: ${(props) => (props.isMobile ? '0' : '')};
+  ${mobile(css<{ showMobileLinks: boolean }>`
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: ${(props) => props.theme.colors.secondary};
 
-  opacity: ${(props) => (props.isMobile && !props.isVisible ? '0' : '1')};
-  transition: opacity 0.3s;
+    opacity: ${(props) => (props.showMobileLinks ? '1' : '0')};
+    transition: opacity 0.3s;
+  `)}
 `
 
 const NavbarLink = styled(Link)`
   font-size: ${(props) => props.theme.typography.size.sm};
   color: ${(props) => props.theme.colors.text.primary};
-  font-family: ${(props) => props.theme.typography.font.body};
   padding: ${(props) => props.theme.spacing.md};
   cursor: pointer;
   text-decoration: none;
 
   &:hover {
-    background: ${(props) => props.theme.colors.secondary};
+    background-color: ${(props) => props.theme.colors.tertiary};
   }
 
-  @media (max-width: ${TABLET_BREAKPOINT}) {
-    padding: ${(props) => props.theme.spacing.sm};
-  }
+  ${mobile(css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  `)}
 `
 
 const MenuIconWrapper = styled.div`
   padding: ${(props) => props.theme.spacing.sm};
+  cursor: pointer;
   &:hover {
-    background: ${(props) => props.theme.colors.secondary};
+    background-color: ${(props) => props.theme.colors.secondary};
   }
-  transition: background 0.3s;
+  transition: background-color 0.3s;
 `
 
 const Navbar = () => {
@@ -88,8 +94,13 @@ const Navbar = () => {
   ]
 
   return (
-    <NavbarWrapper isMobile={isMobile}>
+    <NavbarWrapper>
       <TitleText>{t('app_name')}</TitleText>
+      {session.status === 'authenticated' && session.data.user && (
+        <BodyText>
+          {t('nav.user_greeting', { name: session.data.user.name })}
+        </BodyText>
+      )}
       {isMobile && (
         <MenuIconWrapper
           test-id="menu-icon"
@@ -98,20 +109,12 @@ const Navbar = () => {
           <HamburgerIcon />
         </MenuIconWrapper>
       )}
-      {session.status === 'authenticated' && session.data.user && (
-        <BodyText>
-          {t('nav.user_greeting', { name: session.data.user.name })}
-        </BodyText>
-      )}
-      <LinkWrapper
-        isMobile={isMobile}
-        isVisible={showDropdown}
-        role="navigation"
-      >
+
+      <LinkWrapper showMobileLinks={showDropdown} role="navigation">
         {NavItems.map((navItem) => (
-          <div key={navItem.id}>
-            <NavbarLink href={navItem.href}>{navItem.name}</NavbarLink>
-          </div>
+          <NavbarLink key={navItem.id} href={navItem.href}>
+            <div>{navItem.name}</div>
+          </NavbarLink>
         ))}
         {session.status === 'authenticated' && (
           <NavbarLink href={'/'} onClick={() => signOut()}>
