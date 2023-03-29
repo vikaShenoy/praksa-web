@@ -1,6 +1,8 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
+import { timeAtom } from '../../contexts/jotai'
 import Theme from '../Theme'
+import { JotaiTestProvider } from '../utils/test-utils/jotaiTestProvider'
 import Timer from './Timer'
 
 describe('Timer component', () => {
@@ -28,7 +30,9 @@ describe('Timer component', () => {
   beforeEach(() => {
     render(
       <Theme>
-        <Timer initialTime={4} />
+        <JotaiTestProvider initialValues={[[timeAtom, 4]]}>
+          <Timer />
+        </JotaiTestProvider>
       </Theme>
     )
   })
@@ -70,7 +74,7 @@ describe('Timer component', () => {
       const label = screen.getByLabelText('time-label')
       await waitFor(
         () => {
-          expect(label.textContent).toBe('3s')
+          expect(label.textContent).toBe('2s')
         },
         { timeout: 5000 }
       )

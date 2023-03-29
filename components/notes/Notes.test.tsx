@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import { I18nextProvider } from 'react-i18next'
 import i18n from '../../i18n/i18n'
 import Theme from '../Theme'
-import { inputText } from '../utils/testUtils'
+import { inputText } from '../utils/test-utils/testUtils'
 import Notes from './Notes'
 
 describe('Notes component', () => {
@@ -27,7 +27,9 @@ describe('Notes component', () => {
     })
 
     it('shows the no notes placeholder by default', () => {
-      expect(screen.getByText('Add notes on your practice routine!')).toBeDefined()
+      expect(
+        screen.getByText('Add notes on your practice routine!')
+      ).toBeDefined()
     })
   })
 
@@ -65,7 +67,9 @@ describe('Notes component', () => {
     it('clicking the cancel button does not save the typed text', () => {
       const cancelBtn = screen.getByText('Cancel')
       fireEvent.click(cancelBtn)
-      expect(screen.getByText('Add notes on your practice routine!')).toBeDefined()
+      expect(
+        screen.getByText('Add notes on your practice routine!')
+      ).toBeDefined()
     })
   })
 
