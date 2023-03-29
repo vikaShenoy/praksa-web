@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { I18nextProvider } from 'react-i18next'
 import i18n from '../../../i18n/i18n'
 import Theme from '../../Theme'
-import { clickEl } from '../testUtils'
+import { clickEl } from '../test-utils/testUtils'
 import BasicModal from './BasicModal'
 
 describe('Basic modal component', () => {

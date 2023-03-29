@@ -1,6 +1,9 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
+import { tempoAtom } from '../../contexts/jotai'
+import { DEFAULT_BPM } from '../../utils/constants'
 import Theme from '../Theme'
+import { JotaiTestProvider } from '../utils/test-utils/jotaiTestProvider'
 import Metronome from './Metronome'
 
 const mockBufferSource = { buffer: null, connect: jest.fn(), start: jest.fn() }
@@ -16,7 +19,9 @@ describe('Metronome', () => {
   beforeEach(() => {
     render(
       <Theme>
-        <Metronome />
+        <JotaiTestProvider initialValues={[[tempoAtom, DEFAULT_BPM]]}>
+          <Metronome />
+        </JotaiTestProvider>
       </Theme>
     )
   })

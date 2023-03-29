@@ -16,32 +16,44 @@ const Container = styled.div`
   height: 3rem;
 `
 
-const MainRow = styled.div`
+const MainRow = styled.div<{ isSelected: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background-color: ${(props) => props.theme.colors.faded};
+  background-color: ${(props) =>
+    props.isSelected ? props.theme.colors.accent : props.theme.colors.faded};
   width: 80%;
   height: 100%;
+
+  cursor: pointer;
 `
 
-const ActionRow = styled.div`
+const ActionRow = styled.div<{ isSelected: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
 
-  background-color: ${(props) => props.theme.colors.tertiary};
+  background-color: ${(props) =>
+    props.isSelected
+      ? props.theme.colors.secondary
+      : props.theme.colors.tertiary};
   width: 20%;
   height: 80%;
 `
 
 interface ExerciseCellProps {
   exercise: Exercise
+  onClick: (id: string) => void
+  isSelected: boolean
 }
 
 // TODO: Test
-const ExerciseCell: React.FC<ExerciseCellProps> = ({ exercise }) => {
+const ExerciseCell: React.FC<ExerciseCellProps> = ({
+  exercise,
+  onClick,
+  isSelected,
+}) => {
   const { t } = useTranslation()
   const { onShowEdit, onDelete } = useExerciseContext()
   const exerciseDetails = `${exercise.name}`
@@ -62,10 +74,10 @@ const ExerciseCell: React.FC<ExerciseCellProps> = ({ exercise }) => {
         onConfirm={onConfirmDelete}
       />
       <Container>
-        <MainRow>
+        <MainRow onClick={() => onClick(exercise.id)} isSelected={isSelected}>
           <BodyText>{exerciseDetails}</BodyText>
         </MainRow>
-        <ActionRow>
+        <ActionRow isSelected={isSelected}>
           <IconButton
             iconName={IoPencilSharp}
             onClick={() => onShowEdit(exercise.id)}

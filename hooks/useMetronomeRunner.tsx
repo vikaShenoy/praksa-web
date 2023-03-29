@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react'
 
 interface Props {
-  bpm: number
+  tempo: number
   isPlaying: boolean
 }
 
-const useMetronomeRunner = ({ bpm, isPlaying }: Props) => {
+const useMetronomeRunner = ({ tempo, isPlaying }: Props) => {
   const audioContext = useRef<AudioContext | null>(null)
   const audioSource = useRef<AudioBufferSourceNode | null>(null)
   const audioBuffer = useRef<AudioBuffer | null>(null)
@@ -21,9 +21,9 @@ const useMetronomeRunner = ({ bpm, isPlaying }: Props) => {
   useEffect(() => {
     const source = audioSource.current
     if (source) {
-      source.loopEnd = 1 / (bpm / 60)
+      source.loopEnd = 1 / (tempo / 60)
     }
-  }, [bpm])
+  }, [tempo])
 
   const setup = () => {
     audioContext.current = new window.AudioContext()
@@ -43,7 +43,7 @@ const useMetronomeRunner = ({ bpm, isPlaying }: Props) => {
 
     source.buffer = buffer
     source.loop = true
-    source.loopEnd = 1 / (bpm / 60)
+    source.loopEnd = 1 / (tempo / 60)
     source.connect(context.destination)
     source.start(0)
   }
