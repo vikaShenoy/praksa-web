@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query'
-import { Exercise } from '../../models/Exercise'
+import { Exercise } from '../../../models/Exercise'
 
 async function getExercises() {
   const response = await fetch('/api/exercises', {
@@ -11,6 +11,6 @@ async function getExercises() {
   return exercises
 }
 
-export const useLoadExercises = () => {
+export const useGetExercises = () => {
   return useQuery(['exercises'], getExercises)
 }

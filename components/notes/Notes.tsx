@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
+import { useGetNotes } from '../../hooks/api/notes/useGetNotes'
+import { useUpdateNotes } from '../../hooks/api/notes/useUpdateNotes'
 import { Card } from '../../styles/wrappers/components'
 import { BodyText, BoldText } from '../../styles/wrappers/fonts'
 import SecondaryBtn from '../buttons/secondary-btn/SecondaryBtn'
@@ -44,10 +46,15 @@ const EditBtnContainer = styled.div`
   margin-top: auto;
 `
 
+// TODO: More tests needed
 const Notes = () => {
   const { t } = useTranslation()
   const [isEditing, setIsEditing] = useState(false)
-  const [notes, setNotes] = useState('')
+  const {
+    data: notes,
+    refetch: refetchNotes,
+  } = useGetNotes()
+  const { mutate: updateNotes } = useUpdateNotes()
   const notesInput = useRef<HTMLTextAreaElement>(null)
 
   function onSave() {
@@ -57,12 +64,17 @@ const Notes = () => {
       notesInput.current.value.length > 0
     ) {
     }
-    setNotes(notesInput.current!.value)
+    const updatedNotes = notesInput.current!.value
+    updateNotes(updatedNotes, {
+      onSuccess: () => {
+        refetchNotes()
+      },
+    })
     setIsEditing(false)
   }
 
   return (
-    <NotesCard gridArea="notes" spaceBetween={!isEditing && notes.length > 0}>
+    <NotesCard gridArea="notes" spaceBetween={!isEditing && !!notes}>
       <BoldText>{t('notes.title')}</BoldText>
       {isEditing && (
         <>
@@ -82,7 +94,7 @@ const Notes = () => {
         </>
       )}
 
-      {!isEditing && notes.length === 0 && (
+      {!isEditing && !notes && (
         <>
           <BodyText>{t('notes.prompt')}</BodyText>
           <BtnWrapper>
@@ -94,7 +106,7 @@ const Notes = () => {
         </>
       )}
 
-      {!isEditing && notes.length > 0 && (
+      {!isEditing && !!notes && (
         <>
           <NotesContainer>{notes}</NotesContainer>
           <BtnWrapper>

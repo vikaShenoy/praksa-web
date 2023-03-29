@@ -1,5 +1,5 @@
 import { useMutation } from 'react-query'
-import { Exercise } from '../../models/Exercise'
+import { Exercise } from '../../../models/Exercise'
 
 export type UpdateExerciseData = Partial<Omit<Exercise, 'id' | 'createdAt'>>
 
