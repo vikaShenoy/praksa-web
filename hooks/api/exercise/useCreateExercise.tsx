@@ -1,5 +1,5 @@
 import { useMutation } from 'react-query'
-import { Exercise } from '../../models/Exercise'
+import { Exercise } from '../../../models/Exercise'
 
 export type CreateExerciseData = Omit<Exercise, 'id' | 'createdAt'>
 

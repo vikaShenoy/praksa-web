@@ -4,10 +4,10 @@ import { toast } from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import { ExerciseContext } from '../../contexts/ExerciseContext'
-import { useCreateExercise } from '../../hooks/api/useCreateExercise'
-import { useDeleteExercise } from '../../hooks/api/useDeleteExercise'
-import { useLoadExercises } from '../../hooks/api/useLoadExercises'
-import { useUpdateExercise } from '../../hooks/api/useUpdateExercise'
+import { useCreateExercise } from '../../hooks/api/exercise/useCreateExercise'
+import { useDeleteExercise } from '../../hooks/api/exercise/useDeleteExercise'
+import { useGetExercises } from '../../hooks/api/exercise/useGetExercises'
+import { useUpdateExercise } from '../../hooks/api/exercise/useUpdateExercise'
 import { Exercise } from '../../models/Exercise'
 import { Card } from '../../styles/wrappers/components'
 import { BoldText } from '../../styles/wrappers/fonts'
@@ -35,7 +35,7 @@ export const ExerciseCard = () => {
     refetch: refetchExercises,
     isError: errorLoadingExercise,
     isSuccess: successLoadingExercise,
-  } = useLoadExercises()
+  } = useGetExercises()
   const { mutate: createExercise } = useCreateExercise()
   const { mutate: updateExercise } = useUpdateExercise()
   const { mutate: deleteExercise } = useDeleteExercise()
