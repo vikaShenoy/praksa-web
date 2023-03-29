@@ -41,16 +41,6 @@ describe('Navbar', () => {
       expect(title).toBeInTheDocument()
     })
 
-    it('renders nav links', () => {
-      const homeLink = screen.getByText('Home')
-      expect(homeLink).toBeInTheDocument()
-    })
-
-    it('renders an about link', () => {
-      const aboutLink = screen.getByText('About')
-      expect(aboutLink).toBeInTheDocument()
-    })
-
     it('does not render the hamburger icon when the screen is wide', () => {
       const menuIcon = screen.queryByTestId('menu-icon')
       expect(menuIcon).not.toBeInTheDocument()

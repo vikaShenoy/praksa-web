@@ -80,19 +80,6 @@ const Navbar = () => {
   const { t } = useTranslation()
   const session = useSession()
 
-  const NavItems = [
-    {
-      id: 1,
-      name: t('nav.home'),
-      href: '/',
-    },
-    {
-      id: 2,
-      name: t('nav.about'),
-      href: '/about',
-    },
-  ]
-
   return (
     <NavbarWrapper>
       <TitleText>{t('app_name')}</TitleText>
@@ -111,11 +98,6 @@ const Navbar = () => {
       )}
 
       <LinkWrapper showMobileLinks={showDropdown} role="navigation">
-        {NavItems.map((navItem) => (
-          <NavbarLink key={navItem.id} href={navItem.href}>
-            <div>{navItem.name}</div>
-          </NavbarLink>
-        ))}
         {session.status === 'authenticated' && (
           <NavbarLink href={'/'} onClick={() => signOut()}>
             {t('common.logout')}
