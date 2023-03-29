@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom'
+import { server } from './mocks/server'
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
@@ -23,5 +24,11 @@ Object.defineProperty(window, 'audioContext', {
     dispatchEvent: jest.fn(),
   })),
 })
+
+beforeAll(() => server.listen())
+
+afterEach(() => server.resetHandlers())
+
+afterAll(() => server.close())
 
 export {}
