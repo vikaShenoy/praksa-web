@@ -1,10 +1,14 @@
 name: Migrate database
-on:
-  pull_request:
-    types:
-      - closed
-    branches:
-      - main
+env:
+  DIRECT_URL: ${{ secrets.DIRECT_URL }}
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+on: [push]
+  # pull_request:
+  #   types:
+  #     - closed
+  #   branches:
+  #     - main
 jobs:
   migrate:
     runs-on: ubuntu-latest
