@@ -1,6 +1,14 @@
 # Praksa
 
-Praksa is a web application for music practice.
+Praksa is a web application for music practice. Current features include:
+
+- Metronome
+- Timer
+- Exercise logging
+- Practice notes
+- YouTube video loader
+
+View the application here: https://praksa-web.vercel.app/
 
 ### Tech
 
@@ -33,7 +41,7 @@ yarn test
 
 #### CI
 
-CI is managed using GitHub actions. Linting and tests are run on every push. The pipeline can be seen in .github/test.yml.
+CI is managed using GitHub actions. Linting and tests are run on every push. Database migration is run when PRs are merged into main. CI config can be viewed in `.github/workflows`.
 
 #### CD
 
