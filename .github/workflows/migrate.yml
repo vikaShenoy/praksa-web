@@ -1,4 +1,7 @@
 name: Migrate database
+env:
+  DIRECT_URL: ${{ secrets.DIRECT_URL }}
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
 on:
   pull_request:
     types:
