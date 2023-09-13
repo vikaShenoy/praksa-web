@@ -1,0 +1,14 @@
+name: Migrate database
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          yarn migrate:prod

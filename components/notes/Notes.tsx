@@ -50,10 +50,7 @@ const EditBtnContainer = styled.div`
 const Notes = () => {
   const { t } = useTranslation()
   const [isEditing, setIsEditing] = useState(false)
-  const {
-    data: notes,
-    refetch: refetchNotes,
-  } = useGetNotes()
+  const { data: notes, refetch: refetchNotes } = useGetNotes()
   const { mutate: updateNotes } = useUpdateNotes()
   const notesInput = useRef<HTMLTextAreaElement>(null)
 

@@ -13,7 +13,9 @@
     "format": "prettier --check --ignore-path .gitignore",
     "format:fix": "prettier --write . --ignore-path .prettierignore",
     "fix": "yarn lint ; yarn format:fix",
-    "precommit": "yarn format:fix ; yarn lint ; yarn test"
+    "precommit": "yarn format:fix ; yarn lint ; yarn test",
+    "migrate:dev": "npx prisma migrate dev",
+    "migrate:prod": "npx prisma migrate deploy"
   },
   "dependencies": {
     "@fontsource/lato": "^4.5.10",
