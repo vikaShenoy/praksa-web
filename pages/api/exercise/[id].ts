@@ -23,7 +23,8 @@ export default async function handler(
   try {
     if (req.method === 'PATCH') {
       const data: UpdateExerciseData = req.body
-      await prisma?.exercise.update({ where: { id }, data })
+      const dataWithNulls = addNullsToEditDataIfNeeded(data)
+      await prisma?.exercise.update({ where: { id }, data: dataWithNulls })
       return res.status(200).end()
     } else if (req.method === 'DELETE') {
       const exercise = await prisma?.exercise.findUnique({
@@ -42,4 +43,17 @@ export default async function handler(
   }
 
   return res.status(500).json({ error: 'Route not implemented' })
+}
+
+function addNullsToEditDataIfNeeded(data: UpdateExerciseData) {
+  const { currentBpm, targetBpm, durationSeconds } = data
+
+  const dataWithNulls = {
+    ...data,
+    currentBpm: currentBpm ? currentBpm : null,
+    targetBpm: targetBpm ? targetBpm : null,
+    durationSeconds: durationSeconds ? durationSeconds : null,
+  }
+
+  return dataWithNulls
 }

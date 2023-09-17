@@ -32,7 +32,7 @@ export const ExerciseCard = () => {
 
   const queryClient = useQueryClient()
   const {
-    data: exerciseData, 
+    data: exerciseData,
     isError: errorLoadingExercise,
     isSuccess: successLoadingExercise,
   } = useGetExercises()
@@ -62,6 +62,19 @@ export const ExerciseCard = () => {
     )
   }
 
+  function cleanEditExerciseData(values: ExerciseForm) {
+    if (values.targetBpm?.toString().length === 0) {
+      values.targetBpm = undefined
+    }
+    if (values.currentBpm?.toString().length === 0) {
+      values.currentBpm = undefined
+    }
+    if (values.durationSeconds?.toString().length === 0) {
+      values.durationSeconds = undefined
+    }
+    return values
+  }
+
   function onEdit(
     values: ExerciseForm,
     { setSubmitting }: FormikHelpers<ExerciseForm>
@@ -70,9 +83,11 @@ export const ExerciseCard = () => {
       return
     }
 
+    const cleanedValues = cleanEditExerciseData(values)
+
     setSubmitting(true)
     updateExercise(
-      { exerciseId: exerciseBeingEdited.id, data: { ...values } },
+      { exerciseId: exerciseBeingEdited.id, data: { ...cleanedValues } },
       {
         onSuccess: () => {
           queryClient.invalidateQueries('exercises')
