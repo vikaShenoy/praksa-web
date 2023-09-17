@@ -80,22 +80,5 @@ describe('Notes component', () => {
       clickEl(saveBtn)
       expect(screen.queryByRole('textbox')).toBeFalsy()
     })
-
-    // TODO: Test with MSW
-    // it('clicking the save button saves the typed text', () => {
-    //   const textbox = screen.getByRole('textbox')
-    //   inputText(textbox, 'Practice notes')
-    //   const saveBtn = screen.getByText('Save')
-    //   fireEvent.click(saveBtn)
-    //   expect(screen.getByText('Practice notes')).toBeDefined()
-    // })
-
-    // it('button text is edit when there are notes', () => {
-    //   const textbox = screen.getByRole('textbox')
-    //   inputText(textbox, 'Practice notes')
-    //   const saveBtn = screen.getByText('Save')
-    //   fireEvent.click(saveBtn)
-    //   expect(screen.getByText('Edit')).toBeDefined()
-    // })
   })
 })

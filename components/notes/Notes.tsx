@@ -46,7 +46,6 @@ const EditBtnContainer = styled.div`
   margin-top: auto;
 `
 
-// TODO: More tests needed
 const Notes = () => {
   const { t } = useTranslation()
   const [isEditing, setIsEditing] = useState(false)

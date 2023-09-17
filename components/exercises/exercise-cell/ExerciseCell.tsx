@@ -48,7 +48,6 @@ interface ExerciseCellProps {
   isSelected: boolean
 }
 
-// TODO: Test
 const ExerciseCell: React.FC<ExerciseCellProps> = ({
   exercise,
   onClick,

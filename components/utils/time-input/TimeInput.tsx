@@ -24,7 +24,6 @@ interface Props {
   onEnter: (seconds: number) => void
 }
 
-// TODO: test
 const TimeInput = ({ onEnter }: Props) => {
   const [seconds, setSeconds] = useState('00')
   const [minutes, setMinutes] = useState('00')
