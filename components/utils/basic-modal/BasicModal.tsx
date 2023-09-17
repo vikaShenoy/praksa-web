@@ -69,12 +69,12 @@ const BasicModal: React.FC<BasicModalProps> = ({
 
         <MarginWrapper value={100}>
           <ButtonContainer>
-            <PrimaryBtn text={t('common.cancel')} onClick={onCancel} isFluid />
             <PrimaryBtn
               text={t('common.confirm')}
               onClick={onConfirm}
               isFluid
             />
+            <PrimaryBtn text={t('common.cancel')} onClick={onCancel} isFluid />
           </ButtonContainer>
         </MarginWrapper>
       </ModalContent>
