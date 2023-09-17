@@ -83,7 +83,7 @@ const Navbar = () => {
   return (
     <NavbarWrapper>
       <TitleText>{t('app_name')}</TitleText>
-      {session.status === 'authenticated' && session.data.user && (
+      {session.status === 'authenticated' && session.data.user && !isMobile && (
         <BodyText>
           {t('nav.user_greeting', { name: session.data.user.name })}
         </BodyText>
