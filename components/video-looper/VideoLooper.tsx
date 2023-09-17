@@ -79,7 +79,6 @@ const BottomControlsContainer = styled.div`
   width: 100%;
 `
 
-// TODO: Test
 const VideoLooper = () => {
   const { t } = useTranslation()
   const [player, setPlayer] = useState<YT.Player | null>(null)
@@ -115,11 +114,7 @@ const VideoLooper = () => {
       try {
         player.loadVideoById(videoId)
         setVideoID(videoId)
-      } catch (error) {
-        // TODO: Show some kind of error message
-      }
-    } else {
-      // TODO: Show some kind of error message
+      } catch {}
     }
   }
 

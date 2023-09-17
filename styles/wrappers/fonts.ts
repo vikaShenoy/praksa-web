@@ -1,10 +1,16 @@
 import styled, { css } from "styled-components"
+import { mobile } from "../../utils/breakpoints"
 
 export const TitleText = styled.p`
   font-family: ${(props) => props.theme.typography.font.title};
   font-size: ${(props) => props.theme.typography.size.md};
   text-transform: uppercase;
   color: ${(props) => props.theme.colors.text.primary};
+
+  font-size: ${(props) => props.theme.typography.size.md};
+  ${mobile(css`
+    font-size: ${(props) => props.theme.typography.size.smmd};
+  `)}
 `
 
 export const Label = styled.label`
@@ -14,9 +20,10 @@ export const Label = styled.label`
 `
 
 export const BodyText = styled.p<{ uppercase?: boolean }>`
-  font-size: ${(props) => props.theme.typography.size.sm};
   color: ${(props) => props.theme.colors.text.primary};
   ${(props) => props.uppercase && css`text-transform: uppercase;`}
+
+  font-size: ${(props) => props.theme.typography.size.sm};
 `
 
 export const ErrorText = styled(Label)`
@@ -25,8 +32,12 @@ export const ErrorText = styled(Label)`
 
 export const BoldText = styled.p`
   font-weight: ${(props) => props.theme.typography.weight.bold};
-  font-size: ${(props) => props.theme.typography.size.mdlg};
   color: ${(props) => props.theme.colors.text.primary};
+
+  font-size: ${(props) => props.theme.typography.size.mdlg};
+  ${mobile(css`
+    font-size: ${(props) => props.theme.typography.size.md};
+  `)}
 `
 
 export const H2 = styled.h2`

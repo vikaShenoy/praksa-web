@@ -32,7 +32,6 @@ interface Props {
   maxVal: number
 }
 
-// TODO: test
 const ProgressBar = ({ currentVal, maxVal }: Props) => {
   const outerBar = useRef<HTMLDivElement>(null)
 

@@ -16,13 +16,13 @@ import CreateEditExercise, {
   ExerciseForm,
 } from './create-edit-exercise/CreateEditExercise'
 import ViewExercises from './view-exercises/ViewExercises'
+import { useQueryClient } from 'react-query'
 
 const CardContainer = styled(Card)`
   gap: ${(props) => props.theme.spacing.md};
   justify-content: flex-start;
 `
 
-// TODO: Test
 export const ExerciseCard = () => {
   const { t } = useTranslation()
   const [isCreating, setIsCreating] = useState(false)
@@ -30,9 +30,9 @@ export const ExerciseCard = () => {
   const [exerciseBeingEdited, setExerciseBeingEdited] =
     useState<Exercise | null>(null)
 
+  const queryClient = useQueryClient()
   const {
     data: exerciseData,
-    refetch: refetchExercises,
     isError: errorLoadingExercise,
     isSuccess: successLoadingExercise,
   } = useGetExercises()
@@ -49,7 +49,7 @@ export const ExerciseCard = () => {
       { ...values },
       {
         onSuccess: () => {
-          refetchExercises()
+          queryClient.invalidateQueries('exercises')
         },
         onError: () => {
           toast.error(t('errors.exercise.create'))
@@ -62,6 +62,19 @@ export const ExerciseCard = () => {
     )
   }
 
+  function cleanEditExerciseData(values: ExerciseForm) {
+    if (values.targetBpm?.toString().length === 0) {
+      values.targetBpm = undefined
+    }
+    if (values.currentBpm?.toString().length === 0) {
+      values.currentBpm = undefined
+    }
+    if (values.durationSeconds?.toString().length === 0) {
+      values.durationSeconds = undefined
+    }
+    return values
+  }
+
   function onEdit(
     values: ExerciseForm,
     { setSubmitting }: FormikHelpers<ExerciseForm>
@@ -70,12 +83,14 @@ export const ExerciseCard = () => {
       return
     }
 
+    const cleanedValues = cleanEditExerciseData(values)
+
     setSubmitting(true)
     updateExercise(
-      { exerciseId: exerciseBeingEdited.id, data: { ...values } },
+      { exerciseId: exerciseBeingEdited.id, data: { ...cleanedValues } },
       {
         onSuccess: () => {
-          refetchExercises()
+          queryClient.invalidateQueries('exercises')
         },
         onError: () => {
           toast.error(t('errors.exercise.update'))
@@ -93,7 +108,7 @@ export const ExerciseCard = () => {
       { exerciseId },
       {
         onSuccess: () => {
-          refetchExercises()
+          queryClient.invalidateQueries('exercises')
         },
         onError: () => {
           toast.error(t('errors.exercise.delete'))

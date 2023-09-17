@@ -9,6 +9,17 @@ import { BodyText } from '../../../styles/wrappers/fonts'
 import SecondaryBtn from '../../buttons/secondary-btn/SecondaryBtn'
 import ExerciseCell from '../exercise-cell/ExerciseCell'
 
+const ScrollContainer = styled.div`
+  height: 100%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  height: 300px;
+`
+
 const MarginTopWrapper = styled.div`
   margin-top: auto;
 `
@@ -17,7 +28,6 @@ interface ViewExercisesProps {
   exercises: Exercise[]
 }
 
-// TODO: Test
 const ViewExercises: React.FC<ViewExercisesProps> = ({ exercises }) => {
   const { t } = useTranslation()
   const { showCreateExercise } = useExerciseContext()
@@ -44,14 +54,16 @@ const ViewExercises: React.FC<ViewExercisesProps> = ({ exercises }) => {
     <>
       {exercises.length > 0 ? (
         <>
-          {exercises.map((exercise) => (
-            <ExerciseCell
-              key={exercise.id}
-              exercise={exercise}
-              onClick={onExerciseCellClick}
-              isSelected={selectedExerciseId === exercise.id}
-            />
-          ))}
+          <ScrollContainer>
+            {exercises.map((exercise) => (
+              <ExerciseCell
+                key={exercise.id}
+                exercise={exercise}
+                onClick={onExerciseCellClick}
+                isSelected={selectedExerciseId === exercise.id}
+              />
+            ))}
+          </ScrollContainer>
           <MarginTopWrapper>
             <SecondaryBtn text={t('common.add')} onClick={showCreateExercise} />
           </MarginTopWrapper>

@@ -14,6 +14,7 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   height: 3rem;
+  min-height: 3rem;
 `
 
 const MainRow = styled.div<{ isSelected: boolean }>`
@@ -48,7 +49,6 @@ interface ExerciseCellProps {
   isSelected: boolean
 }
 
-// TODO: Test
 const ExerciseCell: React.FC<ExerciseCellProps> = ({
   exercise,
   onClick,
