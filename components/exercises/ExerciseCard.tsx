@@ -1,5 +1,5 @@
 import { FormikHelpers } from 'formik'
-import { useState } from 'react'
+import { use, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
@@ -16,13 +16,13 @@ import CreateEditExercise, {
   ExerciseForm,
 } from './create-edit-exercise/CreateEditExercise'
 import ViewExercises from './view-exercises/ViewExercises'
+import { useQueryClient } from 'react-query'
 
 const CardContainer = styled(Card)`
   gap: ${(props) => props.theme.spacing.md};
   justify-content: flex-start;
 `
 
-// TODO: Test
 export const ExerciseCard = () => {
   const { t } = useTranslation()
   const [isCreating, setIsCreating] = useState(false)
@@ -30,9 +30,9 @@ export const ExerciseCard = () => {
   const [exerciseBeingEdited, setExerciseBeingEdited] =
     useState<Exercise | null>(null)
 
+  const queryClient = useQueryClient()
   const {
-    data: exerciseData,
-    refetch: refetchExercises,
+    data: exerciseData, 
     isError: errorLoadingExercise,
     isSuccess: successLoadingExercise,
   } = useGetExercises()
@@ -49,7 +49,7 @@ export const ExerciseCard = () => {
       { ...values },
       {
         onSuccess: () => {
-          refetchExercises()
+          queryClient.invalidateQueries('exercises')
         },
         onError: () => {
           toast.error(t('errors.exercise.create'))
@@ -75,7 +75,7 @@ export const ExerciseCard = () => {
       { exerciseId: exerciseBeingEdited.id, data: { ...values } },
       {
         onSuccess: () => {
-          refetchExercises()
+          queryClient.invalidateQueries('exercises')
         },
         onError: () => {
           toast.error(t('errors.exercise.update'))
@@ -93,7 +93,7 @@ export const ExerciseCard = () => {
       { exerciseId },
       {
         onSuccess: () => {
-          refetchExercises()
+          queryClient.invalidateQueries('exercises')
         },
         onError: () => {
           toast.error(t('errors.exercise.delete'))
